@@ -1,0 +1,40 @@
+# requirements-train.txt
+# Training / evaluation box (x86_64 + NVIDIA discrete GPU).
+# Verified to resolve 2026-08 against PyPI.
+#
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install -U pip
+#   pip install -r requirements-train.txt
+#
+# IMPORTANT — torch and your CUDA driver
+# --------------------------------------
+# The PyPI torch wheel now bundles CUDA 13 runtime libs. If your driver is older
+# (CUDA 12.x), install torch FIRST from the matching PyTorch index, THEN this file:
+#
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#   pip install -r requirements-train.txt
+#
+# Check with `nvidia-smi` (top-right shows max supported CUDA) before you start.
+# Getting a CPU-only torch by accident is the single most common way to "discover"
+# that YOLO11x trains slowly.
+
+ultralytics==8.4.127        # pulls torch, torchvision, numpy, opencv, pillow,
+                            # pyyaml, matplotlib, polars, psutil, nvidia-ml-py
+
+# --- ONNX / TensorRT export path (needed by bench_jetson.py --export) ---
+# Deliberately NOT using ultralytics[export-base]: that extra also installs
+# openvino + nncf (~500 MB) which you do not need for a TensorRT target.
+onnx>=1.17.0
+onnxslim>=0.1.82
+onnxruntime-gpu>=1.20.0     # swap to plain `onnxruntime` if the GPU build fails
+
+# --- explicit, even though ultralytics already requires them, so the pin is visible ---
+numpy>=1.26,<3
+pyyaml>=6.0
+pillow>=10.0
+opencv-python>=4.9          # live_check.py; see requirements-jetson.txt for the
+                            # reason you must NOT install this on the Jetson
+
+# --- optional but useful ---
+# tensorboard>=2.16         # training curves without Ultralytics HUB
+# pandas>=2.2               # ultralytics moved to polars; add if you prefer pandas

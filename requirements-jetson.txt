@@ -1,0 +1,97 @@
+# requirements-jetson.txt
+# Orin Nano 8GB / JetPack 6.x (aarch64 Tegra).
+#
+# DO NOT run `pip install -r requirements-train.txt` on the Jetson. It will
+# succeed, and then nothing will work. Two reasons, both silent:
+#
+#   1. torch / torchvision
+#      PyPI's aarch64 torch wheels are built for generic ARM servers and have NO
+#      CUDA support for Tegra. You get a working import, `torch.cuda.is_available()
+#      == False`, and CPU inference at ~1 FPS. You must use NVIDIA's JetPack
+#      wheels. Never let pip resolve torch here.
+#
+#   2. opencv-python
+#      JetPack ships a system OpenCV built with GStreamer (and often CUDA). The
+#      pip wheel is built WITHOUT GStreamer. Installing it shadows the system
+#      build, cv2.VideoCapture falls back to FFmpeg software decode, and your
+#      8-stream nvv4l2decode hardware path quietly disappears. Your RTSP latency
+#      triples and you blame the model.
+#
+#   3. tensorrt
+#      Comes from JetPack (python3-libnvinfer). Never pip install it.
+#
+# ---------------------------------------------------------------------------
+# STEP 1 — create the venv WITH system packages, so system cv2/tensorrt are visible
+# ---------------------------------------------------------------------------
+#   sudo apt install -y python3-venv python3-libnvinfer python3-opencv \
+#                       libopenblas-dev libjpeg-dev zlib1g-dev
+#   python3 -m venv --system-site-packages cam
+#   source cam/bin/activate
+#
+#   # verify BEFORE going further:
+#   python -c "import cv2; print(cv2.getBuildInformation())" | grep -i gstreamer
+#   #   -> must say GStreamer: YES
+#
+# ---------------------------------------------------------------------------
+# STEP 2 — torch from NVIDIA, not PyPI
+# ---------------------------------------------------------------------------
+#   # Option A (recommended): the Jetson AI Lab index, matched to your JetPack
+#   pip install --no-cache-dir torch torchvision \
+#       --index-url https://pypi.jetson-ai-lab.io/jp6/cu126
+#
+#   # Option B: download the JetPack wheel from NVIDIA's forum/dev site by hand.
+#   # Find your JetPack version first:  cat /etc/nv_tegra_release
+#
+#   # verify:
+#   python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+#   #   -> must print True. If False, STOP. Nothing downstream is meaningful.
+#
+# ---------------------------------------------------------------------------
+# STEP 3 — ultralytics WITHOUT its dependency resolver
+# ---------------------------------------------------------------------------
+#   pip install --no-deps ultralytics==8.4.127
+#   pip install -r requirements-jetson.txt
+#
+# ---------------------------------------------------------------------------
+# STEP 4 — sanity check, then benchmark on a WARM device
+# ---------------------------------------------------------------------------
+#   sudo nvpmodel -m 0 && sudo jetson_clocks     # MAXN + locked clocks
+#   python bench_jetson.py --weights best.pt --export --half
+#   python bench_jetson.py --engine best.engine --batches 1,2,4,8 --target-fps 5
+#
+#   Run bench WITH your FFmpeg/NVENC pipeline live. An idle-Jetson number is a
+#   number you will never see in production.
+
+# ===========================================================================
+# Pure-python / safe-on-aarch64 deps only. torch, torchvision, opencv-python
+# and tensorrt are deliberately ABSENT — see notes above.
+# ===========================================================================
+filelock>=3.16.1
+numpy>=1.26,<3
+matplotlib>=3.8
+pillow>=10.0
+pyyaml>=6.0
+requests>=2.31
+psutil>=5.9
+polars>=1.0
+nvidia-ml-py>=12.0.0
+ultralytics-thop>=2.1.6
+
+# ONNX graph tooling for the TensorRT export step.
+# onnxruntime is NOT needed to build a TRT engine; skip it unless you want to
+# validate the intermediate ONNX on-device.
+onnx>=1.17.0
+onnxslim>=0.1.82
+
+# ---------------------------------------------------------------------------
+# Post-install verification. All four must pass or the benchmark is fiction:
+#
+#   python - <<'EOF'
+#   import torch, cv2, tensorrt, ultralytics
+#   print("torch      ", torch.__version__, "cuda:", torch.cuda.is_available())
+#   print("tensorrt   ", tensorrt.__version__)
+#   print("opencv     ", cv2.__version__,
+#         "gstreamer:", "GStreamer:                   YES" in cv2.getBuildInformation())
+#   print("ultralytics", ultralytics.__version__)
+#   EOF
+# ---------------------------------------------------------------------------
