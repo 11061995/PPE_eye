@@ -22,6 +22,10 @@ runs/
 audit.json
 honest_eval*.json
 
+# Enhancement loop scratch (see experiments/README.md). The results/*.json,
+# results.jsonl, REPORT.md, STATUS.md, WEEK1_FINDINGS.md and figs/ ARE tracked.
+experiments/results/*.log
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

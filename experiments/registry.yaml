@@ -1,0 +1,312 @@
+# Experiment matrix for the PPE-EYE enhancement plan (see ../SCHEDULE.md).
+# The loop driver (run.py --next) walks this list in order and runs the first
+# experiment that has no result yet and whose deps are all `done`.
+#
+# Each experiment:
+#   id     : unique, used as the run name and results filename
+#   week   : 1-6, for grouping in the report
+#   tier   : 1-3
+#   item   : which list item(s) it covers ("*" = re-scoped)
+#   kind   : train | eval | audit | corrupt | crossdata | track | distill | calib | arch
+#   desc   : one line, shown in the report
+#   deps   : list of experiment ids that must be `done` first ([] = none)
+#   params : merged over `defaults`, passed to the handler for `kind`
+#
+# Only `kind: train` handlers are implemented in run.py right now. Later weeks
+# are declared so the schedule is visible, but their handlers land in the week
+# they are scheduled. run.py will skip an unimplemented kind with status=skipped.
+
+defaults:
+  data: data/data.yaml
+  model: yolo11s.pt
+  imgsz: 640
+  epochs: 150
+  patience: 30
+  batch: 16
+  seed: 0
+  device: "0"
+  optimizer: AdamW
+  lr0: 0.0001          # re-pointed from 1e-3 after the Week-1 LR sweep: low LR won
+  cos_lr: true
+  warmup_epochs: 3.0
+  close_mosaic: 10
+  project: runs/ppe_enh
+
+# The base recipe the Week-1 resolution / augmentation arms build on.
+# = defaults above (AdamW 1e-4, cosine, warmup 3, close_mosaic 10, 150 ep, patience 30).
+# NOTE: ids w1_{n,m}_adamw_1e3 are legacy labels — they now inherit AdamW 1e-4 too,
+# so the n/s/m size comparison stays on one recipe. The `deps: [w1_s_adamw_1e3]`
+# gates are satisfied (that run is done); Week-2+ handlers select the best Week-1
+# run by metric, not by id.
+
+experiments:
+
+  # ---------- Week 1 : training hygiene ----------
+  - id: w1_s_baseline_repro
+    week: 1
+    tier: 1
+    item: "2"
+    kind: train
+    desc: "Paper's lr0=1e-5 NAdam cell on our split - expected to barely move off COCO init"
+    deps: []
+    params: {optimizer: NAdam, lr0: 1.0e-5, momentum: 0.937, epochs: 100, warmup_epochs: 0.0, close_mosaic: 0}
+
+  - id: w1_s_sgd_1e2
+    week: 1
+    tier: 1
+    item: "2"
+    kind: train
+    desc: "SGD lr0=1e-2, cosine, warmup 3, close_mosaic 10"
+    deps: []
+    params: {optimizer: SGD, lr0: 0.01, momentum: 0.937}
+
+  - id: w1_s_adamw_1e3
+    week: 1
+    tier: 1
+    item: "2"
+    kind: train
+    desc: "AdamW lr0=1e-3, cosine - the expected LR winner and base recipe for later arms"
+    deps: []
+    params: {optimizer: AdamW, lr0: 0.001}
+
+  - id: w1_s_adamw_1e4
+    week: 1
+    tier: 1
+    item: "2"
+    kind: train
+    desc: "AdamW lr0=1e-4, cosine"
+    deps: []
+    params: {optimizer: AdamW, lr0: 0.0001}
+
+  - id: w1_s_res_960
+    week: 1
+    tier: 1
+    item: "3"
+    kind: train
+    desc: "Base recipe at imgsz=960 - small-object resolution sweep"
+    deps: [w1_s_adamw_1e3]
+    params: {imgsz: 960, batch: 12}
+
+  - id: w1_s_res_1280
+    week: 1
+    tier: 1
+    item: "3"
+    kind: train
+    desc: "Base recipe at imgsz=1280 - small-object resolution sweep"
+    deps: [w1_s_adamw_1e3]
+    params: {imgsz: 1280, batch: 8}
+
+  - id: w1_s_noaug
+    week: 1
+    tier: 1
+    item: "5"
+    kind: train
+    desc: "Base recipe, all online augmentation OFF - the control arm for item #5"
+    deps: [w1_s_adamw_1e3]
+    params:
+      hsv_h: 0.0
+      hsv_s: 0.0
+      hsv_v: 0.0
+      degrees: 0.0
+      translate: 0.0
+      scale: 0.0
+      shear: 0.0
+      perspective: 0.0
+      flipud: 0.0
+      fliplr: 0.0
+      mosaic: 0.0
+      mixup: 0.0
+      copy_paste: 0.0
+      erasing: 0.0
+
+  - id: w1_s_domainaug
+    week: 1
+    tier: 1
+    item: "5"
+    kind: train
+    desc: "Base recipe + strong HSV-V (glare), scale (distance), erasing (occlusion)"
+    deps: [w1_s_adamw_1e3]
+    params:
+      hsv_v: 0.7
+      hsv_s: 0.5
+      scale: 0.7
+      translate: 0.15
+      erasing: 0.5
+      mosaic: 1.0
+      mixup: 0.1
+
+  - id: w1_s_imbalance
+    week: 1
+    tier: 1
+    item: "*"
+    kind: train
+    desc: "Base recipe + copy_paste + mixup to lift thin classes WHV (48) / WV (36)"
+    deps: [w1_s_adamw_1e3]
+    params: {copy_paste: 0.5, mixup: 0.15}
+
+  - id: w1_n_adamw_1e3
+    week: 1
+    tier: 1
+    item: "3"
+    kind: train
+    desc: "yolo11n base recipe - deployable size point for the 8-camera budget"
+    deps: []
+    params: {model: yolo11n.pt, batch: 32}
+
+  - id: w1_m_adamw_1e3
+    week: 1
+    tier: 1
+    item: "3"
+    kind: train
+    desc: "yolo11m base recipe - upper size point, KD teacher candidate"
+    deps: []
+    params: {model: yolo11m.pt, batch: 12}
+
+  # ---------- Week 2 : data quality (handlers land in Week 2) ----------
+  - id: w2_label_audit
+    week: 2
+    tier: 1
+    item: "6"
+    kind: audit
+    desc: "Model-assisted flag pass over test set -> 200-image human review queue + cleaned set"
+    deps: [w1_s_adamw_1e3]
+    params: {}
+
+  - id: w2_eval_clean_vs_noisy
+    week: 2
+    tier: 1
+    item: "6"
+    kind: eval
+    desc: "Re-eval Week-1 winner on cleaned vs original test - the label-noise premium"
+    deps: [w2_label_audit]
+    params: {}
+
+  - id: w2_hard_negatives
+    week: 2
+    tier: 1
+    item: "7"
+    kind: train
+    desc: "Auto-fetched distractor images as background-only, retrain winner - false-positive mode"
+    deps: [w1_s_adamw_1e3]
+    params: {}
+
+  - id: w2_sahi_upperbound
+    week: 2
+    tier: 1
+    item: "4"
+    kind: eval
+    desc: "Sliced inference (sahi) on full-res test - distant small-object upper bound"
+    deps: [w1_s_adamw_1e3]
+    params: {}
+
+  # ---------- Week 3 : corruption benchmark ----------
+  - id: w3_corruptions
+    week: 3
+    tier: 2
+    item: "8"
+    kind: corrupt
+    desc: "Motion blur / defocus / JPEG / low light / overexposure / dust-haze x 5 severities"
+    deps: [w1_s_adamw_1e3]
+    params: {severities: 5}
+
+  # ---------- Week 4 : generalisation + temporal ----------
+  - id: w4_crossdata_sh17
+    week: 4
+    tier: 2
+    item: "9"
+    kind: crossdata
+    desc: "Train on our set, test on SH17 after ontology mapping - expect a large drop"
+    deps: [w1_s_adamw_1e3]
+    params: {target: sh17}
+
+  - id: w4_crossdata_chv
+    week: 4
+    tier: 2
+    item: "9"
+    kind: crossdata
+    desc: "Cross-dataset test on CHV after ontology mapping"
+    deps: [w1_s_adamw_1e3]
+    params: {target: chv}
+
+  - id: w4_track_vote
+    week: 4
+    tier: 2
+    item: "10"
+    kind: track
+    desc: "ByteTrack + BoT-SORT, N-frame vote, sweep N in {1,3,5,7,9}, recall vs false-alarm"
+    deps: [w1_s_adamw_1e3]
+    params: {n_sweep: [1, 3, 5, 7, 9]}
+
+  # ---------- Week 5 : deployment contributions ----------
+  - id: w5_kd_x_to_s
+    week: 5
+    tier: 2
+    item: "11"
+    kind: distill
+    desc: "Teacher (best m/x) -> yolo11s student, logit KD + neck feature KD"
+    deps: [w1_m_adamw_1e3, w1_s_adamw_1e3]
+    params: {student: yolo11s.pt}
+
+  - id: w5_kd_x_to_n
+    week: 5
+    tier: 2
+    item: "11"
+    kind: distill
+    desc: "Teacher -> yolo11n student, logit + feature KD"
+    deps: [w1_m_adamw_1e3, w1_n_adamw_1e3]
+    params: {student: yolo11n.pt}
+
+  - id: w5_calibration
+    week: 5
+    tier: 2
+    item: "12"
+    kind: calib
+    desc: "Reliability diagrams + temperature scaling on the winner; ECE before/after"
+    deps: [w1_s_adamw_1e3]
+    params: {}
+
+  # ---------- Week 6 : architecture (only if headroom) ----------
+  - id: w6_p2_head
+    week: 6
+    tier: 3
+    item: "13"
+    kind: arch
+    desc: "P2 detection head for small PPE items, measure latency cost"
+    deps: [w1_s_adamw_1e3]
+    params: {variant: p2}
+
+  - id: w6_attention
+    week: 6
+    tier: 3
+    item: "14"
+    kind: arch
+    desc: "CBAM / ECA / SE / CoordAtt in the neck - ablation rows only"
+    deps: [w1_s_adamw_1e3]
+    params: {variants: [cbam, eca, se, coordatt]}
+
+  - id: w6_two_stage
+    week: 6
+    tier: 3
+    item: "15"
+    kind: arch
+    desc: "person detector -> crop -> PPE classifier, worst-case latency vs worker count"
+    deps: [w1_s_adamw_1e3]
+    params: {}
+
+  - id: w6_baselines
+    week: 6
+    tier: 3
+    item: "16"
+    kind: arch
+    desc: "RT-DETR / D-FINE / RTMDet baseline table"
+    deps: []
+    params: {models: [rtdetr-l.pt]}
+
+  - id: w6_qat
+    week: 6
+    tier: 3
+    item: "17"
+    kind: arch
+    desc: "QAT vs PTQ on the deploy student - recovery on thin classes"
+    deps: [w1_s_adamw_1e3]
+    params: {}

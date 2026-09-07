@@ -323,6 +323,83 @@ in an afternoon. If they cannot produce the split, that is itself a finding.
 
 ---
 
+## Enhancement experiments (`experiments/`)
+
+A separate, self-driving experiment pipeline that takes a 17-item enhancement
+list (learning rate, resolution, augmentation, label quality, robustness,
+distillation, calibration, architecture) and turns each item into a runnable
+experiment that emits a result row and a figure. Built and run by **Claude Code
+(Sonnet 5)** — see *Contributions* below.
+
+### Layout
+
+| path | role |
+|---|---|
+| `SCHEDULE.md` | the full 6-week plan; every item mapped to an experiment id |
+| `experiments/registry.yaml` | the experiment matrix — `defaults` + per-experiment `params`, `deps`, `week`, `kind` |
+| `experiments/run.py` | run one experiment (`--next` for loop mode, or an id): train → test-split eval → latency bench → `results/<id>.json` |
+| `experiments/report.py` | aggregate `results/*.json` → `results/REPORT.md`, `STATUS.md`, `figs/*.png` |
+| `experiments/lib.py` | registry loading, dependency/next-experiment logic, latency bench |
+| `experiments/results/` | one `<id>.json` per experiment, `results.jsonl`, `REPORT.md`, `WEEK1_FINDINGS.md`, `figs/` |
+
+Runs in the `PPE/` venv as shipped (no extra installs for Week 1). Trained
+checkpoints land in `runs/ppe_enh/<id>/weights/` (git-ignored).
+
+### Running it
+
+```powershell
+PPE/Scripts/python.exe experiments/run.py --next        # next pending, deps-ready
+PPE/Scripts/python.exe experiments/run.py w1_s_adamw_1e4 # a specific experiment
+PPE/Scripts/python.exe experiments/report.py             # rebuild tables + figures
+```
+
+As a self-paced loop (Claude Code): `/loop PPE/Scripts/python.exe experiments/run.py --next`.
+`--next` exits 3 at the first experiment whose `kind` has no handler yet — a
+deliberate review gate between weeks. Only `kind: train` is implemented; Weeks
+2–6 (`audit`, `eval`, `corrupt`, `crossdata`, `track`, `distill`, `calib`,
+`arch`) are declared but not yet coded.
+
+### Week 1 result — Tier 1 training hygiene (11/11 runs)
+
+**The Tier-1 knobs did not beat a properly-trained baseline.** The earlier
+"prior best mAP50-95 ≈ 0.14" was interrupted training. A clean 100-epoch
+fine-tune sits at **mAP50 ≈ 0.49 / mAP50-95 ≈ 0.29**, and nothing in the sweep
+moves it up. Full writeup: `experiments/results/WEEK1_FINDINGS.md`.
+
+| item | hypothesis | result | verdict |
+|---|---|---|---|
+| #2 learning rate | `lr0=1e-3` beats the paper's `1e-5` | `1e-3` → 0.117 (worst); `1e-4` ≈ `1e-5` ≈ 0.29; default `1e-2` (SGD) → 0.219 | **falsified** — low LR wins |
+| #3 resolution | 640 → 960 → 1280 helps small objects | monotonic decline 0.282 → 0.248 → 0.144 | **falsified** — export is pre-resized; upscaling adds overfit, not detail |
+| #5 augmentation | domain-matched aug helps | none 0.196 · default 0.282 · heavy 0.238 | **partial** — aug helps, but Ultralytics' default is already the sweet spot |
+| #1\* thin classes | `copy_paste`+`mixup` lift WHV/WV | WHV **fell** 0.13 → 0.045 | **falsified** — WHV is a data/label problem |
+| model size | bigger = better | s 0.282 > m 0.270 > n 0.230 | yolo11s is the sweet spot *and* the deployable size |
+
+Working model: `runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt`
+(AdamW `lr0=1e-4`, 640, default aug — best precision/recall, 7-min train).
+
+**Two open issues that gate everything after Week 1:**
+
+1. **mAP50-95 has a ~0.30 ceiling** no optimiser setting touches → the
+   constraint is the data, not training.
+2. **WV (worker+vest) scores 0.995 in almost every run** on 36 training
+   instances — near-perfect and flat. Likely trivially separable in this export
+   or a within-class near-duplicate in the split. Until a label audit resolves
+   it, the 0.49 headline is measured against a questionable ruler.
+
+**Status: plan paused after Week 1** by request. Next planned step is the label
+audit + person-level honest eval (`eval_honest.py`) before any further training.
+
+## Contributions
+
+- **Reproduction pipeline** (`audit_split.py`, `split_no_leak.py`, `train.py`,
+  `eval_honest.py`, `live_check.py`, `bench_jetson.py`, this README's
+  reproduction sections): project author.
+- **Enhancement pipeline** (`SCHEDULE.md`, `experiments/`, the Week 1 sweep and
+  its findings, this section): **Claude Code (Sonnet 5)**, run as a self-paced
+  experiment loop under the author's direction. Design decisions (dataset
+  ontology, base-recipe re-pointing after the LR sweep, pausing after Week 1)
+  were made by the author at review gates.
+
 ## Reference
 
 Rahman, A.; Ahmed, M.S.; AlBugami, K.N.; Alabbad, A.Y.; AlFantoukh, A.A.;
