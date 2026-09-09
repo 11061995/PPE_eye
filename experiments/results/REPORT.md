@@ -38,10 +38,44 @@ Prior best (lightaug_yolo11s): **mAP50-95 ≈ 0.14**. `Δ` below is vs that.
 
 | id | item | status | mAP50 | mAP50-95 | P | R | lat ms | fps | train min | Δ mAP50-95 | desc |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| w2_label_audit | 6 | pending | - | - | - | - | - | - | - | - | Model-assisted flag pass over test set -> 200-image human review queue + cleaned set |
-| w2_eval_clean_vs_noisy | 6 | pending | - | - | - | - | - | - | - | - | Re-eval Week-1 winner on cleaned vs original test - the label-noise premium |
-| w2_hard_negatives | 7 | pending | - | - | - | - | - | - | - | - | Auto-fetched distractor images as background-only, retrain winner - false-positive mode |
-| w2_sahi_upperbound | 4 | pending | - | - | - | - | - | - | - | - | Sliced inference (sahi) on full-res test - distant small-object upper bound |
+| w2_hard_negatives | 7 | blocked | - | - | - | - | - | - | - | - | Auto-fetched distractor images as background-only, retrain winner - false-positive mode |
+
+### Week 2 — person-level / audit results
+
+**w2_honest_eval** (honest_person_level)
+
+| rule | conf | violation recall | false-alarm | verdict acc | undetected |
+|---|---|---|---|---|---|
+| strict | 0.1 | 0.6486 | 0.875 | 0.6444 | 354 |
+| helmet | 0.1 | 0.3442 | 0.2036 | 0.5339 | 354 |
+
+**w2_label_audit** (label_audit)
+
+| split | images | objects | obj/img | box area p10/p50/p90 | thin (<30) |
+|---|---|---|---|---|---|
+| train | 727 | 1059 | 1.46 | 0.00464/0.06478/0.37493 | — |
+| val | 154 | 999 | 6.49 | 0.00109/0.00857/0.06722 | WHV, WV |
+| test | 316 | 999 | 3.16 | 0.00156/0.01634/0.17018 | WHV, WV |
+
+Flags (1002 on 999 test boxes): edge=277, tiny=163, no_model_support=172, aspect=130, class_disagree=241, unlabeled_pred=19
+
+Auto-clean (tiny AND no_model_support): dropped 88, kept 911 → `labels_clean/`. Review queue: `w2_label_audit_flags.csv`.
+
+**w2_eval_clean_vs_noisy** (clean_vs_noisy)
+
+| rule | recall noisy→clean | false-alarm | verdict acc noisy→clean | Δ recall |
+|---|---|---|---|---|
+| strict | 0.6486 → 0.7111 | 0.875 | 0.6444 → 0.7059 | +0.0625 |
+| helmet | 0.3442 → 0.3622 | 0.2036 | 0.5339 → 0.5498 | +0.018 |
+
+**w2_sahi_upperbound** (sahi_upperbound)
+
+slice 320px / overlap 0.2 · 0.5 min
+
+| rule | recall full → SAHI | undetected full → SAHI | false-alarm SAHI |
+|---|---|---|---|
+| strict | 0.6486 → 0.5587 | 354 → 437 | 0.7778 |
+| helmet | 0.3442 → 0.3203 | 354 → 437 | 0.2671 |
 
 ## Week 3
 
@@ -84,3 +118,5 @@ Prior best (lightaug_yolo11s): **mAP50-95 ≈ 0.14**. `Δ` below is vs that.
 ![w1_resolution](figs/w1_resolution.png)
 
 ![w1_size_latency](figs/w1_size_latency.png)
+
+![w2_honest_eval](figs/w2_honest_eval.png)

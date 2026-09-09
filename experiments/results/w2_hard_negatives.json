@@ -1,0 +1,11 @@
+{
+  "id": "w2_hard_negatives",
+  "week": 2,
+  "tier": 1,
+  "item": "7",
+  "kind": "train",
+  "desc": "Auto-fetched distractor images as background-only, retrain winner - false-positive mode",
+  "status": "blocked",
+  "finished": "2026-09-09 19:38:53",
+  "reason": "Deferred after Week 2. Hard negatives address false POSITIVES; the measured failure mode here is false negatives (27-58% undetected persons) + an unlearned WHV class. Revisit only if a future model drives false-positive rate up."
+}

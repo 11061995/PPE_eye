@@ -1,0 +1,67 @@
+{
+  "names": [
+    "W",
+    "WH",
+    "WHV",
+    "WV"
+  ],
+  "splits": {
+    "train": {
+      "images": 727,
+      "objects": 1059,
+      "per_class": {
+        "W": 422,
+        "WH": 520,
+        "WHV": 53,
+        "WV": 64
+      },
+      "objects_per_image_mean": 1.46,
+      "box_area_frac_p10_p50_p90": [
+        0.00464,
+        0.06478,
+        0.37493
+      ],
+      "thin_classes_lt30": []
+    },
+    "val": {
+      "images": 154,
+      "objects": 999,
+      "per_class": {
+        "W": 495,
+        "WH": 459,
+        "WHV": 27,
+        "WV": 18
+      },
+      "objects_per_image_mean": 6.49,
+      "box_area_frac_p10_p50_p90": [
+        0.00109,
+        0.00857,
+        0.06722
+      ],
+      "thin_classes_lt30": [
+        "WHV",
+        "WV"
+      ]
+    },
+    "test": {
+      "images": 316,
+      "objects": 999,
+      "per_class": {
+        "W": 456,
+        "WH": 517,
+        "WHV": 20,
+        "WV": 6
+      },
+      "objects_per_image_mean": 3.16,
+      "box_area_frac_p10_p50_p90": [
+        0.00156,
+        0.01634,
+        0.17018
+      ],
+      "thin_classes_lt30": [
+        "WHV",
+        "WV"
+      ]
+    }
+  }
+}

@@ -38,3 +38,4 @@ opencv-python>=4.9          # live_check.py; see requirements-jetson.txt for the
 # --- optional but useful ---
 # tensorboard>=2.16         # training curves without Ultralytics HUB
 # pandas>=2.2               # ultralytics moved to polars; add if you prefer pandas
+# sahi>=0.12                # experiments/sahi_eval.py only (sliced-inference row)

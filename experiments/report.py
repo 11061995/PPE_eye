@@ -69,6 +69,8 @@ def write_report(rows):
         md.append("|" + "|".join(["---"] * len(hdr)) + "|")
         for r in wr:
             res = r["result"]
+            if res.get("eval") and r["status"] == "done":
+                continue  # eval rows get their own block below
             cells = [r["id"], str(r.get("item", "-")), r["status"]]
             for key, _ in METRIC_COLS:
                 cells.append(_fmt(res.get(key)))
@@ -77,6 +79,8 @@ def write_report(rows):
             cells.append(r["desc"])
             md.append("| " + " | ".join(cells) + " |")
         md.append("")
+
+        _week_evals(md, wr, w)
 
         # per-class table for the week, if any done
         done = [r for r in wr if r["status"] == "done" and r["result"].get("per_class_AP50")]
@@ -99,6 +103,66 @@ def write_report(rows):
             md.append(f"![{f.stem}](figs/{f.name})")
             md.append("")
     (lib.RESULTS_DIR / "REPORT.md").write_text("\n".join(md), encoding="utf-8")
+
+
+def _week_evals(md, wr, w):
+    evals = [r for r in wr if r["status"] == "done" and r["result"].get("eval")]
+    if not evals:
+        return
+    md.append(f"### Week {w} — person-level / audit results")
+    md.append("")
+    for r in evals:
+        res = r["result"]
+        e = res["eval"]
+        md.append(f"**{r['id']}** ({e})")
+        md.append("")
+        if e == "honest_person_level":
+            md.append("| rule | conf | violation recall | false-alarm | verdict acc | undetected |")
+            md.append("|---|---|---|---|---|---|")
+            for rule, v in res["rules"].items():
+                md.append(f"| {rule} | {v.get('conf')} | {v['violation_recall']} | "
+                          f"{v['false_alarm_rate']} | {v['verdict_accuracy']} | "
+                          f"{v['undetected_persons']} |")
+        elif e == "clean_vs_noisy":
+            md.append("| rule | recall noisy→clean | false-alarm | verdict acc noisy→clean | Δ recall |")
+            md.append("|---|---|---|---|---|")
+            for rule in res["noisy"]:
+                nz, cl = res["noisy"][rule], res["clean"][rule]
+                dl = res["delta_clean_minus_noisy"][rule]
+                md.append(f"| {rule} | {nz['violation_recall']} → {cl['violation_recall']} | "
+                          f"{nz['false_alarm_rate']} | {nz['verdict_accuracy']} → "
+                          f"{cl['verdict_accuracy']} | {dl['violation_recall']:+} |")
+        elif e == "sahi_upperbound":
+            ff = next((x for x in wr if x["id"] == "w2_honest_eval"), None)
+            ff = ff["result"]["rules"] if ff and ff["result"].get("rules") else {}
+            md.append(f"slice {res['slice_px']}px / overlap {res['overlap']} · "
+                      f"{res.get('minutes', '?')} min")
+            md.append("")
+            md.append("| rule | recall full → SAHI | undetected full → SAHI | false-alarm SAHI |")
+            md.append("|---|---|---|---|")
+            for rule, v in res["rules"].items():
+                f = ff.get(rule, {})
+                md.append(f"| {rule} | {f.get('violation_recall', '?')} → {v['violation_recall']} "
+                          f"| {f.get('undetected_persons', '?')} → {v['undetected_persons']} "
+                          f"| {v['false_alarm_rate']} |")
+        elif e == "label_audit":
+            comp = res["composition"]["splits"]
+            fl = res["flags"]
+            md.append("| split | images | objects | obj/img | box area p10/p50/p90 | thin (<30) |")
+            md.append("|---|---|---|---|---|---|")
+            for s, x in comp.items():
+                md.append(f"| {s} | {x['images']} | {x['objects']} | "
+                          f"{x['objects_per_image_mean']} | "
+                          f"{'/'.join(str(v) for v in x['box_area_frac_p10_p50_p90'])} | "
+                          f"{', '.join(x['thin_classes_lt30']) or '—'} |")
+            md.append("")
+            md.append(f"Flags ({fl['flagged_boxes']} on {comp['test']['objects']} test boxes): "
+                      + ", ".join(f"{k}={v}" for k, v in fl["flag_counts"].items()))
+            md.append("")
+            ac = fl["auto_clean"]
+            md.append(f"Auto-clean ({ac['rule']}): dropped {ac['dropped']}, kept {ac['kept']} "
+                      f"→ `{Path(ac['clean_label_dir']).name}/`. Review queue: `{Path(fl['flags_csv']).name}`.")
+        md.append("")
 
 
 def _done(rows, exp_id):
@@ -186,11 +250,43 @@ def fig_size_latency(rows):
     plt.close(fig)
 
 
+def fig_honest_eval(rows):
+    import json
+    curves = {}
+    for rule in ("strict", "helmet"):
+        f = lib.RESULTS_DIR / f"w2_honest_eval_{rule}.json"
+        if f.exists():
+            curves[rule] = json.loads(f.read_text())["sweep"]
+    if not curves:
+        return
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+    for rule, sweep in curves.items():
+        conf = [r["conf"] for r in sweep]
+        ax1.plot(conf, [r["violation_recall"] for r in sweep], "o-", label=f"{rule} recall")
+        ax1.plot(conf, [r["false_alarm_rate"] for r in sweep], "s--", label=f"{rule} false-alarm")
+        ax2.plot([r["false_alarm_rate"] for r in sweep],
+                 [r["violation_recall"] for r in sweep], "o-", label=rule)
+    ax1.set_xlabel("confidence threshold")
+    ax1.set_ylabel("rate")
+    ax1.set_title("Week 2 — violation recall & false-alarm vs conf")
+    ax1.legend(fontsize=8)
+    ax1.grid(alpha=0.3)
+    ax2.set_xlabel("false-alarm rate")
+    ax2.set_ylabel("violation recall")
+    ax2.set_title("recall / false-alarm trade-off")
+    ax2.legend()
+    ax2.grid(alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(lib.FIGS_DIR / "w2_honest_eval.png", dpi=120)
+    plt.close(fig)
+
+
 def main():
     lib.FIGS_DIR.mkdir(parents=True, exist_ok=True)
     rows = _rows()
     write_status(rows)
-    for fn in (fig_lr_sweep, fig_resolution, fig_aug_ablation, fig_size_latency):
+    for fn in (fig_lr_sweep, fig_resolution, fig_aug_ablation, fig_size_latency,
+               fig_honest_eval):
         try:
             fn(rows)
         except Exception as e:  # noqa: BLE001

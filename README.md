@@ -386,19 +386,64 @@ Working model: `runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt`
    or a within-class near-duplicate in the split. Until a label audit resolves
    it, the 0.49 headline is measured against a questionable ruler.
 
-**Status: plan paused after Week 1** by request. Next planned step is the label
-audit + person-level honest eval (`eval_honest.py`) before any further training.
+### Week 2 result — data quality & honest evaluation
+
+Full writeup: `experiments/results/WEEK2_FINDINGS.md`. Model under test:
+`w1_s_adamw_1e4` (mAP50 ≈ 0.49).
+
+**1. The WV=0.995 question — answered by counting.** Real test-set object counts:
+WV = 6, WHV = 20 (both < 30 → "AP is noise"). Not leakage; just tiny classes
+times the ~3× within-split augmentation. The compliant class WHV has 53 training
+instances total.
+
+**2. Train ≠ test distribution — the real ceiling.** Train: 1.46 workers/image,
+6.5 % median box area (close-up singletons). Test: 3.16 workers/image, 1.6 %
+median box area (crowded, distant). The model learns easy close-ups and is scored
+on small clustered workers — this, not the optimiser, is why Week 1 stalled.
+
+**3. Person-level honest eval (`experiments/honest_eval.py`)** — the mAP → decision gap:
+
+| rule | best violation recall | false-alarm rate | undetected persons |
+|---|---|---|---|
+| helmet (WH or WHV compliant) | 0.34 | 0.20 | 354–576 / 999 |
+| strict (WHV compliant) | 0.65 | 0.88–1.00 | 354–576 / 999 |
+
+mAP50 ≈ 0.49 delivers **person-level violation recall 0.34** and **27–58 % of
+workers never detected**. Strict-rule false-alarm hits 1.0 — the model barely
+emits WHV, so every compliant worker is flagged.
+
+**4. Label noise is a minor contributor.** Conservative auto-clean (drop GT boxes
+that are both < 0.3 % area and invisible to the model) removes 88 / 999 test
+boxes → +6 pts strict verdict accuracy. The other 266 undetected persons are
+real misses.
+
+**5. SAHI sliced inference (item #4) does not help.** 320 px and 480 px slices
+both raise undetected persons (354 → 437) — the model is scale-brittle from the
+narrow training distribution, so tiling hurts. A null result, not an upper bound.
+
+`w2_hard_negatives` (item #7) is **deferred** — it targets false positives; the
+measured failure mode is false negatives.
+
+**Status: paused after Week 2.** The project's finding is now firm: on this
+dataset a properly trained YOLO11s reaches mAP50 ≈ 0.49 but only ~0.34
+person-level violation recall and misses a quarter to a half of all workers,
+because the training data (sparse, close-up) does not resemble deployment
+(crowded, distant) and the compliant class is data-starved. No training-recipe,
+augmentation, resolution, or architecture change addresses this — it needs
+deployment-representative labelled data.
 
 ## Contributions
 
 - **Reproduction pipeline** (`audit_split.py`, `split_no_leak.py`, `train.py`,
   `eval_honest.py`, `live_check.py`, `bench_jetson.py`, this README's
   reproduction sections): project author.
-- **Enhancement pipeline** (`SCHEDULE.md`, `experiments/`, the Week 1 sweep and
-  its findings, this section): **Claude Code (Sonnet 5)**, run as a self-paced
-  experiment loop under the author's direction. Design decisions (dataset
-  ontology, base-recipe re-pointing after the LR sweep, pausing after Week 1)
-  were made by the author at review gates.
+- **Enhancement pipeline** (`SCHEDULE.md`, `experiments/` — incl.
+  `experiments/honest_eval.py`, `experiments/audit.py`, `experiments/sahi_eval.py`
+  — the Week 1–2 experiments and findings, and the enhancement sections of this
+  README): **Claude Code (Sonnet 5)**, run as a self-paced experiment loop under
+  the author's direction. Design decisions (dataset ontology, base-recipe
+  re-pointing after the LR sweep, deferring hard-negatives, pausing after each
+  week) were made by the author at review gates.
 
 ## Reference
 

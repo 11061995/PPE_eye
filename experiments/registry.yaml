@@ -162,24 +162,33 @@ experiments:
     deps: []
     params: {model: yolo11m.pt, batch: 12}
 
-  # ---------- Week 2 : data quality (handlers land in Week 2) ----------
+  # ---------- Week 2 : data quality + honest evaluation ----------
+  - id: w2_honest_eval
+    week: 2
+    tier: 1
+    item: "6"
+    kind: eval
+    desc: "Person-level verdicts on the best Week-1 checkpoint: violation recall, false-alarm, undetected persons (strict + helmet rules)"
+    deps: []
+    params: {eval_kind: honest, weights: runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt}
+
   - id: w2_label_audit
     week: 2
     tier: 1
     item: "6"
     kind: audit
-    desc: "Model-assisted flag pass over test set -> 200-image human review queue + cleaned set"
-    deps: [w1_s_adamw_1e3]
-    params: {}
+    desc: "Dataset composition + model-assisted suspicious-box flags (tiny / edge / aspect outliers / high model-GT disagreement) -> review queue + cleaned label set"
+    deps: [w2_honest_eval]
+    params: {weights: runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt}
 
   - id: w2_eval_clean_vs_noisy
     week: 2
     tier: 1
     item: "6"
     kind: eval
-    desc: "Re-eval Week-1 winner on cleaned vs original test - the label-noise premium"
+    desc: "Re-run honest eval on cleaned vs original test - the label-noise premium"
     deps: [w2_label_audit]
-    params: {}
+    params: {eval_kind: clean_vs_noisy, weights: runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt}
 
   - id: w2_hard_negatives
     week: 2
@@ -187,7 +196,7 @@ experiments:
     item: "7"
     kind: train
     desc: "Auto-fetched distractor images as background-only, retrain winner - false-positive mode"
-    deps: [w1_s_adamw_1e3]
+    deps: [w2_honest_eval]
     params: {}
 
   - id: w2_sahi_upperbound
@@ -196,8 +205,8 @@ experiments:
     item: "4"
     kind: eval
     desc: "Sliced inference (sahi) on full-res test - distant small-object upper bound"
-    deps: [w1_s_adamw_1e3]
-    params: {}
+    deps: [w2_honest_eval]
+    params: {eval_kind: sahi, weights: runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt}
 
   # ---------- Week 3 : corruption benchmark ----------
   - id: w3_corruptions

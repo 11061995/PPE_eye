@@ -82,7 +82,95 @@ def handle_train(exp: dict) -> dict:
     }
 
 
-HANDLERS = {"train": handle_train}
+def _best_week1_weights() -> str:
+    """Path to the best Week-1 train run by test_mAP50_95 (fallback: adamw_1e4)."""
+    best, best_v = None, -1.0
+    for e_id in [f.stem for f in lib.RESULTS_DIR.glob("w1_*.json")]:
+        r = lib.load_result(e_id) or {}
+        if r.get("status") == "done" and isinstance(r.get("test_mAP50_95"), (int, float)):
+            if r["test_mAP50_95"] > best_v:
+                best, best_v = r.get("weights"), r["test_mAP50_95"]
+    return best or str(lib.ROOT / "runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt")
+
+
+def handle_eval(exp: dict) -> dict:
+    """Person-level honest eval (both compliance rules) on a chosen checkpoint."""
+    import honest_eval as he
+
+    p = exp["params"]
+    ek = p.get("eval_kind", "honest")
+    if ek not in ("honest", "clean_vs_noisy", "sahi"):
+        raise NotImplementedError(
+            f"eval_kind={ek!r} not implemented yet (experiment {exp['id']}). "
+            f"Build it in the week it is scheduled.")
+    weights = p.get("weights") or _best_week1_weights()
+    weights = weights if Path(weights).is_absolute() else str(lib.ROOT / weights)
+    data = str(lib.ROOT / p.get("data", "data/data.yaml"))
+    split = p.get("split", "test")
+    imgsz = p.get("imgsz", 640)
+    sweep = [float(c) for c in str(p.get("conf_sweep", he.DEFAULT_SWEEP)).split(",")]
+    rules = p.get("rules", ["strict", "helmet"])
+
+    def eval_set(label_dir_name, tag):
+        out = {}
+        for rule in rules:
+            res = he.run(weights, data, split, rule, imgsz, p.get("device", "0"),
+                         p.get("iou", 0.5), sweep, label_dir_name=label_dir_name)
+            (lib.RESULTS_DIR / f"{exp['id']}_{tag}_{rule}.json").write_text(
+                json.dumps(res, indent=2), encoding="utf-8")
+            b = res["best_f1_row"]
+            out[rule] = {
+                "best_conf": b["conf"],
+                "violation_recall": b["violation_recall"],
+                "false_alarm_rate": b["false_alarm_rate"],
+                "verdict_accuracy": b["verdict_accuracy"],
+                "undetected_persons": b["undetected_persons"],
+                "max_recall": max(r["violation_recall"] for r in res["sweep"]),
+                "min_false_alarm": min(r["false_alarm_rate"] for r in res["sweep"]),
+            }
+        return out
+
+    if ek == "sahi":
+        import sahi_eval
+        return sahi_eval.run(weights, data, split, p.get("device", "0"), sweep,
+                             lib.RESULTS_DIR, slice_px=p.get("slice_px", 320),
+                             overlap=p.get("overlap", 0.2))
+
+    if ek == "honest":
+        # keep the simple <id>_<rule>.json names for the report figure
+        out = {}
+        for rule in rules:
+            res = he.run(weights, data, split, rule, imgsz, p.get("device", "0"),
+                         p.get("iou", 0.5), sweep)
+            (lib.RESULTS_DIR / f"{exp['id']}_{rule}.json").write_text(
+                json.dumps(res, indent=2), encoding="utf-8")
+            b = res["best_f1_row"]
+            out[rule] = {k: b[k] for k in ("conf", "violation_recall",
+                        "false_alarm_rate", "verdict_accuracy", "undetected_persons")}
+            out[rule]["max_recall"] = max(r["violation_recall"] for r in res["sweep"])
+        return {"weights": weights, "split": split, "eval": "honest_person_level",
+                "rules": out}
+
+    noisy = eval_set("labels", "noisy")
+    clean = eval_set("labels_clean", "clean")
+    delta = {r: {k: round(clean[r][k] - noisy[r][k], 4)
+                 for k in ("violation_recall", "false_alarm_rate", "verdict_accuracy")}
+             for r in rules}
+    return {"weights": weights, "split": split, "eval": "clean_vs_noisy",
+            "noisy": noisy, "clean": clean, "delta_clean_minus_noisy": delta}
+
+
+def handle_audit(exp: dict) -> dict:
+    import audit
+
+    p = exp["params"]
+    weights = p.get("weights") or _best_week1_weights()
+    weights = weights if Path(weights).is_absolute() else str(lib.ROOT / weights)
+    data = str(lib.ROOT / p.get("data", "data/data.yaml"))
+    return audit.run(weights, data, lib.RESULTS_DIR)
+
+
+HANDLERS = {"train": handle_train, "eval": handle_eval, "audit": handle_audit}
 
 
 def run_one(exp: dict) -> int:

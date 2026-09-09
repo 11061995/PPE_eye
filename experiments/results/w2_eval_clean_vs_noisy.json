@@ -1,0 +1,84 @@
+{
+  "id": "w2_eval_clean_vs_noisy",
+  "week": 2,
+  "tier": 1,
+  "item": "6",
+  "kind": "eval",
+  "desc": "Re-run honest eval on cleaned vs original test - the label-noise premium",
+  "params": {
+    "data": "data/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "eval_kind": "clean_vs_noisy",
+    "weights": "runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt"
+  },
+  "started": "2026-09-08 17:30:33",
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w1_s_adamw_1e4\\weights\\best.pt",
+  "split": "test",
+  "eval": "clean_vs_noisy",
+  "noisy": {
+    "strict": {
+      "best_conf": 0.1,
+      "violation_recall": 0.6486,
+      "false_alarm_rate": 0.875,
+      "verdict_accuracy": 0.6444,
+      "undetected_persons": 354,
+      "max_recall": 0.6486,
+      "min_false_alarm": 0.8571
+    },
+    "helmet": {
+      "best_conf": 0.1,
+      "violation_recall": 0.3442,
+      "false_alarm_rate": 0.2036,
+      "verdict_accuracy": 0.5339,
+      "undetected_persons": 354,
+      "max_recall": 0.3442,
+      "min_false_alarm": 0.1152
+    }
+  },
+  "clean": {
+    "strict": {
+      "best_conf": 0.1,
+      "violation_recall": 0.7111,
+      "false_alarm_rate": 0.875,
+      "verdict_accuracy": 0.7059,
+      "undetected_persons": 266,
+      "max_recall": 0.7111,
+      "min_false_alarm": 0.8571
+    },
+    "helmet": {
+      "best_conf": 0.1,
+      "violation_recall": 0.3622,
+      "false_alarm_rate": 0.2036,
+      "verdict_accuracy": 0.5498,
+      "undetected_persons": 266,
+      "max_recall": 0.3622,
+      "min_false_alarm": 0.1152
+    }
+  },
+  "delta_clean_minus_noisy": {
+    "strict": {
+      "violation_recall": 0.0625,
+      "false_alarm_rate": 0.0,
+      "verdict_accuracy": 0.0615
+    },
+    "helmet": {
+      "violation_recall": 0.018,
+      "false_alarm_rate": 0.0,
+      "verdict_accuracy": 0.0159
+    }
+  },
+  "status": "done",
+  "finished": "2026-09-08 17:32:07"
+}
