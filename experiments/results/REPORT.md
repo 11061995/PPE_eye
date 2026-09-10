@@ -87,9 +87,17 @@ slice 320px / overlap 0.2 · 0.5 min
 
 | id | item | status | mAP50 | mAP50-95 | P | R | lat ms | fps | train min | Δ mAP50-95 | desc |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| w4_crossdata_sh17 | 9 | pending | - | - | - | - | - | - | - | - | Train on our set, test on SH17 after ontology mapping - expect a large drop |
+| w4_sh17_train | 9 | done | 0.5835 | 0.4257 | 0.6614 | 0.5271 | 6.0200 | 166.1 | 5.8000 | +0.2857 | Train on SH17-compliance ONLY (498 PPE-bearing imgs, mapped to W/WH/WHV/WV), cross-eval on Pictor test |
+| w4_mixed_train | 9 | pending | - | - | - | - | - | - | - | - | Train on Pictor + SH17-compliance combined; val/test stay PURE Pictor so the number is comparable to Weeks 1-2 |
+| w4_crossdata_sh17 | 9 | pending | - | - | - | - | - | - | - | - | Week-1 Pictor-only model evaluated on SH17-compliance test - the generalisation drop |
 | w4_crossdata_chv | 9 | pending | - | - | - | - | - | - | - | - | Cross-dataset test on CHV after ontology mapping |
 | w4_track_vote | 10 | pending | - | - | - | - | - | - | - | - | ByteTrack + BoT-SORT, N-frame vote, sweep N in {1,3,5,7,9}, recall vs false-alarm |
+
+### Week 4 per-class AP50
+
+| id | W | WH | WHV | WV |
+|---|---|---|---|---|
+| w4_sh17_train | 0.5113 | 0.7080 | 0.5819 | 0.5327 |
 
 ## Week 5
 

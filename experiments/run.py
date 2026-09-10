@@ -63,7 +63,29 @@ def handle_train(exp: dict) -> dict:
                  for i, v in zip(mt.box.ap_class_index, mt.box.ap50)}
     lat = lib.latency_ms(m, kw["imgsz"], kw.get("device", "0"))
 
+    # optional cross-dataset evaluation on other data.yaml files
+    cross = {}
+    for tag_path in p.get("also_eval_data", []):
+        tag, dpath = (tag_path.split("=", 1) if "=" in tag_path else (Path(tag_path).parent.name, tag_path))
+        dpath = dpath if Path(dpath).is_absolute() else str(lib.ROOT / dpath)
+        try:
+            xv = m.val(data=dpath, split="test", imgsz=kw["imgsz"],
+                       device=kw.get("device", "0"),
+                       project=str(lib.ROOT / "runs" / "ppe_enh"),
+                       name=f"{exp['id']}_x_{tag}", exist_ok=True, plots=False)
+            cross[tag] = {
+                "mAP50": round(float(xv.box.map50), 4),
+                "mAP50_95": round(float(xv.box.map), 4),
+                "precision": round(float(xv.box.mp), 4),
+                "recall": round(float(xv.box.mr), 4),
+                "per_class_AP50": {xv.names[i]: round(float(v), 4)
+                                   for i, v in zip(xv.box.ap_class_index, xv.box.ap50)},
+            }
+        except Exception as e:  # noqa: BLE001
+            cross[tag] = {"error": str(e)}
+
     return {
+        **({"cross_dataset": cross} if cross else {}),
         "model": model_name,
         "imgsz": kw["imgsz"],
         "optimizer": kw.get("optimizer"),

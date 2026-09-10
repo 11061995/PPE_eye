@@ -1,0 +1,29 @@
+{
+  "id": "w4_mixed_train",
+  "week": 4,
+  "tier": 2,
+  "item": "9",
+  "kind": "train",
+  "desc": "Train on Pictor + SH17-compliance combined; val/test stay PURE Pictor so the number is comparable to Weeks 1-2",
+  "status": "running",
+  "started": "2026-09-10 09:24:05",
+  "params": {
+    "data": "data/mixed_pictor_sh17/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "also_eval_data": [
+      "sh17=data/sh17_compliance/data.yaml"
+    ]
+  }
+}

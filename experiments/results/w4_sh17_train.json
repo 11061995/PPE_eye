@@ -1,0 +1,67 @@
+{
+  "id": "w4_sh17_train",
+  "week": 4,
+  "tier": 2,
+  "item": "9",
+  "kind": "train",
+  "desc": "Train on SH17-compliance ONLY (498 PPE-bearing imgs, mapped to W/WH/WHV/WV), cross-eval on Pictor test",
+  "params": {
+    "data": "data/sh17_compliance/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "also_eval_data": [
+      "pictor=data/data.yaml"
+    ]
+  },
+  "started": "2026-09-10 09:14:48",
+  "cross_dataset": {
+    "pictor": {
+      "mAP50": 0.1025,
+      "mAP50_95": 0.0442,
+      "precision": 0.2321,
+      "recall": 0.2154,
+      "per_class_AP50": {
+        "W": 0.2484,
+        "WH": 0.1205,
+        "WHV": 0.0269,
+        "WV": 0.0143
+      }
+    }
+  },
+  "model": "yolo11s.pt",
+  "imgsz": 640,
+  "optimizer": "AdamW",
+  "lr0": 0.0001,
+  "epochs_cfg": 150,
+  "epochs_trained": 64,
+  "train_minutes": 5.8,
+  "test_mAP50": 0.5835,
+  "test_mAP50_95": 0.4257,
+  "test_precision": 0.6614,
+  "test_recall": 0.5271,
+  "per_class_AP50": {
+    "W": 0.5113,
+    "WH": 0.708,
+    "WHV": 0.5819,
+    "WV": 0.5327
+  },
+  "latency_ms_mean": 6.02,
+  "latency_ms_p50": 5.94,
+  "latency_ms_p95": 6.53,
+  "fps_mean": 166.1,
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_sh17_train\\weights\\best.pt",
+  "run_dir": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_sh17_train",
+  "status": "done",
+  "finished": "2026-09-10 09:20:56"
+}

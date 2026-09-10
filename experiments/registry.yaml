@@ -219,14 +219,37 @@ experiments:
     params: {severities: 5}
 
   # ---------- Week 4 : generalisation + temporal ----------
+  - id: w4_sh17_train
+    week: 4
+    tier: 2
+    item: "9"
+    kind: train
+    desc: "Train on SH17-compliance ONLY (498 PPE-bearing imgs, mapped to W/WH/WHV/WV), cross-eval on Pictor test"
+    deps: []
+    params:
+      data: data/sh17_compliance/data.yaml
+      also_eval_data: ["pictor=data/data.yaml"]
+
+  - id: w4_mixed_train
+    week: 4
+    tier: 2
+    item: "9"
+    kind: train
+    desc: "Train on Pictor + SH17-compliance combined; val/test stay PURE Pictor so the number is comparable to Weeks 1-2"
+    deps: []
+    params:
+      data: data/mixed_pictor_sh17/data.yaml
+      also_eval_data: ["sh17=data/sh17_compliance/data.yaml"]
+
   - id: w4_crossdata_sh17
     week: 4
     tier: 2
     item: "9"
     kind: crossdata
-    desc: "Train on our set, test on SH17 after ontology mapping - expect a large drop"
-    deps: [w1_s_adamw_1e3]
-    params: {target: sh17}
+    desc: "Week-1 Pictor-only model evaluated on SH17-compliance test - the generalisation drop"
+    deps: []
+    params: {target: sh17, weights: runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt,
+             data: data/sh17_compliance/data.yaml}
 
   - id: w4_crossdata_chv
     week: 4
