@@ -91,3 +91,78 @@ fixed.
 - Focus/shutter discipline > lighting colour. Verify lens focus per camera.
 - Night is an open problem; do not ship these weights for after-dark monitoring.
 - Compression to ~q25 is survivable (77% retention); below q15 it is not.
+
+---
+
+# Week 3b — `w3_darkaug`: the low-light fix that did not work
+
+**Hypothesis:** the low-light collapse above is an augmentation gap, so retrain
+the mixed recipe with aggressive brightness jitter (`hsv_v: 0.9`, i.e. value gain
+0.1×–1.9×, which spans our low-light severities) and the night failure recovers.
+
+**Result: falsified.** 50 epochs, 10.9 min. Verified by re-running the same
+corruption benchmark (`w3_corrupt_dark`).
+
+## It did not fix the night
+
+| low-light severity | W4 mixed | W3 darkaug |
+|---|---|---|
+| 1 | 0.353 | 0.403 |
+| 2 | 0.203 | 0.221 |
+| 3 | 0.022 | 0.037 |
+| 4 | 0.000 | 0.002 |
+| 5 | 0.000 | 0.000 |
+
+Severities 4–5 — actual darkness — remain **total failure**. The only movement is
+at severity 1, which is dusk, not night. The target of the experiment was not hit.
+
+Likely cause: `hsv_v` rescales brightness but adds no **sensor noise**, while the
+benchmark's low-light model compounds darkening with noise that grows as the
+signal shrinks. The augmentation trained for the wrong half of the corruption.
+
+## It made everything else worse
+
+Violation recall, W4 mixed → W3 darkaug, at severity 3:
+
+| corruption | mixed | darkaug |
+|---|---|---|
+| motion blur | 0.191 | 0.110 |
+| defocus | 0.268 | 0.217 |
+| JPEG | 0.351 | 0.271 |
+| overexposure | 0.435 | 0.372 |
+| dust / haze | 0.431 | 0.367 |
+
+And on clean images: object mAP50 0.495 → **0.432**, precision 0.651 → **0.484**,
+WV AP50 0.995 → 0.774, SH17 cross-eval 0.587 → 0.557.
+
+**Verdict: do not ship this checkpoint.** Aggressive brightness jitter bought a
+marginal dusk improvement and paid for it everywhere else.
+
+## The one genuine second-order finding
+
+The dark model is markedly **more precise** per violation. Full 9-point sweep
+(`w3_darkaug_honest_helmet.json`) against the mixed model, at matched recall:
+
+| | recall | violation precision | FP | undetected |
+|---|---|---|---|---|
+| darkaug @ conf 0.10 | 0.407 | **0.803** | **46** | **410** |
+| mixed @ conf 0.30 | 0.400 | 0.761 | 58 | 507 |
+| mixed @ conf 0.10 | **0.457** | 0.723 | 81 | 386 |
+
+At ~0.40 recall the dark model beats the mixed model on *both* false positives
+and undetected persons. But its recall **caps at 0.407** — even at the lowest
+threshold swept it never reaches the mixed model's 0.457.
+
+So the tradeoff is real but narrow: darkaug is the better choice only if ~0.40
+violation recall is acceptable and false alarms are expensive. For maximum
+violation catch, W4 mixed remains the model. This does not rescue the
+experiment — it failed its stated hypothesis.
+
+## What would actually be needed for night operation
+
+1. Augmentation that models **darkening plus sensor noise together**, not
+   brightness alone.
+2. Failing that, real night/IR frames in training — the Week-4 lesson (data, not
+   recipe) applying again.
+3. Until then, the honest deployment statement is unchanged: **these checkpoints
+   do not work after dark.**

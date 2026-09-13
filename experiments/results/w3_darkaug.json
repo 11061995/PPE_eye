@@ -1,0 +1,68 @@
+{
+  "id": "w3_darkaug",
+  "week": 3,
+  "tier": 2,
+  "item": "8",
+  "kind": "train",
+  "desc": "Mixed recipe + aggressive brightness aug (hsv_v 0.9 -> value gain 0.1-1.9x) to attack the low-light collapse found by w3_corruptions",
+  "params": {
+    "data": "data/mixed_pictor_sh17/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "hsv_v": 0.9,
+    "also_eval_data": [
+      "sh17=data/sh17_compliance/data.yaml"
+    ]
+  },
+  "started": "2026-09-13 08:07:05",
+  "cross_dataset": {
+    "sh17": {
+      "mAP50": 0.5573,
+      "mAP50_95": 0.3908,
+      "precision": 0.4719,
+      "recall": 0.6307,
+      "per_class_AP50": {
+        "W": 0.4722,
+        "WH": 0.6631,
+        "WHV": 0.6257,
+        "WV": 0.4682
+      }
+    }
+  },
+  "model": "yolo11s.pt",
+  "imgsz": 640,
+  "optimizer": "AdamW",
+  "lr0": 0.0001,
+  "epochs_cfg": 150,
+  "epochs_trained": 50,
+  "train_minutes": 10.9,
+  "test_mAP50": 0.4318,
+  "test_mAP50_95": 0.2805,
+  "test_precision": 0.4836,
+  "test_recall": 0.4702,
+  "per_class_AP50": {
+    "W": 0.457,
+    "WH": 0.4358,
+    "WHV": 0.0605,
+    "WV": 0.7736
+  },
+  "latency_ms_mean": 6.09,
+  "latency_ms_p50": 5.93,
+  "latency_ms_p95": 7.27,
+  "fps_mean": 164.2,
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w3_darkaug\\weights\\best.pt",
+  "run_dir": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w3_darkaug",
+  "status": "done",
+  "finished": "2026-09-13 08:18:17"
+}

@@ -82,6 +82,14 @@ slice 320px / overlap 0.2 · 0.5 min
 | id | item | status | mAP50 | mAP50-95 | P | R | lat ms | fps | train min | Δ mAP50-95 | desc |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | w3_corruptions | 8 | done | - | - | - | - | - | - | - | - | Motion blur / defocus / JPEG / low light / overexposure / dust-haze x 5 severities, scored person-level |
+| w3_darkaug | 8 | done | 0.4318 | 0.2805 | 0.4836 | 0.4702 | 6.0900 | 164.2 | 10.9000 | +0.1405 | Mixed recipe + aggressive brightness aug (hsv_v 0.9 -> value gain 0.1-1.9x) to attack the low-light collapse found by w3_corruptions |
+| w3_corrupt_dark | 8 | done | - | - | - | - | - | - | - | - | Re-run the corruption benchmark on the dark-augmented model - does hsv_v=0.9 recover the low-light collapse? |
+
+### Week 3 per-class AP50
+
+| id | W | WH | WHV | WV |
+|---|---|---|---|---|
+| w3_darkaug | 0.4570 | 0.4358 | 0.0605 | 0.7736 |
 
 ## Week 4
 
@@ -131,3 +139,5 @@ slice 320px / overlap 0.2 · 0.5 min
 ![w2_honest_eval](figs/w2_honest_eval.png)
 
 ![w3_corruption_recall](figs/w3_corruption_recall.png)
+
+![w5_calibration](figs/w5_calibration.png)

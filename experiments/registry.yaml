@@ -236,6 +236,20 @@ experiments:
       hsv_v: 0.9
       also_eval_data: ["sh17=data/sh17_compliance/data.yaml"]
 
+  - id: w3_corrupt_dark
+    week: 3
+    tier: 2
+    item: "8"
+    kind: corrupt
+    desc: "Re-run the corruption benchmark on the dark-augmented model - does hsv_v=0.9 recover the low-light collapse?"
+    deps: [w3_darkaug]
+    params:
+      severities: 5
+      rule: helmet
+      conf_sweep: "0.10,0.25,0.50"
+      models:
+        w3_darkaug: runs/ppe_enh/w3_darkaug/weights/best.pt
+
   # ---------- Week 4 : generalisation + temporal ----------
   - id: w4_sh17_train
     week: 4
