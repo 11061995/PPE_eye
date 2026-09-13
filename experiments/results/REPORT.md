@@ -106,7 +106,7 @@ slice 320px / overlap 0.2 · 0.5 min
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | w5_kd_x_to_s | 11 | pending | - | - | - | - | - | - | - | - | Teacher (best m/x) -> yolo11s student, logit KD + neck feature KD |
 | w5_kd_x_to_n | 11 | pending | - | - | - | - | - | - | - | - | Teacher -> yolo11n student, logit + feature KD |
-| w5_calibration | 12 | pending | - | - | - | - | - | - | - | - | Reliability diagrams + temperature scaling on the winner; ECE before/after |
+| w5_calibration | 12 | done | - | - | - | - | - | - | - | - | Reliability diagrams + temperature scaling; ECE before/after. T fitted on val, reported on test |
 
 ## Week 6
 

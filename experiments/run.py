@@ -215,8 +215,25 @@ def handle_corrupt(exp: dict) -> dict:
                            corruptions=p.get("corruptions"))
 
 
+def handle_calib(exp: dict) -> dict:
+    """Confidence calibration: reliability + ECE, temperature fitted on val."""
+    import calibrate
+
+    p = exp["params"]
+    data = str(lib.ROOT / p.get("data", "data/data.yaml"))
+    models = p.get("models") or {"w4_mixed": "runs/ppe_enh/w4_mixed_train/weights/best.pt"}
+    models = {t: (w if Path(w).is_absolute() else str(lib.ROOT / w))
+              for t, w in models.items()}
+    missing = [t for t, w in models.items() if not Path(w).exists()]
+    if missing:
+        raise FileNotFoundError(f"missing checkpoints for {missing}")
+    return calibrate.run(models, data, p.get("imgsz", 640), p.get("device", "0"),
+                         float(p.get("iou", 0.5)))
+
+
 HANDLERS = {"train": handle_train, "eval": handle_eval,
-            "audit": handle_audit, "corrupt": handle_corrupt}
+            "audit": handle_audit, "corrupt": handle_corrupt,
+            "calib": handle_calib}
 
 
 def run_one(exp: dict) -> int:

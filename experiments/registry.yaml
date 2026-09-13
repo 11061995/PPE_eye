@@ -299,9 +299,12 @@ experiments:
     tier: 2
     item: "12"
     kind: calib
-    desc: "Reliability diagrams + temperature scaling on the winner; ECE before/after"
+    desc: "Reliability diagrams + temperature scaling; ECE before/after. T fitted on val, reported on test"
     deps: [w1_s_adamw_1e3]
-    params: {}
+    params:
+      models:
+        w1_baseline: runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt
+        w4_mixed: runs/ppe_enh/w4_mixed_train/weights/best.pt
 
   # ---------- Week 6 : architecture (only if headroom) ----------
   - id: w6_p2_head
