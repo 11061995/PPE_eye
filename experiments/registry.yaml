@@ -224,6 +224,18 @@ experiments:
         w1_baseline: runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt
         w4_mixed: runs/ppe_enh/w4_mixed_train/weights/best.pt
 
+  - id: w3_darkaug
+    week: 3
+    tier: 2
+    item: "8"
+    kind: train
+    desc: "Mixed recipe + aggressive brightness aug (hsv_v 0.9 -> value gain 0.1-1.9x) to attack the low-light collapse found by w3_corruptions"
+    deps: [w3_corruptions]
+    params:
+      data: data/mixed_pictor_sh17/data.yaml
+      hsv_v: 0.9
+      also_eval_data: ["sh17=data/sh17_compliance/data.yaml"]
+
   # ---------- Week 4 : generalisation + temporal ----------
   - id: w4_sh17_train
     week: 4
