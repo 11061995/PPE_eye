@@ -81,7 +81,7 @@ slice 320px / overlap 0.2 · 0.5 min
 
 | id | item | status | mAP50 | mAP50-95 | P | R | lat ms | fps | train min | Δ mAP50-95 | desc |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| w3_corruptions | 8 | pending | - | - | - | - | - | - | - | - | Motion blur / defocus / JPEG / low light / overexposure / dust-haze x 5 severities |
+| w3_corruptions | 8 | done | - | - | - | - | - | - | - | - | Motion blur / defocus / JPEG / low light / overexposure / dust-haze x 5 severities, scored person-level |
 
 ## Week 4
 
@@ -129,3 +129,5 @@ slice 320px / overlap 0.2 · 0.5 min
 ![w1_size_latency](figs/w1_size_latency.png)
 
 ![w2_honest_eval](figs/w2_honest_eval.png)
+
+![w3_corruption_recall](figs/w3_corruption_recall.png)

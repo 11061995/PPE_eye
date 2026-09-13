@@ -214,9 +214,15 @@ experiments:
     tier: 2
     item: "8"
     kind: corrupt
-    desc: "Motion blur / defocus / JPEG / low light / overexposure / dust-haze x 5 severities"
+    desc: "Motion blur / defocus / JPEG / low light / overexposure / dust-haze x 5 severities, scored person-level"
     deps: [w1_s_adamw_1e3]
-    params: {severities: 5}
+    params:
+      severities: 5
+      rule: helmet          # strict's false-alarm denominator is 4-9 persons - cannot resolve an effect
+      conf_sweep: "0.10,0.25,0.50"
+      models:
+        w1_baseline: runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt
+        w4_mixed: runs/ppe_enh/w4_mixed_train/weights/best.pt
 
   # ---------- Week 4 : generalisation + temporal ----------
   - id: w4_sh17_train

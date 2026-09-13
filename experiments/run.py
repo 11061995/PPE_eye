@@ -192,7 +192,31 @@ def handle_audit(exp: dict) -> dict:
     return audit.run(weights, data, lib.RESULTS_DIR)
 
 
-HANDLERS = {"train": handle_train, "eval": handle_eval, "audit": handle_audit}
+def handle_corrupt(exp: dict) -> dict:
+    """RTSP-realistic corruption sweep, scored person-level (see corruptions.py)."""
+    import corruptions
+
+    p = exp["params"]
+    data = str(lib.ROOT / p.get("data", "data/data.yaml"))
+    sweep = [float(c) for c in str(p.get("conf_sweep", "0.10,0.25,0.50")).split(",")]
+
+    models = p.get("models") or {"w4_mixed": "runs/ppe_enh/w4_mixed_train/weights/best.pt"}
+    models = {t: (w if Path(w).is_absolute() else str(lib.ROOT / w))
+              for t, w in models.items()}
+    missing = [t for t, w in models.items() if not Path(w).exists()]
+    if missing:
+        raise FileNotFoundError(f"missing checkpoints for {missing}")
+
+    return corruptions.run(models, data, p.get("split", "test"), p.get("imgsz", 640),
+                           p.get("device", "0"), sweep,
+                           severities=int(p.get("severities", 5)),
+                           rule=p.get("rule", "helmet"),
+                           iou_thr=float(p.get("iou", 0.5)),
+                           corruptions=p.get("corruptions"))
+
+
+HANDLERS = {"train": handle_train, "eval": handle_eval,
+            "audit": handle_audit, "corrupt": handle_corrupt}
 
 
 def run_one(exp: dict) -> int:
