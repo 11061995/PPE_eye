@@ -1,0 +1,116 @@
+{
+  "imgsz": 640,
+  "n_images": 150,
+  "cameras": 8,
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "model_stats": {
+    "amsar_yolov8n_person": {
+      "weights": "yolov8n.pt",
+      "params_M": 3.16,
+      "gflops_640": 8.86,
+      "file_MB": 6.55
+    },
+    "amsar_ppe": {
+      "weights": "ppe.pt",
+      "params_M": 2.69,
+      "gflops_640": 6.95,
+      "file_MB": 5.63
+    },
+    "ppe_eye_yolo11s_w1baseline": {
+      "weights": "best.pt",
+      "params_M": 9.43,
+      "gflops_640": 21.67,
+      "file_MB": 19.19
+    },
+    "ppe_eye_yolo11n_w1": {
+      "weights": "best.pt",
+      "params_M": 2.59,
+      "gflops_640": 6.5,
+      "file_MB": 5.48
+    },
+    "ppe_eye_yolo11s_w4mixed": {
+      "weights": "best.pt",
+      "params_M": 9.43,
+      "gflops_640": 21.67,
+      "file_MB": 19.18
+    }
+  },
+  "runs": {
+    "amsar_native": {
+      "system": "amsar_cascade",
+      "capture": "native",
+      "forward_passes_per_frame": 2,
+      "person_ms_median": 5.9,
+      "ppe_ms_median": 5.63,
+      "assoc_ms_median": 0.061,
+      "total_ms_median": 11.64,
+      "total_ms_mean": 11.79,
+      "total_ms_p95": 13.13,
+      "fps": 85.9,
+      "peak_vram_MB": 45.5,
+      "mean_persons_per_frame": 0.99,
+      "n_frames": 150,
+      "max_fps_per_cam_at_N": 10.74,
+      "gpu_ms_for_N_cams_at_5fps": 465.6
+    },
+    "amsar_deployed": {
+      "system": "amsar_cascade",
+      "capture": "amsar",
+      "forward_passes_per_frame": 2,
+      "person_ms_median": 5.09,
+      "ppe_ms_median": 4.92,
+      "assoc_ms_median": 0.043,
+      "total_ms_median": 10.12,
+      "total_ms_mean": 10.25,
+      "total_ms_p95": 11.38,
+      "fps": 98.9,
+      "peak_vram_MB": 59.9,
+      "mean_persons_per_frame": 0.86,
+      "n_frames": 150,
+      "max_fps_per_cam_at_N": 12.35,
+      "gpu_ms_for_N_cams_at_5fps": 404.8
+    },
+    "ppe_eye_yolo11s_w1baseline": {
+      "system": "ppe_eye_single",
+      "weights": "runs/ppe_enh/w1_s_baseline_repro/weights/best.pt",
+      "forward_passes_per_frame": 1,
+      "total_ms_median": 6.98,
+      "total_ms_mean": 7.23,
+      "total_ms_p95": 8.42,
+      "fps": 143.2,
+      "peak_vram_MB": 161.8,
+      "mean_dets_per_frame": 3.43,
+      "n_frames": 150,
+      "max_fps_per_cam_at_N": 17.91,
+      "gpu_ms_for_N_cams_at_5fps": 279.2
+    },
+    "ppe_eye_yolo11n_w1": {
+      "system": "ppe_eye_single",
+      "weights": "runs/ppe_enh/w1_n_adamw_1e3/weights/best.pt",
+      "forward_passes_per_frame": 1,
+      "total_ms_median": 6.95,
+      "total_ms_mean": 7.19,
+      "total_ms_p95": 8.19,
+      "fps": 143.9,
+      "peak_vram_MB": 152.6,
+      "mean_dets_per_frame": 3.59,
+      "n_frames": 150,
+      "max_fps_per_cam_at_N": 17.99,
+      "gpu_ms_for_N_cams_at_5fps": 278.0
+    },
+    "ppe_eye_yolo11s_w4mixed": {
+      "system": "ppe_eye_single",
+      "weights": "runs/ppe_enh/w4_mixed_train/weights/best.pt",
+      "forward_passes_per_frame": 1,
+      "total_ms_median": 6.78,
+      "total_ms_mean": 6.92,
+      "total_ms_p95": 7.62,
+      "fps": 147.6,
+      "peak_vram_MB": 209.5,
+      "mean_dets_per_frame": 3.97,
+      "n_frames": 150,
+      "max_fps_per_cam_at_N": 18.44,
+      "gpu_ms_for_N_cams_at_5fps": 271.2
+    }
+  }
+}
