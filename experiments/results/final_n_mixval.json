@@ -1,0 +1,78 @@
+{
+  "id": "final_n_mixval",
+  "week": 7,
+  "tier": 1,
+  "item": "deploy",
+  "kind": "train",
+  "desc": "yolo11n on the mixed-val config - the deployable size point, selected on a representative val set",
+  "params": {
+    "data": "data/finest/data_mixval.yaml",
+    "model": "yolo11n.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 32,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "also_eval_data": [
+      "sh17v2=data/sh17c_v2/data.yaml",
+      "closeup=data/sh17c_v2/data_holdout.yaml"
+    ]
+  },
+  "started": "2026-09-15 15:31:44",
+  "cross_dataset": {
+    "sh17v2": {
+      "mAP50": 0.5476,
+      "mAP50_95": 0.3922,
+      "precision": 0.4901,
+      "recall": 0.5664,
+      "per_class_AP50": {
+        "W": 0.6254,
+        "WH": 0.5137,
+        "WHV": 0.4837,
+        "WV": 0.5676
+      }
+    },
+    "closeup": {
+      "mAP50": 0.7886,
+      "mAP50_95": 0.5549,
+      "precision": 0.7623,
+      "recall": 0.6726,
+      "per_class_AP50": {
+        "W": 0.7886
+      }
+    }
+  },
+  "model": "yolo11n.pt",
+  "imgsz": 640,
+  "optimizer": "AdamW",
+  "lr0": 0.0001,
+  "epochs_cfg": 150,
+  "epochs_trained": 60,
+  "train_minutes": 8.5,
+  "test_mAP50": 0.4747,
+  "test_mAP50_95": 0.2494,
+  "test_precision": 0.5524,
+  "test_recall": 0.4877,
+  "per_class_AP50": {
+    "W": 0.4036,
+    "WH": 0.3649,
+    "WHV": 0.1354,
+    "WV": 0.995
+  },
+  "latency_ms_mean": 6.01,
+  "latency_ms_p50": 5.89,
+  "latency_ms_p95": 6.9,
+  "fps_mean": 166.3,
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_n_mixval\\weights\\best.pt",
+  "run_dir": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_n_mixval",
+  "status": "done",
+  "finished": "2026-09-15 15:40:40",
+  "finding": "NULL RESULT, replicating final_s_mixval at the yolo11n size point: the mixed val set selects epoch 30 of 60, the same epoch pure-Pictor val selects, so best.pt and every test metric are identical to final_n_deploy. Two architectures, same conclusion - the validation split was not what was limiting these checkpoints."
+}

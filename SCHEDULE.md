@@ -115,6 +115,36 @@ vs latency across FP32 → FP16 → INT8 → QAT and model sizes.
 
 ---
 
+## Week 7 — the final checkpoint (added after Week 6)
+
+Weeks 1-3 swept the recipe and Week 6 swept the architecture; both came back
+flat. Week 4 found the only lever that moved the deployment metric was the
+**data**. Week 7 applies that finding and produces the `.pt` that ships.
+
+| id | what it does |
+|---|---|
+| `final_s_base` | yolo11s on Pictor + SH17-v2, Week-1 winning recipe, no extra aug |
+| `final_s_thin` | + `copy_paste`/`mixup`, now that WHV has 180 train instances not 53 |
+| `final_s_scale` | + `scale`/`translate` only — isolates the distance-matching aug that `w1_s_domainaug` bundled with brightness and erasing |
+| `final_n_deploy` | yolo11n on the same data — the size point Amsar actually deploys |
+
+New data: `experiments/sh17_map_v2.py` uses SH17's `head` class (bare head) as a
+**confirmed** no-helmet signal instead of discarding images with no PPE
+annotation, then filters the resulting head-only images to deployment geometry
+(median person-box area < 4%). Assembled by `experiments/build_finest.py`.
+`val`/`test` stay pure Pictor and unchanged since Week 1.
+
+New gate: `experiments/gate.py` implements the acceptance test HEAD_TO_HEAD.md
+asked for — four person-level test beds, each reporting its own trivial
+baselines, with a pass/fail verdict. `experiments/deploy.py` refuses to install a
+checkpoint that has not passed it.
+
+**Deliverables:** `experiments/results/GAINS.md` (the whole-project accounting),
+`GATE.json`, `figs/gains_recall_vs_falsealarm.png`, and `ppe_eye.pt` in the
+Amsar tree.
+
+---
+
 ## Master outputs (regenerated every tick)
 
 - `experiments/results/REPORT.md` — all tables, grouped by week

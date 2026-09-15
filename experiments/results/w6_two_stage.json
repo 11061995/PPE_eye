@@ -1,0 +1,101 @@
+{
+  "id": "w6_two_stage",
+  "week": 6,
+  "tier": 3,
+  "item": "15",
+  "kind": "arch",
+  "desc": "person detector -> crop -> PPE classifier: latency as a function of worker count, vs the single-pass model",
+  "params": {
+    "data": "data/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "variant": "two_stage",
+    "single_weights": "runs/ppe_enh/w4_mixed_train/weights/best.pt",
+    "person_model": "yolo11n.pt",
+    "worker_counts": [
+      1,
+      2,
+      3,
+      5,
+      10,
+      20,
+      40
+    ]
+  },
+  "started": "2026-09-15 14:40:44",
+  "single_pass": {
+    "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.pt",
+    "latency_ms_mean": 7.3,
+    "latency_ms_p50": 6.31,
+    "latency_ms_p95": 10.99,
+    "fps_mean": 136.9
+  },
+  "person_stage": {
+    "model": "yolo11n.pt",
+    "latency_ms_mean": 7.31,
+    "latency_ms_p50": 6.29,
+    "latency_ms_p95": 11.44,
+    "fps_mean": 136.8
+  },
+  "per_crop_classifier_ms": 0.241,
+  "crop_size": 128,
+  "curve": [
+    {
+      "workers": 1,
+      "single_pass_ms": 7.3,
+      "cascade_ms": 7.55,
+      "cascade_over_single": 1.03
+    },
+    {
+      "workers": 2,
+      "single_pass_ms": 7.3,
+      "cascade_ms": 7.79,
+      "cascade_over_single": 1.07
+    },
+    {
+      "workers": 3,
+      "single_pass_ms": 7.3,
+      "cascade_ms": 8.03,
+      "cascade_over_single": 1.1
+    },
+    {
+      "workers": 5,
+      "single_pass_ms": 7.3,
+      "cascade_ms": 8.52,
+      "cascade_over_single": 1.17
+    },
+    {
+      "workers": 10,
+      "single_pass_ms": 7.3,
+      "cascade_ms": 9.72,
+      "cascade_over_single": 1.33
+    },
+    {
+      "workers": 20,
+      "single_pass_ms": 7.3,
+      "cascade_ms": 12.13,
+      "cascade_over_single": 1.66
+    },
+    {
+      "workers": 40,
+      "single_pass_ms": 7.3,
+      "cascade_ms": 16.95,
+      "cascade_over_single": 2.32
+    }
+  ],
+  "cascade_cheaper_below_workers": 1,
+  "note": "classifier is a 3-conv stub - a deliberate lower bound on the cascade's stage-2 cost. A real PPE classifier is slower, so the crossover reported here is optimistic for the cascade.",
+  "status": "done",
+  "finished": "2026-09-15 14:40:48"
+}

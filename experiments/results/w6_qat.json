@@ -1,0 +1,51 @@
+{
+  "id": "w6_qat",
+  "week": 6,
+  "tier": 3,
+  "item": "17",
+  "kind": "arch",
+  "desc": "Post-training quantisation: FP32 vs TensorRT FP16 vs TensorRT INT8 vs ONNX - accuracy retention and latency",
+  "params": {
+    "data": "data/mixed_pictor_sh17/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "variant": "quant",
+    "weights": "runs/ppe_enh/w4_mixed_train/weights/best.pt"
+  },
+  "started": "2026-09-15 14:41:37",
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.pt",
+  "formats": {
+    "fp32": {
+      "test_mAP50": 0.4948,
+      "test_mAP50_95": 0.3019,
+      "latency_ms_mean": 5.91,
+      "latency_ms_p50": 5.86,
+      "latency_ms_p95": 6.32,
+      "fps_mean": 169.1,
+      "file_MB": 19.18,
+      "mAP50_retention": 1.0
+    },
+    "fp16_trt": {
+      "error": "ModuleNotFoundError: No module named 'tensorrt'"
+    },
+    "int8_trt": {
+      "error": "ModuleNotFoundError: No module named 'tensorrt'"
+    },
+    "onnx_fp32": {
+      "error": "RuntimeError: Error when binding input: There's no data transfer registered for copying tensors from Device:[DeviceType:1 MemoryType:0 VendorId:4318 DeviceId:0 Alignment:0] to Device:[DeviceType:0 MemoryType:0 VendorId:0 DeviceId:0 Alignment:0]"
+    }
+  },
+  "status": "done",
+  "finished": "2026-09-15 14:43:48"
+}

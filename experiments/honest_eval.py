@@ -76,6 +76,35 @@ def load_gt(label_file: Path, w: int, h: int):
     return out
 
 
+IMG_EXT = {".jpg", ".jpeg", ".png", ".bmp"}
+
+
+def _resolve_split(entry: Path, label_dir_name: str = "labels"):
+    """A split may be an image directory or a .txt listing of image paths (the
+    form the SH17 / mixed datasets use). Returns (images, image -> label file).
+
+    Labels are resolved per image by swapping the `images` path segment for
+    `label_dir_name`, so a listing whose images live in several directories still
+    finds the right label beside each one.
+    """
+    if entry.suffix.lower() == ".txt":
+        imgs = sorted(Path(x.strip()) for x in entry.read_text().splitlines() if x.strip())
+    else:
+        imgs = sorted(p for p in entry.rglob("*") if p.suffix.lower() in IMG_EXT)
+
+    def label_for(p: Path) -> Path:
+        parts = list(p.parts)
+        for i in range(len(parts) - 1, -1, -1):
+            if parts[i] == "images":
+                parts[i] = label_dir_name
+                break
+        else:
+            return p.parent.parent / label_dir_name / (p.stem + ".txt")
+        return Path(*parts).with_suffix(".txt")
+
+    return imgs, label_for
+
+
 def run(weights: str, data: str, split: str, rule: str, imgsz: int,
         device: str, iou_thr: float, sweep: list[float],
         label_dir_name: str = "labels", predictor=None) -> dict:
@@ -93,10 +122,7 @@ def run(weights: str, data: str, split: str, rule: str, imgsz: int,
         names = [names[i] for i in sorted(names)]
     compliant_ids = {i for i, n in enumerate(names) if n in RULES[rule]}
 
-    img_dir = Path(img_dir)
-    label_dir = img_dir.parent / label_dir_name
-    imgs = sorted(p for p in img_dir.rglob("*")
-                  if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp"})
+    imgs, label_of = _resolve_split(Path(img_dir), label_dir_name)
     conf_floor = min(sweep)
 
     if predictor is None:
@@ -120,7 +146,7 @@ def run(weights: str, data: str, split: str, rule: str, imgsz: int,
         for im in imgs:
             h, w = dims[im]
             preds = [(c, b) for (c, b, s) in cache[im] if s >= conf]
-            gts = load_gt(label_dir / (im.stem + ".txt"), w, h)
+            gts = load_gt(label_of(im), w, h)
 
             used = set()
             for gc, gb in gts:
