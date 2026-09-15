@@ -1,0 +1,79 @@
+{
+  "id": "final_s_scale",
+  "week": 7,
+  "tier": 1,
+  "item": "deploy",
+  "kind": "train",
+  "desc": "Same data, plus scale/translate jitter only - isolates the distance-matching augmentation that w1_s_domainaug bundled with brightness and erasing",
+  "params": {
+    "data": "data/finest/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "scale": 0.6,
+    "translate": 0.15,
+    "also_eval_data": [
+      "sh17v2=data/sh17c_v2/data.yaml",
+      "closeup=data/sh17c_v2/data_holdout.yaml"
+    ]
+  },
+  "started": "2026-09-15 15:40:41",
+  "cross_dataset": {
+    "sh17v2": {
+      "mAP50": 0.5466,
+      "mAP50_95": 0.3794,
+      "precision": 0.5775,
+      "recall": 0.5497,
+      "per_class_AP50": {
+        "W": 0.7608,
+        "WH": 0.5222,
+        "WHV": 0.4306,
+        "WV": 0.4728
+      }
+    },
+    "closeup": {
+      "mAP50": 0.8656,
+      "mAP50_95": 0.624,
+      "precision": 0.8184,
+      "recall": 0.7485,
+      "per_class_AP50": {
+        "W": 0.8656
+      }
+    }
+  },
+  "model": "yolo11s.pt",
+  "imgsz": 640,
+  "optimizer": "AdamW",
+  "lr0": 0.0001,
+  "epochs_cfg": 150,
+  "epochs_trained": 44,
+  "train_minutes": 10.5,
+  "test_mAP50": 0.4554,
+  "test_mAP50_95": 0.2671,
+  "test_precision": 0.4644,
+  "test_recall": 0.5091,
+  "per_class_AP50": {
+    "W": 0.4339,
+    "WH": 0.461,
+    "WHV": 0.0335,
+    "WV": 0.8931
+  },
+  "latency_ms_mean": 6.09,
+  "latency_ms_p50": 5.98,
+  "latency_ms_p95": 7.04,
+  "fps_mean": 164.1,
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_s_scale\\weights\\best.pt",
+  "run_dir": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_s_scale",
+  "status": "done",
+  "finished": "2026-09-15 15:51:43"
+}

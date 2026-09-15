@@ -1,0 +1,78 @@
+{
+  "id": "w6_p2_head",
+  "week": 6,
+  "tier": 3,
+  "item": "13",
+  "kind": "arch",
+  "desc": "P2/4 detection head for small, distant workers - accuracy gain vs latency cost",
+  "params": {
+    "data": "data/mixed_pictor_sh17/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 80,
+    "patience": 20,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "variant": "p2",
+    "variants": [
+      "none",
+      "p2"
+    ],
+    "scale": "s"
+  },
+  "started": "2026-09-15 16:53:48",
+  "scale": "s",
+  "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\mixed_pictor_sh17\\data.yaml",
+  "variants": {
+    "none": {
+      "params_M": 9.429,
+      "GFLOPs": 21.67,
+      "latency_ms_mean": 5.88,
+      "latency_ms_p50": 5.86,
+      "latency_ms_p95": 6.08,
+      "fps_mean": 170.1,
+      "train_minutes": 8.3,
+      "test_mAP50": 0.4616,
+      "test_mAP50_95": 0.2604,
+      "test_precision": 0.5149,
+      "test_recall": 0.4805,
+      "per_class_AP50": {
+        "W": 0.405,
+        "WH": 0.4148,
+        "WHV": 0.148,
+        "WV": 0.8785
+      },
+      "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w6_p2_head_none\\weights\\best.pt"
+    },
+    "p2": {
+      "params_M": 9.576,
+      "GFLOPs": 29.07,
+      "latency_ms_mean": 6.76,
+      "latency_ms_p50": 6.72,
+      "latency_ms_p95": 7.11,
+      "fps_mean": 147.9,
+      "train_minutes": 22.7,
+      "test_mAP50": 0.4616,
+      "test_mAP50_95": 0.2492,
+      "test_precision": 0.4815,
+      "test_recall": 0.4623,
+      "per_class_AP50": {
+        "W": 0.4098,
+        "WH": 0.4325,
+        "WHV": 0.049,
+        "WV": 0.955
+      },
+      "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w6_p2_head_p2\\weights\\best.pt"
+    }
+  },
+  "note": "COCO weights transferred for every shape-matching layer; only the ablated blocks start random. The `none` variant is the control - same code path, stock yolo11 neck.",
+  "status": "done",
+  "finished": "2026-09-15 17:25:17"
+}

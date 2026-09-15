@@ -1,0 +1,97 @@
+{
+  "id": "w4_crossdata_sh17",
+  "week": 4,
+  "tier": 2,
+  "item": "9",
+  "kind": "crossdata",
+  "desc": "Week-1 Pictor-only model evaluated on SH17-compliance test - the generalisation drop",
+  "params": {
+    "data": "data/sh17_compliance/data_ood.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "target": "sh17",
+    "weights": "runs/ppe_enh/w1_s_adamw_1e4/weights/best.pt",
+    "rules": [
+      "helmet"
+    ],
+    "conf_sweep": "0.10,0.20,0.30,0.50"
+  },
+  "started": "2026-09-15 14:41:13",
+  "target": "sh17",
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w1_s_adamw_1e4\\weights\\best.pt",
+  "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17_compliance\\data_ood.yaml",
+  "split": "test",
+  "test_mAP50": 0.1704,
+  "test_mAP50_95": 0.0926,
+  "test_precision": 0.2684,
+  "test_recall": 0.2848,
+  "per_class_AP50": {
+    "W": 0.115,
+    "WH": 0.2584,
+    "WHV": 0.2196,
+    "WV": 0.0886
+  },
+  "person_level": {
+    "helmet": {
+      "sweep": [
+        {
+          "conf": 0.1,
+          "violation_recall": 0.24,
+          "false_alarm_rate": 0.2334,
+          "verdict_accuracy": 0.5222,
+          "undetected_persons": 415
+        },
+        {
+          "conf": 0.2,
+          "violation_recall": 0.2157,
+          "false_alarm_rate": 0.235,
+          "verdict_accuracy": 0.5037,
+          "undetected_persons": 477
+        },
+        {
+          "conf": 0.3,
+          "violation_recall": 0.2,
+          "false_alarm_rate": 0.2215,
+          "verdict_accuracy": 0.4944,
+          "undetected_persons": 541
+        },
+        {
+          "conf": 0.5,
+          "violation_recall": 0.1652,
+          "false_alarm_rate": 0.2285,
+          "verdict_accuracy": 0.4401,
+          "undetected_persons": 724
+        }
+      ],
+      "best_f1": {
+        "conf": 0.1,
+        "rule": "helmet",
+        "matched": 1239,
+        "violation_recall": 0.24,
+        "violation_precision": 0.471,
+        "f1": 0.318,
+        "false_alarm_rate": 0.2334,
+        "verdict_accuracy": 0.5222,
+        "undetected_persons": 415,
+        "phantom_persons": 1268,
+        "TP": 138,
+        "FP": 155,
+        "FN": 437,
+        "TN": 509
+      }
+    }
+  },
+  "status": "done",
+  "finished": "2026-09-15 14:41:36"
+}

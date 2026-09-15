@@ -1,0 +1,77 @@
+{
+  "id": "final_n_deploy",
+  "week": 7,
+  "tier": 1,
+  "item": "deploy",
+  "kind": "train",
+  "desc": "yolo11n on the same data - the size point Amsar actually deploys (8 cameras, one forward pass)",
+  "params": {
+    "data": "data/finest/data.yaml",
+    "model": "yolo11n.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 32,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "also_eval_data": [
+      "sh17v2=data/sh17c_v2/data.yaml",
+      "closeup=data/sh17c_v2/data_holdout.yaml"
+    ]
+  },
+  "started": "2026-09-15 15:11:08",
+  "cross_dataset": {
+    "sh17v2": {
+      "mAP50": 0.5476,
+      "mAP50_95": 0.3922,
+      "precision": 0.4901,
+      "recall": 0.5664,
+      "per_class_AP50": {
+        "W": 0.6254,
+        "WH": 0.5137,
+        "WHV": 0.4837,
+        "WV": 0.5676
+      }
+    },
+    "closeup": {
+      "mAP50": 0.7886,
+      "mAP50_95": 0.5549,
+      "precision": 0.7623,
+      "recall": 0.6726,
+      "per_class_AP50": {
+        "W": 0.7886
+      }
+    }
+  },
+  "model": "yolo11n.pt",
+  "imgsz": 640,
+  "optimizer": "AdamW",
+  "lr0": 0.0001,
+  "epochs_cfg": 150,
+  "epochs_trained": 60,
+  "train_minutes": 8.0,
+  "test_mAP50": 0.4747,
+  "test_mAP50_95": 0.2494,
+  "test_precision": 0.5524,
+  "test_recall": 0.4877,
+  "per_class_AP50": {
+    "W": 0.4036,
+    "WH": 0.3649,
+    "WHV": 0.1354,
+    "WV": 0.995
+  },
+  "latency_ms_mean": 5.95,
+  "latency_ms_p50": 5.85,
+  "latency_ms_p95": 6.45,
+  "fps_mean": 168.1,
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_n_deploy\\weights\\best.pt",
+  "run_dir": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_n_deploy",
+  "status": "done",
+  "finished": "2026-09-15 15:19:38"
+}

@@ -1,0 +1,120 @@
+{
+  "id": "w6_attention",
+  "week": 6,
+  "tier": 3,
+  "item": "14",
+  "kind": "arch",
+  "desc": "CBAM / ECA / SE / CoordAtt after each neck output - ablation rows only",
+  "params": {
+    "data": "data/mixed_pictor_sh17/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 80,
+    "patience": 20,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "variant": "attention",
+    "variants": [
+      "cbam",
+      "eca",
+      "se",
+      "coordatt"
+    ],
+    "scale": "s"
+  },
+  "started": "2026-09-15 15:53:50",
+  "scale": "s",
+  "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\mixed_pictor_sh17\\data.yaml",
+  "variants": {
+    "cbam": {
+      "params_M": 9.775,
+      "GFLOPs": 21.68,
+      "latency_ms_mean": 6.39,
+      "latency_ms_p50": 6.34,
+      "latency_ms_p95": 6.85,
+      "fps_mean": 156.5,
+      "train_minutes": 17.7,
+      "test_mAP50": 0.4596,
+      "test_mAP50_95": 0.2398,
+      "test_precision": 0.6315,
+      "test_recall": 0.4203,
+      "per_class_AP50": {
+        "W": 0.41,
+        "WH": 0.4519,
+        "WHV": 0.1133,
+        "WV": 0.8631
+      },
+      "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w6_attention_cbam\\weights\\best.pt"
+    },
+    "eca": {
+      "params_M": 9.429,
+      "GFLOPs": 21.68,
+      "latency_ms_mean": 6.17,
+      "latency_ms_p50": 6.14,
+      "latency_ms_p95": 6.61,
+      "fps_mean": 162.1,
+      "train_minutes": 10.4,
+      "test_mAP50": 0.4157,
+      "test_mAP50_95": 0.1958,
+      "test_precision": 0.4404,
+      "test_recall": 0.4778,
+      "per_class_AP50": {
+        "W": 0.3834,
+        "WH": 0.4312,
+        "WHV": 0.0321,
+        "WV": 0.8158
+      },
+      "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w6_attention_eca\\weights\\best.pt"
+    },
+    "se": {
+      "params_M": 9.472,
+      "GFLOPs": 21.68,
+      "latency_ms_mean": 6.25,
+      "latency_ms_p50": 6.25,
+      "latency_ms_p95": 6.47,
+      "fps_mean": 159.9,
+      "train_minutes": 13.7,
+      "test_mAP50": 0.4857,
+      "test_mAP50_95": 0.257,
+      "test_precision": 0.6628,
+      "test_recall": 0.4247,
+      "per_class_AP50": {
+        "W": 0.4282,
+        "WH": 0.4169,
+        "WHV": 0.1027,
+        "WV": 0.995
+      },
+      "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w6_attention_se\\weights\\best.pt"
+    },
+    "coordatt": {
+      "params_M": 9.463,
+      "GFLOPs": 21.68,
+      "latency_ms_mean": 6.69,
+      "latency_ms_p50": 6.67,
+      "latency_ms_p95": 7.06,
+      "fps_mean": 149.4,
+      "train_minutes": 17.2,
+      "test_mAP50": 0.451,
+      "test_mAP50_95": 0.2728,
+      "test_precision": 0.5232,
+      "test_recall": 0.3745,
+      "per_class_AP50": {
+        "W": 0.4509,
+        "WH": 0.4586,
+        "WHV": 0.0549,
+        "WV": 0.8394
+      },
+      "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w6_attention_coordatt\\weights\\best.pt"
+    }
+  },
+  "note": "COCO weights transferred for every shape-matching layer; only the ablated blocks start random. The `none` variant is the control - same code path, stock yolo11 neck.",
+  "status": "done",
+  "finished": "2026-09-15 16:53:47"
+}
