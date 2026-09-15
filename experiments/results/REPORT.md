@@ -203,12 +203,12 @@ _classifier is a 3-conv stub - a deliberate lower bound on the cascade's stage-2
 
 | format | mAP50 | mAP50-95 | retention | lat ms | fps | file MB |
 |---|---|---|---|---|---|---|
-| fp32 | 0.4948 | 0.3019 | 1.0 | 6.13 | 163.0 | 19.18 |
-| fp16_torch | — | — | — | — | — | _RuntimeError: Input type (float) and bias type (struct c10::Half) shou_ |
+| fp32 | 0.4948 | 0.3019 | 1.0 | 17.75 | 56.3 | 19.18 |
+| fp16_torch | 0.4954 | 0.3018 | 1.0012 | 6.25 | 160.0 | 9.59 |
 | fp16_tensorrt | — | — | — | — | — | _ModuleNotFoundError: No module named 'tensorrt'_ |
 | int8_tensorrt | — | — | — | — | — | _ModuleNotFoundError: No module named 'tensorrt'_ |
-| onnx_cpu | 0.4634 | 0.2674 | 0.9365 | 26.88 | 37.2 | 37.93 |
-| torchscript | 0.4635 | 0.2674 | 0.9367 | 4.92 | 203.4 | 38.19 |
+| onnx_cpu | 0.4632 | 0.2671 | 0.9361 | 27.47 | 36.4 | 37.93 |
+| torchscript | 0.4634 | 0.2674 | 0.9365 | 5.18 | 193.0 | 38.19 |
 
 ## Week 7
 

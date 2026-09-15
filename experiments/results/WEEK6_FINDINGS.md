@@ -86,21 +86,128 @@ association loop is 0.06 ms and is not the bottleneck; the second forward pass i
 training loop and exists to recover accuracy that the variants above show there
 is no architectural headroom for. PTQ is what gates deployment, and is measured.
 
-TensorRT FP16/INT8 could not be measured on this machine — the `tensorrt` package
-is absent and `onnxruntime-gpu` fails against this CUDA build (missing
+| format | mAP50 | vs. its own control | latency vs. FP32 | file |
+|---|---|---|---|---|
+| FP32 PyTorch | 0.4948 | — | 1.00× (6.03 ms) | 19.18 MB |
+| FP16 PyTorch | 0.4954 | +0.0006 | **0.94×** | 9.59 MB |
+| TorchScript | 0.4634 | −0.0000 | **1.21×** | 38.19 MB |
+| ONNX (CPU) | 0.4632 | −0.0002 | 0.22× (27.47 ms, CPU) | 37.93 MB |
+| TensorRT FP16 / INT8 | — | — | — | not measurable here |
+
+Latency is given as a ratio because the absolute per-format numbers in
+`w6_qat.json` are **not comparable to each other** — see below. The FP16 and
+TorchScript ratios come from A/B reps that alternate the two models inside one
+process; the ONNX figure is CPU and needs no such control.
+
+**Both columns needed a control before they meant anything**, and without them
+this table tells two lies.
+
+### The export "accuracy drop" is letterboxing, not precision
+
+TorchScript and ONNX both land at 0.463 against an FP32 figure of 0.495 — an
+apparent 6.3% loss from two export paths that are mathematically lossless, which
+is already the tell. Exported models cannot use ultralytics' rectangular
+batching, so `val()` silently forces `rect=False` for them. Running the **PyTorch
+FP32 model** at `rect=False`:
+
+| | mAP50 | mAP50-95 |
+|---|---|---|
+| PyTorch FP32, `rect=True` | 0.4948 | 0.3019 |
+| PyTorch FP32, `rect=False` | **0.4634** | 0.2674 |
+| TorchScript | 0.4634 | — |
+| ONNX | 0.4632 | — |
+
+The export formats reproduce the PyTorch model **exactly**. The comparison to
+make is against 0.4634, and on that basis quantisation costs nothing at all.
+Anyone reading the raw table would have rejected export over a 6% loss that
+does not exist.
+
+### FP16 does not speed this model up
+
+The per-format latency fields are measured at different points in one process
+and are not a controlled A/B — this run recorded FP32 at 17.75 ms, three times
+the 5.94 ms of the previous run, which alone would have manufactured a 2.8×
+FP16 "speedup". Alternating the two models in a single process, 15 warmup + 60
+timed with `torch.cuda.synchronize`, 3 reps:
+
+| rep | FP32 | FP16 | speedup |
+|---|---|---|---|
+| 0 | 6.10 | 6.54 | 0.93× |
+| 1 | 6.03 | 6.37 | 0.95× |
+| 2 | 5.97 | 6.42 | 0.93× |
+
+**FP16 is consistently slower**, by 5–7%. At 9.4M parameters and batch 1 the
+pipeline is launch-overhead-bound, not compute-bound, so halving the arithmetic
+buys nothing and the extra casts cost a little. FP16's real wins here are the 2×
+smaller file and accuracy retention of 1.001 — not throughput, on this GPU.
+
+The same treatment for TorchScript, which the uncontrolled table also flattered,
+this time confirms it: 6.24/5.06, 6.67/5.65, 6.00/4.94 — a real **1.18–1.23×**
+at no accuracy cost. TorchScript is the one format change worth making on this
+hardware, and it is a graph optimisation, not a quantisation.
+
+TensorRT FP16/INT8 could not be measured on this machine — the `tensorrt`
+package is absent and `onnxruntime-gpu` fails against this CUDA build (missing
 `cublasLt64_13.dll`). Those are the rows that matter on a Jetson and remain
-unmeasured here; `bench_jetson.py` exists for the real numbers.
+unmeasured; `bench_jetson.py` exists for the real numbers. **The FP16 result
+above should not be extrapolated to one:** a Jetson's memory bandwidth and
+tensor-core ratio differ enough that the overhead-bound conclusion may not hold.
 
 ## Item #16 — baselines
 
-`w6_baselines` (RT-DETR) is queued. D-FINE and RTMDet are not in ultralytics
-8.4.127 and would need a separate framework, so the "baseline table" is narrower
-than the schedule imagined.
+`w6_baselines`. D-FINE and RTMDet are not in ultralytics 8.4.127 and would need
+a separate framework, so the baseline table is narrower than the schedule
+imagined: RT-DETR-l against `w4_mixed_train` (yolo11s) on the same data,
+optimiser, learning rate and seed.
+
+| model | mAP50 | **W+WH** | latency | train |
+|---|---|---|---|---|
+| yolo11s | **0.4948** | **0.4557** | 6.72 ms | 9.9 min / 150 ep |
+| rtdetr-l | 0.3530 | 0.3887 | 16.61 ms | 57.4 min / 100 ep |
+| Δ | **−0.1418** | **−0.0670** | 2.47× | 8.7× per epoch |
+
+A clean negative, and not a close one: −0.142 mAP50, −0.067 on the two
+well-supported classes, at **2.47× the latency**. The gap narrows on the
+well-supported classes — the thin classes are doing some of the damage, as
+always — but it does not come close to reversing.
+
+**Two caveats, both of which I state because they cut against the conclusion:**
+
+1. **RT-DETR trained 100 epochs to yolo11s's 150.** The two are not equal-budget.
+   Its `patience 30` did not trigger, so it may not have converged, and a
+   150-epoch RT-DETR could close some of the gap. The per-epoch cost is 8.7×
+   (0.574 vs 0.066 min/epoch), so matching the epoch count would have meant ~86
+   minutes against 9.9.
+2. **RT-DETR-l is the larger model**, so this is not a like-for-like parameter
+   comparison. That direction favours RT-DETR, and it still lost.
+
+Even granting caveat 1 in full, a model that needs 8.7× the compute per epoch
+and 2.47× the inference latency to *maybe* reach parity is not a candidate for
+this deployment. The reading is the standard one for detection transformers:
+they need far more data than 1126 images to beat a well-tuned CNN, because they
+must learn an association prior that a CNN has built in. Nothing here says the
+architecture family is wrong — it says the dataset is too small to pay for it.
+**The same conclusion as every other week: the data is the constraint.**
 
 ## Verdict on Week 6
 
 **No architectural change is adopted.** The schedule's own gate — "only if Weeks
 1–2 show headroom" — was the right call: the P2 head is a measurable cost for no
-gain, and attention is within run-to-run spread except for one variant that needs
-a seed-repeat before anyone believes it. The project's conclusion is unchanged
-and now tested from a third direction: **the data is the lever.**
+gain, attention is within run-to-run spread except for one variant that needs a
+seed-repeat before anyone believes it, and RT-DETR loses on both axes at once.
+The project's conclusion is unchanged and now tested from a third direction:
+**the data is the lever.**
+
+**One deployment change is worth making, and it is not an architecture change.**
+TorchScript export is 1.21× faster at batch 1 and bit-for-bit accuracy-neutral
+once the letterboxing control is applied. It is not adopted here because the
+shipped checkpoint was gated as a `.pt` and Amsar loads `.pt`; changing the
+serving format is a separate change with its own rollback story. It is the
+cheapest unclaimed win left in this repo.
+
+**The lasting output of Week 6 may be the two controls, not the ablations.**
+Both the "export costs 6% accuracy" and the "FP16 is 2.8× faster" readings were
+reproducible, plausible, and wrong — and each would have driven a real
+deployment decision the wrong way. Neither was caught by re-running; both were
+caught by holding one thing constant. Every latency number in this repo measured
+across process boundaries should be read with that in mind.

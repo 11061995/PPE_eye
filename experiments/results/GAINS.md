@@ -153,6 +153,13 @@ Combined with `HEAD_TO_HEAD.md`'s measured 1.7× end-to-end speedup and 2.4× le
 compute at 3.2× lower in-domain false alarms, **the single-pass ontology is the
 settled architectural result of this project.**
 
+One further cost gain is measured but **not** taken: TorchScript export runs
+**1.21×** faster at batch 1 (6.24/5.06, 6.67/5.65, 6.00/4.94 across interleaved
+reps) and is accuracy-neutral once letterboxing is controlled for. FP16, by
+contrast, is **0.94×** — slower — because at 9.4M parameters and batch 1 this
+pipeline is launch-overhead-bound, not compute-bound. Both in
+`WEEK6_FINDINGS.md` §17.
+
 ---
 
 ## 3. What was tried and did not work
@@ -172,7 +179,9 @@ data change and not a recipe or architecture change.
 | 13/14 | **P2 head, CBAM / SE / ECA / CoordAtt** | see `REPORT.md` Week 6 — run against a `none` control on identical data, recipe and COCO initialisation. |
 | 17 | **QAT** | not run, deliberately: it needs fake-quant observers in the training loop and exists to recover accuracy the Week-6 variants showed there is no headroom for. PTQ is what gates deployment and is measured instead. |
 
-### 3.1 Two reporting traps found while writing this up, now fixed in `report.py`
+### 3.1 Four reporting traps found while writing this up
+
+The first two are fixed in `report.py`; the last two are controls now stored alongside the measurement in `w6_qat.json`. All four share a shape: a number that is real, reproducible, and points the wrong way until something is held constant.
 
 **mAP50 on Pictor test is a 4-class mean over classes with 456, 517, 20 and 6
 instances.** It is therefore half-determined by two classes too thin to measure.
@@ -193,6 +202,21 @@ counts so this cannot be misread again.
 **Rows were being compared across different test sets.** `w4_sh17_train`'s
 headline 0.5835 is scored on **SH17**, not Pictor — its Pictor number is 0.1025,
 in the `cross_dataset` field. The report now prints a `test set` column.
+
+**An export "accuracy drop" that was letterboxing.** ONNX and TorchScript both
+scored 0.463 against FP32's 0.495 — an apparent 6.3% loss from two export paths
+that are mathematically lossless. Exported models cannot use ultralytics'
+rectangular batching, so `val()` forces `rect=False` for them. The **PyTorch
+FP32** model at `rect=False` scores **0.4634** — identical. Quantisation costs
+nothing; the naive table would have blocked export over a loss that does not
+exist.
+
+**An FP16 speedup that was a cold GPU.** Per-format latencies are measured at
+different points in one process. The re-run clocked FP32 at 17.75 ms against
+5.94 ms in the previous run, which would have manufactured a 2.8× FP16 win.
+Alternating both models in one process over 3 reps, FP16 is **0.93–0.95×** —
+slightly *slower*. At 9.4M parameters and batch 1 this pipeline is
+launch-overhead-bound, not compute-bound.
 
 ### 3.2 Three metrics that must never be quoted from this repo
 

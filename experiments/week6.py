@@ -254,22 +254,29 @@ def _quant(exp: dict) -> dict:
 
     # FP16 needs no export - same graph at half precision, and it is what a
     # Jetson TensorRT FP16 engine approximates. Both accuracy and latency go
-    # through ultralytics' own `half=` flag: hand-calling `model.half()` and then
-    # predicting on a uint8 array raises a dtype mismatch, since the preprocessor
-    # still produces float32.
+    # through ultralytics' own `half=` flag.
+    #
+    # This leg runs on a FRESH object, not on `m`. `val(half=True)` halves the
+    # weights in place, but the predictor that `lib.latency_ms` cached on `m`
+    # during the FP32 leg keeps its float32 preprocessor, and ultralytics reuses
+    # a cached predictor instead of rebuilding it - so the next predict feeds
+    # float32 input to half weights and raises "Input type (float) and bias type
+    # (c10::Half) should be the same". A fresh object builds its predictor after
+    # the halving. Verified both ways before this was written.
     try:
         import time as _t
         import numpy as _np
-        hv = m.val(data=data, split="test", imgsz=imgsz, device=device, half=True,
-                   project=str(lib.ROOT / "runs" / "ppe_enh"),
-                   name=f"{exp['id']}_fp16", exist_ok=True, plots=False)
+        hm = YOLO(weights)
+        hv = hm.val(data=data, split="test", imgsz=imgsz, device=device, half=True,
+                    project=str(lib.ROOT / "runs" / "ppe_enh"),
+                    name=f"{exp['id']}_fp16", exist_ok=True, plots=False)
         dummy = (_np.random.rand(imgsz, imgsz, 3) * 255).astype("uint8")
         for _ in range(10):
-            m.predict(dummy, imgsz=imgsz, device=device, half=True, verbose=False)
+            hm.predict(dummy, imgsz=imgsz, device=device, half=True, verbose=False)
         ts = []
         for _ in range(60):
             t0 = _t.perf_counter()
-            m.predict(dummy, imgsz=imgsz, device=device, half=True, verbose=False)
+            hm.predict(dummy, imgsz=imgsz, device=device, half=True, verbose=False)
             ts.append((_t.perf_counter() - t0) * 1000.0)
         ts.sort()
         rows["fp16_torch"] = {
