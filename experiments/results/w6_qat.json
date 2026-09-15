@@ -23,29 +23,56 @@
     "variant": "quant",
     "weights": "runs/ppe_enh/w4_mixed_train/weights/best.pt"
   },
-  "started": "2026-09-15 14:41:37",
+  "started": "2026-09-15 18:51:42",
   "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.pt",
   "formats": {
     "fp32": {
       "test_mAP50": 0.4948,
       "test_mAP50_95": 0.3019,
-      "latency_ms_mean": 5.91,
-      "latency_ms_p50": 5.86,
-      "latency_ms_p95": 6.32,
-      "fps_mean": 169.1,
+      "latency_ms_mean": 5.94,
+      "latency_ms_p50": 5.87,
+      "latency_ms_p95": 6.83,
+      "fps_mean": 168.2,
       "file_MB": 19.18,
       "mAP50_retention": 1.0
     },
-    "fp16_trt": {
+    "fp16_torch": {
+      "error": "RuntimeError: Input type (float) and bias type (struct c10::Half) should be the same"
+    },
+    "fp16_tensorrt": {
       "error": "ModuleNotFoundError: No module named 'tensorrt'"
     },
-    "int8_trt": {
+    "int8_tensorrt": {
       "error": "ModuleNotFoundError: No module named 'tensorrt'"
     },
-    "onnx_fp32": {
-      "error": "RuntimeError: Error when binding input: There's no data transfer registered for copying tensors from Device:[DeviceType:1 MemoryType:0 VendorId:4318 DeviceId:0 Alignment:0] to Device:[DeviceType:0 MemoryType:0 VendorId:0 DeviceId:0 Alignment:0]"
+    "onnx_cpu": {
+      "test_mAP50": 0.4634,
+      "test_mAP50_95": 0.2674,
+      "latency_ms_mean": 26.25,
+      "latency_ms_p50": 26.3,
+      "latency_ms_p95": 28.03,
+      "fps_mean": 38.1,
+      "device": "cpu",
+      "file_MB": 37.93,
+      "export_minutes": 1.0,
+      "path": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.onnx",
+      "mAP50_retention": 0.9365
+    },
+    "torchscript": {
+      "test_mAP50": 0.4635,
+      "test_mAP50_95": 0.2674,
+      "latency_ms_mean": 4.89,
+      "latency_ms_p50": 4.89,
+      "latency_ms_p95": 5.02,
+      "fps_mean": 204.3,
+      "device": "0",
+      "file_MB": 38.19,
+      "export_minutes": 0.2,
+      "path": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.torchscript",
+      "mAP50_retention": 0.9367
     }
   },
+  "note": "QAT is not run: it needs fake-quant observers in the training loop, and the Week-6 variants found no architectural headroom for it to recover. PTQ is what gates deployment anyway. TensorRT rows depend on the `tensorrt` package being present on the target; on a Jetson they are the numbers that matter.",
   "status": "done",
-  "finished": "2026-09-15 14:43:48"
+  "finished": "2026-09-15 18:53:28"
 }

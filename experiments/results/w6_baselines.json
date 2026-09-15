@@ -1,0 +1,52 @@
+{
+  "id": "w6_baselines",
+  "week": 6,
+  "tier": 3,
+  "item": "16",
+  "kind": "arch",
+  "desc": "RT-DETR baseline on the same data and recipe (D-FINE / RTMDet are not in ultralytics 8.4)",
+  "params": {
+    "data": "data/mixed_pictor_sh17/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 100,
+    "patience": 30,
+    "batch": 8,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "variant": "baselines",
+    "models": [
+      "rtdetr-l.pt"
+    ]
+  },
+  "started": "2026-09-15 17:52:59",
+  "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\mixed_pictor_sh17\\data.yaml",
+  "models": {
+    "rtdetr-l": {
+      "train_minutes": 57.4,
+      "test_mAP50": 0.353,
+      "test_mAP50_95": 0.1861,
+      "test_precision": 0.3333,
+      "test_recall": 0.4464,
+      "per_class_AP50": {
+        "W": 0.3616,
+        "WH": 0.4159,
+        "WHV": 0.0854,
+        "WV": 0.5493
+      },
+      "latency_ms_mean": 16.61,
+      "latency_ms_p50": 16.54,
+      "latency_ms_p95": 16.93,
+      "fps_mean": 60.2,
+      "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w6_baselines_rtdetr-l\\weights\\best.pt"
+    }
+  },
+  "status": "done",
+  "finished": "2026-09-15 18:50:35"
+}

@@ -99,7 +99,7 @@ slice 320px / overlap 0.2 · 0.5 min
 | w4_mixed_train | 9 | done | pictor(test) | 0.4948 | 0.3019 | 0.6508 | 0.4572 | 6.7200 | 148.7 | 9.9000 | +0.1619 | Train on Pictor + SH17-compliance combined; val/test stay PURE Pictor so the number is comparable to Weeks 1-2 |
 | w4_crossdata_sh17 | 9 | done | sh17-v1-ood | 0.1704 | 0.0926 | 0.2684 | 0.2848 | - | - | - | -0.0474 | Week-1 Pictor-only model evaluated on SH17-compliance test - the generalisation drop |
 | w4_crossdata_chv | 9 | blocked | pictor | - | - | - | - | - | - | - | - | Cross-dataset test on CHV after ontology mapping |
-| w4_track_vote | 10 | pending | pictor | - | - | - | - | - | - | - | - | N-frame confidence-weighted vote over noisy re-observations, N in {1,3,5,7,9} - proxy for Amsar's PPESmoother (no video in repo) |
+| w4_track_vote | 10 | done | pictor | - | - | - | - | - | - | - | - | N-frame confidence-weighted vote over noisy re-observations, N in {1,3,5,7,9} - proxy for Amsar's PPESmoother (no video in repo) |
 
 **w4_crossdata_sh17** (crossdata)
 
@@ -111,6 +111,18 @@ slice 320px / overlap 0.2 · 0.5 min
 | 0.2 | 0.2157 | 0.235 | 0.5037 | 477 |
 | 0.3 | 0.2 | 0.2215 | 0.4944 | 541 |
 | 0.5 | 0.1652 | 0.2285 | 0.4401 | 724 |
+
+**w4_track_vote** (track)
+
+Confidence-weighted vote over N noisy re-observations (rule = helmet). **no video in repo - N independent noisy re-observations of each still, not true tracking. Models observation noise but not viewpoint change or tracker identity error, so it is an upper bound on what Amsar's PPESmoother can buy.**
+
+| N | conf | violation recall | violation precision | false-alarm | verdict acc | undetected |
+|---|---|---|---|---|---|---|
+| 1 | 0.1 | 0.4567 | 0.7226 | 0.2531 | 0.5754 | 386 |
+| 3 | 0.1 | 0.4416 | 0.7234 | 0.2609 | 0.5585 | 425 |
+| 5 | 0.1 | 0.4459 | 0.7228 | 0.2625 | 0.5609 | 423 |
+| 7 | 0.1 | 0.4437 | 0.7218 | 0.2651 | 0.5579 | 429 |
+| 9 | 0.1 | 0.4264 | 0.7061 | 0.2724 | 0.5452 | 431 |
 
 ### Week 4 per-class AP50
 
@@ -124,19 +136,46 @@ slice 320px / overlap 0.2 · 0.5 min
 
 | id | item | status | test set | mAP50 | mAP50-95 | P | R | lat ms | fps | train min | Δ mAP50-95 | desc |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| w5_kd_x_to_s | 11 | pending | pictor(test) | - | - | - | - | - | - | - | - | yolo11m teacher -> yolo11s student via teacher pseudo-labelling on the mixed train set |
-| w5_kd_x_to_n | 11 | pending | pictor(test) | - | - | - | - | - | - | - | - | yolo11m teacher -> yolo11n student via teacher pseudo-labelling - the deployable size point |
+| w5_kd_x_to_s | 11 | done | pictor(test) | 0.4765 | 0.2876 | 0.5009 | 0.5030 | 6.5900 | 151.8 | 16.1000 | +0.1476 | yolo11m teacher -> yolo11s student via teacher pseudo-labelling on the mixed train set |
+| w5_kd_x_to_n | 11 | done | pictor(test) | 0.3799 | 0.1946 | 0.4855 | 0.4007 | 5.8500 | 170.9 | 7.5000 | +0.0546 | yolo11m teacher -> yolo11n student via teacher pseudo-labelling - the deployable size point |
 | w5_calibration | 12 | done | pictor | - | - | - | - | - | - | - | - | Reliability diagrams + temperature scaling; ECE before/after. T fitted on val, reported on test |
+
+### Week 5 per-class AP50
+
+| id | W (n=456) | WH (n=517) | WHV (n=20) | WV (n=6) |
+|---|---|---|---|---|
+| w5_kd_x_to_s | 0.4081 | 0.4450 | 0.0579 | 0.9950 |
+| w5_kd_x_to_n | 0.3733 | 0.4254 | 0.1393 | 0.5815 |
 
 ## Week 6
 
 | id | item | status | test set | mAP50 | mAP50-95 | P | R | lat ms | fps | train min | Δ mAP50-95 | desc |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| w6_p2_head | 13 | pending | pictor(test) | - | - | - | - | - | - | - | - | P2/4 detection head for small, distant workers - accuracy gain vs latency cost |
-| w6_attention | 14 | running | pictor(test) | - | - | - | - | - | - | - | - | CBAM / ECA / SE / CoordAtt after each neck output - ablation rows only |
+| w6_p2_head | 13 | done | pictor(test) | - | - | - | - | - | - | - | - | P2/4 detection head for small, distant workers - accuracy gain vs latency cost |
+| w6_attention | 14 | done | pictor(test) | - | - | - | - | - | - | - | - | CBAM / ECA / SE / CoordAtt after each neck output - ablation rows only |
 | w6_two_stage | 15 | done | pictor | - | - | - | - | - | - | - | - | person detector -> crop -> PPE classifier: latency as a function of worker count, vs the single-pass model |
-| w6_baselines | 16 | pending | pictor(test) | - | - | - | - | - | - | - | - | RT-DETR baseline on the same data and recipe (D-FINE / RTMDet are not in ultralytics 8.4) |
+| w6_baselines | 16 | done | pictor(test) | - | - | - | - | - | - | - | - | RT-DETR baseline on the same data and recipe (D-FINE / RTMDet are not in ultralytics 8.4) |
 | w6_qat | 17 | done | pictor(test) | - | - | - | - | - | - | - | - | Post-training quantisation: FP32 vs TensorRT FP16 vs TensorRT INT8 vs ONNX - accuracy retention and latency |
+
+**w6_p2_head** (arch)
+
+| variant | params M | GFLOPs | mAP50 | mAP50-95 | lat ms | fps | train min |
+|---|---|---|---|---|---|---|---|
+| none | 9.429 | 21.67 | 0.4616 | 0.2604 | 5.88 | 170.1 | 8.3 |
+| p2 | 9.576 | 29.07 | 0.4616 | 0.2492 | 6.76 | 147.9 | 22.7 |
+
+_COCO weights transferred for every shape-matching layer; only the ablated blocks start random. The `none` variant is the control - same code path, stock yolo11 neck._
+
+**w6_attention** (arch)
+
+| variant | params M | GFLOPs | mAP50 | mAP50-95 | lat ms | fps | train min |
+|---|---|---|---|---|---|---|---|
+| cbam | 9.775 | 21.68 | 0.4596 | 0.2398 | 6.39 | 156.5 | 17.7 |
+| eca | 9.429 | 21.68 | 0.4157 | 0.1958 | 6.17 | 162.1 | 10.4 |
+| se | 9.472 | 21.68 | 0.4857 | 0.257 | 6.25 | 159.9 | 13.7 |
+| coordatt | 9.463 | 21.68 | 0.451 | 0.2728 | 6.69 | 149.4 | 17.2 |
+
+_COCO weights transferred for every shape-matching layer; only the ablated blocks start random. The `none` variant is the control - same code path, stock yolo11 neck._
 
 **w6_two_stage** (arch)
 
@@ -154,14 +193,22 @@ single pass 7.3 ms · person stage 7.31 ms · per-crop classifier 0.241 ms
 
 _classifier is a 3-conv stub - a deliberate lower bound on the cascade's stage-2 cost. A real PPE classifier is slower, so the crossover reported here is optimistic for the cascade._
 
+**w6_baselines** (arch)
+
+| model | mAP50 | mAP50-95 | P | R | lat ms | fps | train min |
+|---|---|---|---|---|---|---|---|
+| rtdetr-l | 0.353 | 0.1861 | 0.3333 | 0.4464 | 16.61 | 60.2 | 57.4 |
+
 **w6_qat** (arch)
 
 | format | mAP50 | mAP50-95 | retention | lat ms | fps | file MB |
 |---|---|---|---|---|---|---|
-| fp32 | 0.4948 | 0.3019 | 1.0 | 5.91 | 169.1 | 19.18 |
-| fp16_trt | — | — | — | — | — | _ModuleNotFoundError: No module named 'tensorrt'_ |
-| int8_trt | — | — | — | — | — | _ModuleNotFoundError: No module named 'tensorrt'_ |
-| onnx_fp32 | — | — | — | — | — | _RuntimeError: Error when binding input: There's no data transfer regis_ |
+| fp32 | 0.4948 | 0.3019 | 1.0 | 6.13 | 163.0 | 19.18 |
+| fp16_torch | — | — | — | — | — | _RuntimeError: Input type (float) and bias type (struct c10::Half) shou_ |
+| fp16_tensorrt | — | — | — | — | — | _ModuleNotFoundError: No module named 'tensorrt'_ |
+| int8_tensorrt | — | — | — | — | — | _ModuleNotFoundError: No module named 'tensorrt'_ |
+| onnx_cpu | 0.4634 | 0.2674 | 0.9365 | 26.88 | 37.2 | 37.93 |
+| torchscript | 0.4635 | 0.2674 | 0.9367 | 4.92 | 203.4 | 38.19 |
 
 ## Week 7
 

@@ -252,19 +252,35 @@ def _quant(exp: dict) -> dict:
                     **lib.latency_ms(m, imgsz, device),
                     "file_MB": round(Path(weights).stat().st_size / 1e6, 2)}
 
-    # FP16 needs no export - it is the same graph at half precision, and it is
-    # what a Jetson TensorRT FP16 engine is approximating.
+    # FP16 needs no export - same graph at half precision, and it is what a
+    # Jetson TensorRT FP16 engine approximates. Both accuracy and latency go
+    # through ultralytics' own `half=` flag: hand-calling `model.half()` and then
+    # predicting on a uint8 array raises a dtype mismatch, since the preprocessor
+    # still produces float32.
     try:
+        import time as _t
+        import numpy as _np
         hv = m.val(data=data, split="test", imgsz=imgsz, device=device, half=True,
                    project=str(lib.ROOT / "runs" / "ppe_enh"),
                    name=f"{exp['id']}_fp16", exist_ok=True, plots=False)
-        import torch
-        hm = YOLO(weights)
-        hm.model = hm.model.half()
-        rows["fp16_torch"] = {"test_mAP50": round(float(hv.box.map50), 4),
-                              "test_mAP50_95": round(float(hv.box.map), 4),
-                              **lib.latency_ms(m, imgsz, device),
-                              "file_MB": rows["fp32"]["file_MB"] / 2}
+        dummy = (_np.random.rand(imgsz, imgsz, 3) * 255).astype("uint8")
+        for _ in range(10):
+            m.predict(dummy, imgsz=imgsz, device=device, half=True, verbose=False)
+        ts = []
+        for _ in range(60):
+            t0 = _t.perf_counter()
+            m.predict(dummy, imgsz=imgsz, device=device, half=True, verbose=False)
+            ts.append((_t.perf_counter() - t0) * 1000.0)
+        ts.sort()
+        rows["fp16_torch"] = {
+            "test_mAP50": round(float(hv.box.map50), 4),
+            "test_mAP50_95": round(float(hv.box.map), 4),
+            "latency_ms_mean": round(sum(ts) / len(ts), 2),
+            "latency_ms_p50": round(ts[len(ts) // 2], 2),
+            "latency_ms_p95": round(ts[int(len(ts) * 0.95)], 2),
+            "fps_mean": round(1000.0 / (sum(ts) / len(ts)), 1),
+            "file_MB": round(rows["fp32"]["file_MB"] / 2, 2),
+        }
     except Exception as e:  # noqa: BLE001
         rows["fp16_torch"] = {"error": f"{type(e).__name__}: {e}"}
 
