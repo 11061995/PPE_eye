@@ -1,0 +1,78 @@
+{
+  "id": "final_s_mixval",
+  "week": 7,
+  "tier": 1,
+  "item": "deploy",
+  "kind": "train",
+  "desc": "Same data and recipe as final_s_base; only the VAL set changes (Pictor val + SH17-v2 val) so early stopping is not driven by Pictor val's 6.49 persons/img outlier distribution",
+  "params": {
+    "data": "data/finest/data_mixval.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "also_eval_data": [
+      "sh17v2=data/sh17c_v2/data.yaml",
+      "closeup=data/sh17c_v2/data_holdout.yaml"
+    ]
+  },
+  "started": "2026-09-15 15:21:36",
+  "cross_dataset": {
+    "sh17v2": {
+      "mAP50": 0.5158,
+      "mAP50_95": 0.3832,
+      "precision": 0.5478,
+      "recall": 0.5064,
+      "per_class_AP50": {
+        "W": 0.6965,
+        "WH": 0.4574,
+        "WHV": 0.4844,
+        "WV": 0.425
+      }
+    },
+    "closeup": {
+      "mAP50": 0.7841,
+      "mAP50_95": 0.5656,
+      "precision": 0.7391,
+      "recall": 0.6532,
+      "per_class_AP50": {
+        "W": 0.7841
+      }
+    }
+  },
+  "model": "yolo11s.pt",
+  "imgsz": 640,
+  "optimizer": "AdamW",
+  "lr0": 0.0001,
+  "epochs_cfg": 150,
+  "epochs_trained": 38,
+  "train_minutes": 9.6,
+  "test_mAP50": 0.2893,
+  "test_mAP50_95": 0.1496,
+  "test_precision": 0.3435,
+  "test_recall": 0.368,
+  "per_class_AP50": {
+    "W": 0.4265,
+    "WH": 0.432,
+    "WHV": 0.0359,
+    "WV": 0.2627
+  },
+  "latency_ms_mean": 5.96,
+  "latency_ms_p50": 5.92,
+  "latency_ms_p95": 6.4,
+  "fps_mean": 167.7,
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_s_mixval\\weights\\best.pt",
+  "run_dir": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_s_mixval",
+  "status": "done",
+  "finished": "2026-09-15 15:31:43",
+  "finding": "NULL RESULT, and cleanly so. Changing the validation set from pure Pictor val to Pictor val + SH17-v2 val moved the whole val curve (ep8 fitness 0.2148 -> 0.2494) but did NOT move its argmax: both select epoch 8 of 38. Training is deterministic at seed 0, so the selected weights - and therefore every test metric - are byte-identical to final_s_base. The early peak is not an artifact of an unrepresentative val split; the model genuinely peaks at epoch 8 and degrades after, on both distributions. That removes checkpoint selection as an explanation and points the remaining in-domain recall gap at the operating threshold instead."
+}

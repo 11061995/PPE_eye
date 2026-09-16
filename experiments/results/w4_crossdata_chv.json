@@ -1,0 +1,28 @@
+{
+  "id": "w4_crossdata_chv",
+  "week": 4,
+  "tier": 2,
+  "item": "9",
+  "kind": "crossdata",
+  "desc": "Cross-dataset test on CHV after ontology mapping",
+  "status": "blocked",
+  "reason": "CHV (Colour Helmet and Vest) is not on this machine and cannot be fetched: roboflow returns HTTP 403 without an API key, and no local copy exists under DATASETS/. The cross-dataset question it was to answer is covered by w4_crossdata_sh17 (Pictor-only weights on 498 unseen SH17 images) and by the close-up shift holdout built in sh17_map_v2.py. Unblock by placing a YOLO-format CHV export on disk and setting params.data.",
+  "finished": "2026-09-15 14:41:06",
+  "params": {
+    "data": "data/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "target": "chv"
+  }
+}

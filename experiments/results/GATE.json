@@ -1,0 +1,4764 @@
+{
+  "w4_sh17": {
+    "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_sh17_train\\weights\\best.pt",
+    "rule": "helmet",
+    "beds": {
+      "pictor": {
+        "bed": "pictor",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\data.yaml",
+        "baselines": {
+          "n_images": 316,
+          "n_persons": 999,
+          "violation_base_rate": 0.4625,
+          "always_violation_accuracy": 0.4625,
+          "always_compliant_accuracy": 0.5375,
+          "trivial_best_accuracy": 0.5375
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.3615,
+            "violation_precision": 0.5661,
+            "false_alarm_rate": 0.7232,
+            "verdict_accuracy": 0.338,
+            "undetected_persons": 606,
+            "TP": 167,
+            "FP": 128,
+            "FN": 295,
+            "TN": 49
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.3377,
+            "violation_precision": 0.5799,
+            "false_alarm_rate": 0.7152,
+            "verdict_accuracy": 0.3242,
+            "undetected_persons": 639,
+            "TP": 156,
+            "FP": 113,
+            "FN": 306,
+            "TN": 45
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.3182,
+            "violation_precision": 0.6049,
+            "false_alarm_rate": 0.6957,
+            "verdict_accuracy": 0.315,
+            "undetected_persons": 671,
+            "TP": 147,
+            "FP": 96,
+            "FN": 315,
+            "TN": 42
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.3009,
+            "violation_precision": 0.607,
+            "false_alarm_rate": 0.687,
+            "verdict_accuracy": 0.3035,
+            "undetected_persons": 691,
+            "TP": 139,
+            "FP": 90,
+            "FN": 323,
+            "TN": 41
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.2922,
+            "violation_precision": 0.6308,
+            "false_alarm_rate": 0.6752,
+            "verdict_accuracy": 0.2988,
+            "undetected_persons": 713,
+            "TP": 135,
+            "FP": 79,
+            "FN": 327,
+            "TN": 38
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.2749,
+            "violation_precision": 0.6195,
+            "false_alarm_rate": 0.7027,
+            "verdict_accuracy": 0.2792,
+            "undetected_persons": 727,
+            "TP": 127,
+            "FP": 78,
+            "FN": 335,
+            "TN": 33
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.2511,
+            "violation_precision": 0.6138,
+            "false_alarm_rate": 0.6952,
+            "verdict_accuracy": 0.261,
+            "undetected_persons": 746,
+            "TP": 116,
+            "FP": 73,
+            "FN": 346,
+            "TN": 32
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.2446,
+            "violation_precision": 0.6209,
+            "false_alarm_rate": 0.7113,
+            "verdict_accuracy": 0.2522,
+            "undetected_persons": 758,
+            "TP": 113,
+            "FP": 69,
+            "FN": 349,
+            "TN": 28
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.2165,
+            "violation_precision": 0.6135,
+            "false_alarm_rate": 0.7,
+            "verdict_accuracy": 0.2301,
+            "undetected_persons": 781,
+            "TP": 100,
+            "FP": 63,
+            "FN": 362,
+            "TN": 27
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.1991,
+            "violation_precision": 0.6525,
+            "false_alarm_rate": 0.6901,
+            "verdict_accuracy": 0.2139,
+            "undetected_persons": 814,
+            "TP": 92,
+            "FP": 49,
+            "FN": 370,
+            "TN": 22
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 639,
+          "violation_recall": 0.3615,
+          "violation_precision": 0.5661,
+          "f1": 0.4412,
+          "false_alarm_rate": 0.7232,
+          "verdict_accuracy": 0.338,
+          "undetected_persons": 606,
+          "phantom_persons": 776,
+          "TP": 167,
+          "FP": 128,
+          "FN": 295,
+          "TN": 49
+        }
+      },
+      "sh17v2": {
+        "bed": "sh17v2",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data.yaml",
+        "baselines": {
+          "n_images": 125,
+          "n_persons": 305,
+          "violation_base_rate": 0.6656,
+          "always_violation_accuracy": 0.6656,
+          "always_compliant_accuracy": 0.3344,
+          "trivial_best_accuracy": 0.6656
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.5764,
+            "violation_precision": 0.9669,
+            "false_alarm_rate": 0.0392,
+            "verdict_accuracy": 0.7049,
+            "undetected_persons": 14,
+            "TP": 117,
+            "FP": 4,
+            "FN": 86,
+            "TN": 98
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.5813,
+            "violation_precision": 0.9672,
+            "false_alarm_rate": 0.0392,
+            "verdict_accuracy": 0.7082,
+            "undetected_persons": 15,
+            "TP": 118,
+            "FP": 4,
+            "FN": 85,
+            "TN": 98
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.5714,
+            "violation_precision": 0.9667,
+            "false_alarm_rate": 0.0392,
+            "verdict_accuracy": 0.7016,
+            "undetected_persons": 18,
+            "TP": 116,
+            "FP": 4,
+            "FN": 87,
+            "TN": 98
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.5714,
+            "violation_precision": 0.9667,
+            "false_alarm_rate": 0.0392,
+            "verdict_accuracy": 0.7016,
+            "undetected_persons": 19,
+            "TP": 116,
+            "FP": 4,
+            "FN": 87,
+            "TN": 98
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.5517,
+            "violation_precision": 0.9739,
+            "false_alarm_rate": 0.0294,
+            "verdict_accuracy": 0.6918,
+            "undetected_persons": 24,
+            "TP": 112,
+            "FP": 3,
+            "FN": 91,
+            "TN": 99
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.5419,
+            "violation_precision": 0.9735,
+            "false_alarm_rate": 0.0294,
+            "verdict_accuracy": 0.6852,
+            "undetected_persons": 27,
+            "TP": 110,
+            "FP": 3,
+            "FN": 93,
+            "TN": 99
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.5172,
+            "violation_precision": 0.9906,
+            "false_alarm_rate": 0.01,
+            "verdict_accuracy": 0.6733,
+            "undetected_persons": 33,
+            "TP": 105,
+            "FP": 1,
+            "FN": 98,
+            "TN": 99
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.4877,
+            "violation_precision": 0.99,
+            "false_alarm_rate": 0.01,
+            "verdict_accuracy": 0.6535,
+            "undetected_persons": 39,
+            "TP": 99,
+            "FP": 1,
+            "FN": 104,
+            "TN": 99
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.4532,
+            "violation_precision": 0.9787,
+            "false_alarm_rate": 0.02,
+            "verdict_accuracy": 0.6271,
+            "undetected_persons": 50,
+            "TP": 92,
+            "FP": 2,
+            "FN": 111,
+            "TN": 98
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.4286,
+            "violation_precision": 0.9775,
+            "false_alarm_rate": 0.0208,
+            "verdict_accuracy": 0.6054,
+            "undetected_persons": 63,
+            "TP": 87,
+            "FP": 2,
+            "FN": 116,
+            "TN": 94
+          }
+        ],
+        "best_f1": {
+          "conf": 0.05,
+          "rule": "helmet",
+          "matched": 305,
+          "violation_recall": 0.5813,
+          "violation_precision": 0.9672,
+          "f1": 0.7262,
+          "false_alarm_rate": 0.0392,
+          "verdict_accuracy": 0.7082,
+          "undetected_persons": 15,
+          "phantom_persons": 236,
+          "TP": 118,
+          "FP": 4,
+          "FN": 85,
+          "TN": 98
+        },
+        "contamination": "59 of 125 images were in the Week-4 v1 SH17 training set, so this bed is held out for the final runs but NOT for w4_sh17_train / w4_mixed_train / w3_darkaug"
+      },
+      "sh17v2_strict": {
+        "bed": "sh17v2_strict",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_strict.yaml",
+        "baselines": {
+          "n_images": 51,
+          "n_persons": 163,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.4908,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4908,
+            "undetected_persons": 14,
+            "TP": 80,
+            "FP": 0,
+            "FN": 83,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.4969,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4969,
+            "undetected_persons": 15,
+            "TP": 81,
+            "FP": 0,
+            "FN": 82,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.4847,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4847,
+            "undetected_persons": 18,
+            "TP": 79,
+            "FP": 0,
+            "FN": 84,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.4847,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4847,
+            "undetected_persons": 19,
+            "TP": 79,
+            "FP": 0,
+            "FN": 84,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.4601,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4601,
+            "undetected_persons": 24,
+            "TP": 75,
+            "FP": 0,
+            "FN": 88,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.4479,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4479,
+            "undetected_persons": 27,
+            "TP": 73,
+            "FP": 0,
+            "FN": 90,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.4172,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4172,
+            "undetected_persons": 31,
+            "TP": 68,
+            "FP": 0,
+            "FN": 95,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.3804,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3804,
+            "undetected_persons": 37,
+            "TP": 62,
+            "FP": 0,
+            "FN": 101,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.3374,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3374,
+            "undetected_persons": 47,
+            "TP": 55,
+            "FP": 0,
+            "FN": 108,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.3067,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3067,
+            "undetected_persons": 56,
+            "TP": 50,
+            "FP": 0,
+            "FN": 113,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.05,
+          "rule": "helmet",
+          "matched": 163,
+          "violation_recall": 0.4969,
+          "violation_precision": 1.0,
+          "f1": 0.6639,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.4969,
+          "undetected_persons": 15,
+          "phantom_persons": 170,
+          "TP": 81,
+          "FP": 0,
+          "FN": 82,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      },
+      "closeup": {
+        "bed": "closeup",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_holdout.yaml",
+        "baselines": {
+          "n_images": 400,
+          "n_persons": 620,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.3548,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3548,
+            "undetected_persons": 11,
+            "TP": 220,
+            "FP": 0,
+            "FN": 400,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.35,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.35,
+            "undetected_persons": 13,
+            "TP": 217,
+            "FP": 0,
+            "FN": 403,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.3484,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3484,
+            "undetected_persons": 18,
+            "TP": 216,
+            "FP": 0,
+            "FN": 404,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.3403,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3403,
+            "undetected_persons": 23,
+            "TP": 211,
+            "FP": 0,
+            "FN": 409,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.3419,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3419,
+            "undetected_persons": 27,
+            "TP": 212,
+            "FP": 0,
+            "FN": 408,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.3323,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3323,
+            "undetected_persons": 31,
+            "TP": 206,
+            "FP": 0,
+            "FN": 414,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.329,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.329,
+            "undetected_persons": 33,
+            "TP": 204,
+            "FP": 0,
+            "FN": 416,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.3177,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3177,
+            "undetected_persons": 42,
+            "TP": 197,
+            "FP": 0,
+            "FN": 423,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.2968,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.2968,
+            "undetected_persons": 66,
+            "TP": 184,
+            "FP": 0,
+            "FN": 436,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.2855,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.2855,
+            "undetected_persons": 80,
+            "TP": 177,
+            "FP": 0,
+            "FN": 443,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 620,
+          "violation_recall": 0.3548,
+          "violation_precision": 1.0,
+          "f1": 0.5238,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.3548,
+          "undetected_persons": 11,
+          "phantom_persons": 547,
+          "TP": 220,
+          "FP": 0,
+          "FN": 400,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      }
+    },
+    "gate": {
+      "operating_conf": 0.1,
+      "checks": {
+        "heldout_verdict_accuracy>=target": {
+          "value": 0.7082,
+          "target": 0.7,
+          "pass": true
+        },
+        "heldout_beats_trivial_baseline": {
+          "value": 0.7082,
+          "target": 0.6656,
+          "pass": true
+        },
+        "indomain_violation_recall>=target": {
+          "value": 0.3009,
+          "target": 0.45,
+          "pass": false
+        },
+        "indomain_false_alarm<=ceiling": {
+          "value": 0.687,
+          "target": 0.3,
+          "pass": false
+        },
+        "indomain_beats_trivial_baseline": {
+          "value": 0.3035,
+          "target": 0.5375,
+          "pass": false
+        }
+      },
+      "indomain_row": {
+        "conf": 0.1,
+        "violation_recall": 0.3009,
+        "violation_precision": 0.607,
+        "false_alarm_rate": 0.687,
+        "verdict_accuracy": 0.3035,
+        "undetected_persons": 691,
+        "TP": 139,
+        "FP": 90,
+        "FN": 323,
+        "TN": 41
+      },
+      "heldout_best_row": {
+        "conf": 0.05,
+        "violation_recall": 0.5813,
+        "violation_precision": 0.9672,
+        "false_alarm_rate": 0.0392,
+        "verdict_accuracy": 0.7082,
+        "undetected_persons": 15,
+        "TP": 118,
+        "FP": 4,
+        "FN": 85,
+        "TN": 98
+      },
+      "iso_false_alarm": {
+        "FA<=0.15": null,
+        "FA<=0.20": null,
+        "FA<=0.25": null,
+        "FA<=0.30": null
+      },
+      "passed": false
+    }
+  },
+  "w4_mixed": {
+    "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.pt",
+    "rule": "helmet",
+    "beds": {
+      "pictor": {
+        "bed": "pictor",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\data.yaml",
+        "baselines": {
+          "n_images": 316,
+          "n_persons": 999,
+          "violation_base_rate": 0.4625,
+          "always_violation_accuracy": 0.4625,
+          "always_compliant_accuracy": 0.5375,
+          "trivial_best_accuracy": 0.5375
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.5411,
+            "violation_precision": 0.6964,
+            "false_alarm_rate": 0.2986,
+            "verdict_accuracy": 0.6119,
+            "undetected_persons": 299,
+            "TP": 250,
+            "FP": 109,
+            "FN": 212,
+            "TN": 256
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.5043,
+            "violation_precision": 0.7061,
+            "false_alarm_rate": 0.2787,
+            "verdict_accuracy": 0.5975,
+            "undetected_persons": 335,
+            "TP": 233,
+            "FP": 97,
+            "FN": 229,
+            "TN": 251
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.4827,
+            "violation_precision": 0.7102,
+            "false_alarm_rate": 0.27,
+            "verdict_accuracy": 0.587,
+            "undetected_persons": 359,
+            "TP": 223,
+            "FP": 91,
+            "FN": 239,
+            "TN": 246
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.4567,
+            "violation_precision": 0.7226,
+            "false_alarm_rate": 0.2531,
+            "verdict_accuracy": 0.5754,
+            "undetected_persons": 386,
+            "TP": 211,
+            "FP": 81,
+            "FN": 251,
+            "TN": 239
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.4199,
+            "violation_precision": 0.7239,
+            "false_alarm_rate": 0.2492,
+            "verdict_accuracy": 0.5494,
+            "undetected_persons": 432,
+            "TP": 194,
+            "FP": 74,
+            "FN": 268,
+            "TN": 223
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.4199,
+            "violation_precision": 0.7348,
+            "false_alarm_rate": 0.2465,
+            "verdict_accuracy": 0.5469,
+            "undetected_persons": 451,
+            "TP": 194,
+            "FP": 70,
+            "FN": 268,
+            "TN": 214
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.4134,
+            "violation_precision": 0.7579,
+            "false_alarm_rate": 0.2285,
+            "verdict_accuracy": 0.5446,
+            "undetected_persons": 479,
+            "TP": 191,
+            "FP": 61,
+            "FN": 271,
+            "TN": 206
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.4004,
+            "violation_precision": 0.7613,
+            "false_alarm_rate": 0.2311,
+            "verdict_accuracy": 0.5302,
+            "undetected_persons": 507,
+            "TP": 185,
+            "FP": 58,
+            "FN": 277,
+            "TN": 193
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.3528,
+            "violation_precision": 0.7581,
+            "false_alarm_rate": 0.2385,
+            "verdict_accuracy": 0.4838,
+            "undetected_persons": 571,
+            "TP": 163,
+            "FP": 52,
+            "FN": 299,
+            "TN": 166
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.3139,
+            "violation_precision": 0.7632,
+            "false_alarm_rate": 0.2571,
+            "verdict_accuracy": 0.4317,
+            "undetected_persons": 640,
+            "TP": 145,
+            "FP": 45,
+            "FN": 317,
+            "TN": 130
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 827,
+          "violation_recall": 0.5411,
+          "violation_precision": 0.6964,
+          "f1": 0.609,
+          "false_alarm_rate": 0.2986,
+          "verdict_accuracy": 0.6119,
+          "undetected_persons": 299,
+          "phantom_persons": 1491,
+          "TP": 250,
+          "FP": 109,
+          "FN": 212,
+          "TN": 256
+        }
+      },
+      "sh17v2": {
+        "bed": "sh17v2",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data.yaml",
+        "baselines": {
+          "n_images": 125,
+          "n_persons": 305,
+          "violation_base_rate": 0.6656,
+          "always_violation_accuracy": 0.6656,
+          "always_compliant_accuracy": 0.3344,
+          "trivial_best_accuracy": 0.6656
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.5517,
+            "violation_precision": 0.9573,
+            "false_alarm_rate": 0.0495,
+            "verdict_accuracy": 0.6842,
+            "undetected_persons": 22,
+            "TP": 112,
+            "FP": 5,
+            "FN": 91,
+            "TN": 96
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.5567,
+            "violation_precision": 0.9496,
+            "false_alarm_rate": 0.06,
+            "verdict_accuracy": 0.6832,
+            "undetected_persons": 24,
+            "TP": 113,
+            "FP": 6,
+            "FN": 90,
+            "TN": 94
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.5419,
+            "violation_precision": 0.9565,
+            "false_alarm_rate": 0.051,
+            "verdict_accuracy": 0.6744,
+            "undetected_persons": 30,
+            "TP": 110,
+            "FP": 5,
+            "FN": 93,
+            "TN": 93
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.5123,
+            "violation_precision": 0.9541,
+            "false_alarm_rate": 0.0515,
+            "verdict_accuracy": 0.6533,
+            "undetected_persons": 39,
+            "TP": 104,
+            "FP": 5,
+            "FN": 99,
+            "TN": 92
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.5025,
+            "violation_precision": 0.9533,
+            "false_alarm_rate": 0.0515,
+            "verdict_accuracy": 0.6467,
+            "undetected_persons": 44,
+            "TP": 102,
+            "FP": 5,
+            "FN": 101,
+            "TN": 92
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.4778,
+            "violation_precision": 0.951,
+            "false_alarm_rate": 0.0521,
+            "verdict_accuracy": 0.6288,
+            "undetected_persons": 52,
+            "TP": 97,
+            "FP": 5,
+            "FN": 106,
+            "TN": 91
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.4581,
+            "violation_precision": 0.9588,
+            "false_alarm_rate": 0.0426,
+            "verdict_accuracy": 0.6162,
+            "undetected_persons": 60,
+            "TP": 93,
+            "FP": 4,
+            "FN": 110,
+            "TN": 90
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.4187,
+            "violation_precision": 0.9551,
+            "false_alarm_rate": 0.0426,
+            "verdict_accuracy": 0.5892,
+            "undetected_persons": 66,
+            "TP": 85,
+            "FP": 4,
+            "FN": 118,
+            "TN": 90
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.3744,
+            "violation_precision": 0.95,
+            "false_alarm_rate": 0.0449,
+            "verdict_accuracy": 0.5514,
+            "undetected_persons": 85,
+            "TP": 76,
+            "FP": 4,
+            "FN": 127,
+            "TN": 85
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.3399,
+            "violation_precision": 0.9583,
+            "false_alarm_rate": 0.0357,
+            "verdict_accuracy": 0.5226,
+            "undetected_persons": 108,
+            "TP": 69,
+            "FP": 3,
+            "FN": 134,
+            "TN": 81
+          }
+        ],
+        "best_f1": {
+          "conf": 0.05,
+          "rule": "helmet",
+          "matched": 303,
+          "violation_recall": 0.5567,
+          "violation_precision": 0.9496,
+          "f1": 0.7019,
+          "false_alarm_rate": 0.06,
+          "verdict_accuracy": 0.6832,
+          "undetected_persons": 24,
+          "phantom_persons": 327,
+          "TP": 113,
+          "FP": 6,
+          "FN": 90,
+          "TN": 94
+        },
+        "contamination": "59 of 125 images were in the Week-4 v1 SH17 training set, so this bed is held out for the final runs but NOT for w4_sh17_train / w4_mixed_train / w3_darkaug"
+      },
+      "sh17v2_strict": {
+        "bed": "sh17v2_strict",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_strict.yaml",
+        "baselines": {
+          "n_images": 51,
+          "n_persons": 163,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.454,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.454,
+            "undetected_persons": 21,
+            "TP": 74,
+            "FP": 0,
+            "FN": 89,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.4663,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4663,
+            "undetected_persons": 22,
+            "TP": 76,
+            "FP": 0,
+            "FN": 87,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.4417,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4417,
+            "undetected_persons": 26,
+            "TP": 72,
+            "FP": 0,
+            "FN": 91,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.4049,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4049,
+            "undetected_persons": 34,
+            "TP": 66,
+            "FP": 0,
+            "FN": 97,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.3926,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3926,
+            "undetected_persons": 39,
+            "TP": 64,
+            "FP": 0,
+            "FN": 99,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.362,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.362,
+            "undetected_persons": 46,
+            "TP": 59,
+            "FP": 0,
+            "FN": 104,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.3436,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3436,
+            "undetected_persons": 51,
+            "TP": 56,
+            "FP": 0,
+            "FN": 107,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.3006,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3006,
+            "undetected_persons": 56,
+            "TP": 49,
+            "FP": 0,
+            "FN": 114,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.2577,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.2577,
+            "undetected_persons": 68,
+            "TP": 42,
+            "FP": 0,
+            "FN": 121,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.2209,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.2209,
+            "undetected_persons": 85,
+            "TP": 36,
+            "FP": 0,
+            "FN": 127,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.05,
+          "rule": "helmet",
+          "matched": 163,
+          "violation_recall": 0.4663,
+          "violation_precision": 1.0,
+          "f1": 0.636,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.4663,
+          "undetected_persons": 22,
+          "phantom_persons": 224,
+          "TP": 76,
+          "FP": 0,
+          "FN": 87,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      },
+      "closeup": {
+        "bed": "closeup",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_holdout.yaml",
+        "baselines": {
+          "n_images": 400,
+          "n_persons": 620,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.5903,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5903,
+            "undetected_persons": 21,
+            "TP": 366,
+            "FP": 0,
+            "FN": 254,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.5903,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5903,
+            "undetected_persons": 25,
+            "TP": 366,
+            "FP": 0,
+            "FN": 254,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.5871,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5871,
+            "undetected_persons": 28,
+            "TP": 364,
+            "FP": 0,
+            "FN": 256,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.5871,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5871,
+            "undetected_persons": 29,
+            "TP": 364,
+            "FP": 0,
+            "FN": 256,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.5758,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5758,
+            "undetected_persons": 37,
+            "TP": 357,
+            "FP": 0,
+            "FN": 263,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.571,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.571,
+            "undetected_persons": 41,
+            "TP": 354,
+            "FP": 0,
+            "FN": 266,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.5694,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5694,
+            "undetected_persons": 44,
+            "TP": 353,
+            "FP": 0,
+            "FN": 267,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.5661,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5661,
+            "undetected_persons": 52,
+            "TP": 351,
+            "FP": 0,
+            "FN": 269,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.5387,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5387,
+            "undetected_persons": 74,
+            "TP": 334,
+            "FP": 0,
+            "FN": 286,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.5,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5,
+            "undetected_persons": 110,
+            "TP": 310,
+            "FP": 0,
+            "FN": 310,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 620,
+          "violation_recall": 0.5903,
+          "violation_precision": 1.0,
+          "f1": 0.7424,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.5903,
+          "undetected_persons": 21,
+          "phantom_persons": 592,
+          "TP": 366,
+          "FP": 0,
+          "FN": 254,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      }
+    },
+    "gate": {
+      "operating_conf": 0.1,
+      "checks": {
+        "heldout_verdict_accuracy>=target": {
+          "value": 0.6842,
+          "target": 0.7,
+          "pass": false
+        },
+        "heldout_beats_trivial_baseline": {
+          "value": 0.6842,
+          "target": 0.6656,
+          "pass": true
+        },
+        "indomain_violation_recall>=target": {
+          "value": 0.4567,
+          "target": 0.45,
+          "pass": true
+        },
+        "indomain_false_alarm<=ceiling": {
+          "value": 0.2531,
+          "target": 0.3,
+          "pass": true
+        },
+        "indomain_beats_trivial_baseline": {
+          "value": 0.5754,
+          "target": 0.5375,
+          "pass": true
+        }
+      },
+      "indomain_row": {
+        "conf": 0.1,
+        "violation_recall": 0.4567,
+        "violation_precision": 0.7226,
+        "false_alarm_rate": 0.2531,
+        "verdict_accuracy": 0.5754,
+        "undetected_persons": 386,
+        "TP": 211,
+        "FP": 81,
+        "FN": 251,
+        "TN": 239
+      },
+      "heldout_best_row": {
+        "conf": 0.03,
+        "violation_recall": 0.5517,
+        "violation_precision": 0.9573,
+        "false_alarm_rate": 0.0495,
+        "verdict_accuracy": 0.6842,
+        "undetected_persons": 22,
+        "TP": 112,
+        "FP": 5,
+        "FN": 91,
+        "TN": 96
+      },
+      "iso_false_alarm": {
+        "FA<=0.15": null,
+        "FA<=0.20": null,
+        "FA<=0.25": {
+          "conf": 0.15,
+          "violation_recall": 0.4199,
+          "false_alarm_rate": 0.2492,
+          "verdict_accuracy": 0.5494,
+          "undetected_persons": 432
+        },
+        "FA<=0.30": {
+          "conf": 0.03,
+          "violation_recall": 0.5411,
+          "false_alarm_rate": 0.2986,
+          "verdict_accuracy": 0.6119,
+          "undetected_persons": 299
+        }
+      },
+      "passed": false
+    }
+  },
+  "w1_baseline": {
+    "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w1_s_adamw_1e4\\weights\\best.pt",
+    "rule": "helmet",
+    "beds": {
+      "pictor": {
+        "bed": "pictor",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\data.yaml",
+        "baselines": {
+          "n_images": 316,
+          "n_persons": 999,
+          "violation_base_rate": 0.4625,
+          "always_violation_accuracy": 0.4625,
+          "always_compliant_accuracy": 0.5375,
+          "trivial_best_accuracy": 0.5375
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.4004,
+            "violation_precision": 0.7088,
+            "false_alarm_rate": 0.2038,
+            "verdict_accuracy": 0.5772,
+            "undetected_persons": 281,
+            "TP": 185,
+            "FP": 76,
+            "FN": 277,
+            "TN": 297
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.3831,
+            "violation_precision": 0.7052,
+            "false_alarm_rate": 0.2067,
+            "verdict_accuracy": 0.5622,
+            "undetected_persons": 306,
+            "TP": 177,
+            "FP": 74,
+            "FN": 285,
+            "TN": 284
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.3658,
+            "violation_precision": 0.7012,
+            "false_alarm_rate": 0.2057,
+            "verdict_accuracy": 0.5505,
+            "undetected_persons": 325,
+            "TP": 169,
+            "FP": 72,
+            "FN": 293,
+            "TN": 278
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.3442,
+            "violation_precision": 0.7004,
+            "false_alarm_rate": 0.2036,
+            "verdict_accuracy": 0.5339,
+            "undetected_persons": 354,
+            "TP": 159,
+            "FP": 68,
+            "FN": 303,
+            "TN": 266
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.3247,
+            "violation_precision": 0.7143,
+            "false_alarm_rate": 0.1881,
+            "verdict_accuracy": 0.5237,
+            "undetected_persons": 386,
+            "TP": 150,
+            "FP": 60,
+            "FN": 312,
+            "TN": 259
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.3139,
+            "violation_precision": 0.7108,
+            "false_alarm_rate": 0.1922,
+            "verdict_accuracy": 0.5111,
+            "undetected_persons": 414,
+            "TP": 145,
+            "FP": 59,
+            "FN": 317,
+            "TN": 248
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.3095,
+            "violation_precision": 0.7259,
+            "false_alarm_rate": 0.1806,
+            "verdict_accuracy": 0.5099,
+            "undetected_persons": 437,
+            "TP": 143,
+            "FP": 54,
+            "FN": 319,
+            "TN": 245
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.2944,
+            "violation_precision": 0.7432,
+            "false_alarm_rate": 0.1655,
+            "verdict_accuracy": 0.5,
+            "undetected_persons": 466,
+            "TP": 136,
+            "FP": 47,
+            "FN": 326,
+            "TN": 237
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.2619,
+            "violation_precision": 0.7289,
+            "false_alarm_rate": 0.1654,
+            "verdict_accuracy": 0.4741,
+            "undetected_persons": 504,
+            "TP": 121,
+            "FP": 45,
+            "FN": 341,
+            "TN": 227
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.2208,
+            "violation_precision": 0.7445,
+            "false_alarm_rate": 0.1489,
+            "verdict_accuracy": 0.4333,
+            "undetected_persons": 576,
+            "TP": 102,
+            "FP": 35,
+            "FN": 360,
+            "TN": 200
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 835,
+          "violation_recall": 0.4004,
+          "violation_precision": 0.7088,
+          "f1": 0.5118,
+          "false_alarm_rate": 0.2038,
+          "verdict_accuracy": 0.5772,
+          "undetected_persons": 281,
+          "phantom_persons": 1851,
+          "TP": 185,
+          "FP": 76,
+          "FN": 277,
+          "TN": 297
+        }
+      },
+      "sh17v2": {
+        "bed": "sh17v2",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data.yaml",
+        "baselines": {
+          "n_images": 125,
+          "n_persons": 305,
+          "violation_base_rate": 0.6656,
+          "always_violation_accuracy": 0.6656,
+          "always_compliant_accuracy": 0.3344,
+          "trivial_best_accuracy": 0.6656
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.3892,
+            "violation_precision": 0.8495,
+            "false_alarm_rate": 0.1538,
+            "verdict_accuracy": 0.5306,
+            "undetected_persons": 44,
+            "TP": 79,
+            "FP": 14,
+            "FN": 124,
+            "TN": 77
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.3596,
+            "violation_precision": 0.8488,
+            "false_alarm_rate": 0.1444,
+            "verdict_accuracy": 0.5119,
+            "undetected_persons": 52,
+            "TP": 73,
+            "FP": 13,
+            "FN": 130,
+            "TN": 77
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.3498,
+            "violation_precision": 0.8452,
+            "false_alarm_rate": 0.1477,
+            "verdict_accuracy": 0.5017,
+            "undetected_persons": 64,
+            "TP": 71,
+            "FP": 13,
+            "FN": 132,
+            "TN": 75
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.3596,
+            "violation_precision": 0.8588,
+            "false_alarm_rate": 0.1412,
+            "verdict_accuracy": 0.5069,
+            "undetected_persons": 75,
+            "TP": 73,
+            "FP": 12,
+            "FN": 130,
+            "TN": 73
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.3399,
+            "violation_precision": 0.8625,
+            "false_alarm_rate": 0.1294,
+            "verdict_accuracy": 0.4965,
+            "undetected_persons": 83,
+            "TP": 69,
+            "FP": 11,
+            "FN": 134,
+            "TN": 74
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.335,
+            "violation_precision": 0.8718,
+            "false_alarm_rate": 0.1205,
+            "verdict_accuracy": 0.493,
+            "undetected_persons": 90,
+            "TP": 68,
+            "FP": 10,
+            "FN": 135,
+            "TN": 73
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.3153,
+            "violation_precision": 0.8649,
+            "false_alarm_rate": 0.122,
+            "verdict_accuracy": 0.4772,
+            "undetected_persons": 94,
+            "TP": 64,
+            "FP": 10,
+            "FN": 139,
+            "TN": 72
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.2956,
+            "violation_precision": 0.8696,
+            "false_alarm_rate": 0.1111,
+            "verdict_accuracy": 0.4648,
+            "undetected_persons": 100,
+            "TP": 60,
+            "FP": 9,
+            "FN": 143,
+            "TN": 72
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.266,
+            "violation_precision": 0.8571,
+            "false_alarm_rate": 0.1169,
+            "verdict_accuracy": 0.4357,
+            "undetected_persons": 110,
+            "TP": 54,
+            "FP": 9,
+            "FN": 149,
+            "TN": 68
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.266,
+            "violation_precision": 0.871,
+            "false_alarm_rate": 0.1231,
+            "verdict_accuracy": 0.4142,
+            "undetected_persons": 132,
+            "TP": 54,
+            "FP": 8,
+            "FN": 149,
+            "TN": 57
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 294,
+          "violation_recall": 0.3892,
+          "violation_precision": 0.8495,
+          "f1": 0.5338,
+          "false_alarm_rate": 0.1538,
+          "verdict_accuracy": 0.5306,
+          "undetected_persons": 44,
+          "phantom_persons": 915,
+          "TP": 79,
+          "FP": 14,
+          "FN": 124,
+          "TN": 77
+        },
+        "contamination": "59 of 125 images were in the Week-4 v1 SH17 training set, so this bed is held out for the final runs but NOT for w4_sh17_train / w4_mixed_train / w3_darkaug"
+      },
+      "sh17v2_strict": {
+        "bed": "sh17v2_strict",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_strict.yaml",
+        "baselines": {
+          "n_images": 51,
+          "n_persons": 163,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.362,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.362,
+            "undetected_persons": 28,
+            "TP": 59,
+            "FP": 0,
+            "FN": 104,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.3252,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3252,
+            "undetected_persons": 34,
+            "TP": 53,
+            "FP": 0,
+            "FN": 110,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.3129,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3129,
+            "undetected_persons": 44,
+            "TP": 51,
+            "FP": 0,
+            "FN": 112,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.3252,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3252,
+            "undetected_persons": 51,
+            "TP": 53,
+            "FP": 0,
+            "FN": 110,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.3067,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3067,
+            "undetected_persons": 58,
+            "TP": 50,
+            "FP": 0,
+            "FN": 113,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.3006,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3006,
+            "undetected_persons": 63,
+            "TP": 49,
+            "FP": 0,
+            "FN": 114,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.2761,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.2761,
+            "undetected_persons": 66,
+            "TP": 45,
+            "FP": 0,
+            "FN": 118,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.2577,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.2577,
+            "undetected_persons": 70,
+            "TP": 42,
+            "FP": 0,
+            "FN": 121,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.2393,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.2393,
+            "undetected_persons": 73,
+            "TP": 39,
+            "FP": 0,
+            "FN": 124,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.2393,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.2393,
+            "undetected_persons": 82,
+            "TP": 39,
+            "FP": 0,
+            "FN": 124,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 163,
+          "violation_recall": 0.362,
+          "violation_precision": 1.0,
+          "f1": 0.5315,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.362,
+          "undetected_persons": 28,
+          "phantom_persons": 475,
+          "TP": 59,
+          "FP": 0,
+          "FN": 104,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      },
+      "closeup": {
+        "bed": "closeup",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_holdout.yaml",
+        "baselines": {
+          "n_images": 400,
+          "n_persons": 620,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.9226,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.9226,
+            "undetected_persons": 12,
+            "TP": 572,
+            "FP": 0,
+            "FN": 48,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.9161,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.9161,
+            "undetected_persons": 17,
+            "TP": 568,
+            "FP": 0,
+            "FN": 52,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.9081,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.9081,
+            "undetected_persons": 20,
+            "TP": 563,
+            "FP": 0,
+            "FN": 57,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.9016,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.9016,
+            "undetected_persons": 26,
+            "TP": 559,
+            "FP": 0,
+            "FN": 61,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.8952,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8952,
+            "undetected_persons": 33,
+            "TP": 555,
+            "FP": 0,
+            "FN": 65,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.8919,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8919,
+            "undetected_persons": 37,
+            "TP": 553,
+            "FP": 0,
+            "FN": 67,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.8855,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8855,
+            "undetected_persons": 47,
+            "TP": 549,
+            "FP": 0,
+            "FN": 71,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.8677,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8677,
+            "undetected_persons": 58,
+            "TP": 538,
+            "FP": 0,
+            "FN": 82,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.8371,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8371,
+            "undetected_persons": 82,
+            "TP": 519,
+            "FP": 0,
+            "FN": 101,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.779,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.779,
+            "undetected_persons": 125,
+            "TP": 483,
+            "FP": 0,
+            "FN": 137,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 620,
+          "violation_recall": 0.9226,
+          "violation_precision": 1.0,
+          "f1": 0.9597,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.9226,
+          "undetected_persons": 12,
+          "phantom_persons": 1252,
+          "TP": 572,
+          "FP": 0,
+          "FN": 48,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      }
+    },
+    "gate": {
+      "operating_conf": 0.1,
+      "checks": {
+        "heldout_verdict_accuracy>=target": {
+          "value": 0.5306,
+          "target": 0.7,
+          "pass": false
+        },
+        "heldout_beats_trivial_baseline": {
+          "value": 0.5306,
+          "target": 0.6656,
+          "pass": false
+        },
+        "indomain_violation_recall>=target": {
+          "value": 0.3442,
+          "target": 0.45,
+          "pass": false
+        },
+        "indomain_false_alarm<=ceiling": {
+          "value": 0.2036,
+          "target": 0.3,
+          "pass": true
+        },
+        "indomain_beats_trivial_baseline": {
+          "value": 0.5339,
+          "target": 0.5375,
+          "pass": false
+        }
+      },
+      "indomain_row": {
+        "conf": 0.1,
+        "violation_recall": 0.3442,
+        "violation_precision": 0.7004,
+        "false_alarm_rate": 0.2036,
+        "verdict_accuracy": 0.5339,
+        "undetected_persons": 354,
+        "TP": 159,
+        "FP": 68,
+        "FN": 303,
+        "TN": 266
+      },
+      "heldout_best_row": {
+        "conf": 0.03,
+        "violation_recall": 0.3892,
+        "violation_precision": 0.8495,
+        "false_alarm_rate": 0.1538,
+        "verdict_accuracy": 0.5306,
+        "undetected_persons": 44,
+        "TP": 79,
+        "FP": 14,
+        "FN": 124,
+        "TN": 77
+      },
+      "iso_false_alarm": {
+        "FA<=0.15": {
+          "conf": 0.5,
+          "violation_recall": 0.2208,
+          "false_alarm_rate": 0.1489,
+          "verdict_accuracy": 0.4333,
+          "undetected_persons": 576
+        },
+        "FA<=0.20": {
+          "conf": 0.15,
+          "violation_recall": 0.3247,
+          "false_alarm_rate": 0.1881,
+          "verdict_accuracy": 0.5237,
+          "undetected_persons": 386
+        },
+        "FA<=0.25": {
+          "conf": 0.03,
+          "violation_recall": 0.4004,
+          "false_alarm_rate": 0.2038,
+          "verdict_accuracy": 0.5772,
+          "undetected_persons": 281
+        },
+        "FA<=0.30": {
+          "conf": 0.03,
+          "violation_recall": 0.4004,
+          "false_alarm_rate": 0.2038,
+          "verdict_accuracy": 0.5772,
+          "undetected_persons": 281
+        }
+      },
+      "passed": false
+    }
+  },
+  "final_s_base": {
+    "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_s_base\\weights\\best.pt",
+    "rule": "helmet",
+    "beds": {
+      "pictor": {
+        "bed": "pictor",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\data.yaml",
+        "baselines": {
+          "n_images": 316,
+          "n_persons": 999,
+          "violation_base_rate": 0.4625,
+          "always_violation_accuracy": 0.4625,
+          "always_compliant_accuracy": 0.5375,
+          "trivial_best_accuracy": 0.5375
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.4286,
+            "violation_precision": 0.7857,
+            "false_alarm_rate": 0.1543,
+            "verdict_accuracy": 0.6084,
+            "undetected_persons": 318,
+            "TP": 198,
+            "FP": 54,
+            "FN": 264,
+            "TN": 296
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.4242,
+            "violation_precision": 0.7935,
+            "false_alarm_rate": 0.1536,
+            "verdict_accuracy": 0.6008,
+            "undetected_persons": 351,
+            "TP": 196,
+            "FP": 51,
+            "FN": 266,
+            "TN": 281
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.4242,
+            "violation_precision": 0.7935,
+            "false_alarm_rate": 0.1574,
+            "verdict_accuracy": 0.5967,
+            "undetected_persons": 368,
+            "TP": 196,
+            "FP": 51,
+            "FN": 266,
+            "TN": 273
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.4113,
+            "violation_precision": 0.7983,
+            "false_alarm_rate": 0.1543,
+            "verdict_accuracy": 0.586,
+            "undetected_persons": 396,
+            "TP": 190,
+            "FP": 48,
+            "FN": 272,
+            "TN": 263
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.3918,
+            "violation_precision": 0.8044,
+            "false_alarm_rate": 0.1497,
+            "verdict_accuracy": 0.5701,
+            "undetected_persons": 428,
+            "TP": 181,
+            "FP": 44,
+            "FN": 281,
+            "TN": 250
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.3831,
+            "violation_precision": 0.8045,
+            "false_alarm_rate": 0.1519,
+            "verdict_accuracy": 0.5597,
+            "undetected_persons": 453,
+            "TP": 177,
+            "FP": 43,
+            "FN": 285,
+            "TN": 240
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.3571,
+            "violation_precision": 0.8088,
+            "false_alarm_rate": 0.1423,
+            "verdict_accuracy": 0.5435,
+            "undetected_persons": 481,
+            "TP": 165,
+            "FP": 39,
+            "FN": 297,
+            "TN": 235
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.3377,
+            "violation_precision": 0.8254,
+            "false_alarm_rate": 0.131,
+            "verdict_accuracy": 0.5252,
+            "undetected_persons": 520,
+            "TP": 156,
+            "FP": 33,
+            "FN": 306,
+            "TN": 219
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.2879,
+            "violation_precision": 0.8581,
+            "false_alarm_rate": 0.1078,
+            "verdict_accuracy": 0.473,
+            "undetected_persons": 601,
+            "TP": 133,
+            "FP": 22,
+            "FN": 329,
+            "TN": 182
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.2316,
+            "violation_precision": 0.877,
+            "false_alarm_rate": 0.0938,
+            "verdict_accuracy": 0.4051,
+            "undetected_persons": 692,
+            "TP": 107,
+            "FP": 15,
+            "FN": 355,
+            "TN": 145
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 812,
+          "violation_recall": 0.4286,
+          "violation_precision": 0.7857,
+          "f1": 0.5546,
+          "false_alarm_rate": 0.1543,
+          "verdict_accuracy": 0.6084,
+          "undetected_persons": 318,
+          "phantom_persons": 1935,
+          "TP": 198,
+          "FP": 54,
+          "FN": 264,
+          "TN": 296
+        }
+      },
+      "sh17v2": {
+        "bed": "sh17v2",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data.yaml",
+        "baselines": {
+          "n_images": 125,
+          "n_persons": 305,
+          "violation_base_rate": 0.6656,
+          "always_violation_accuracy": 0.6656,
+          "always_compliant_accuracy": 0.3344,
+          "trivial_best_accuracy": 0.6656
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.7438,
+            "violation_precision": 0.858,
+            "false_alarm_rate": 0.2577,
+            "verdict_accuracy": 0.7433,
+            "undetected_persons": 20,
+            "TP": 151,
+            "FP": 25,
+            "FN": 52,
+            "TN": 72
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.7192,
+            "violation_precision": 0.8538,
+            "false_alarm_rate": 0.2577,
+            "verdict_accuracy": 0.7267,
+            "undetected_persons": 24,
+            "TP": 146,
+            "FP": 25,
+            "FN": 57,
+            "TN": 72
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.7044,
+            "violation_precision": 0.8512,
+            "false_alarm_rate": 0.2604,
+            "verdict_accuracy": 0.7157,
+            "undetected_persons": 27,
+            "TP": 143,
+            "FP": 25,
+            "FN": 60,
+            "TN": 71
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.7044,
+            "violation_precision": 0.8614,
+            "false_alarm_rate": 0.2396,
+            "verdict_accuracy": 0.7224,
+            "undetected_persons": 28,
+            "TP": 143,
+            "FP": 23,
+            "FN": 60,
+            "TN": 73
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.7044,
+            "violation_precision": 0.8667,
+            "false_alarm_rate": 0.234,
+            "verdict_accuracy": 0.7239,
+            "undetected_persons": 31,
+            "TP": 143,
+            "FP": 22,
+            "FN": 60,
+            "TN": 72
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.6897,
+            "violation_precision": 0.8642,
+            "false_alarm_rate": 0.2418,
+            "verdict_accuracy": 0.7109,
+            "undetected_persons": 38,
+            "TP": 140,
+            "FP": 22,
+            "FN": 63,
+            "TN": 69
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.6847,
+            "violation_precision": 0.8688,
+            "false_alarm_rate": 0.2386,
+            "verdict_accuracy": 0.7079,
+            "undetected_persons": 42,
+            "TP": 139,
+            "FP": 21,
+            "FN": 64,
+            "TN": 67
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.6453,
+            "violation_precision": 0.8618,
+            "false_alarm_rate": 0.2414,
+            "verdict_accuracy": 0.6793,
+            "undetected_persons": 52,
+            "TP": 131,
+            "FP": 21,
+            "FN": 72,
+            "TN": 66
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.6158,
+            "violation_precision": 0.8562,
+            "false_alarm_rate": 0.253,
+            "verdict_accuracy": 0.6538,
+            "undetected_persons": 67,
+            "TP": 125,
+            "FP": 21,
+            "FN": 78,
+            "TN": 62
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.5369,
+            "violation_precision": 0.8651,
+            "false_alarm_rate": 0.2297,
+            "verdict_accuracy": 0.5993,
+            "undetected_persons": 101,
+            "TP": 109,
+            "FP": 17,
+            "FN": 94,
+            "TN": 57
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 300,
+          "violation_recall": 0.7438,
+          "violation_precision": 0.858,
+          "f1": 0.7968,
+          "false_alarm_rate": 0.2577,
+          "verdict_accuracy": 0.7433,
+          "undetected_persons": 20,
+          "phantom_persons": 487,
+          "TP": 151,
+          "FP": 25,
+          "FN": 52,
+          "TN": 72
+        },
+        "contamination": "59 of 125 images were in the Week-4 v1 SH17 training set, so this bed is held out for the final runs but NOT for w4_sh17_train / w4_mixed_train / w3_darkaug"
+      },
+      "sh17v2_strict": {
+        "bed": "sh17v2_strict",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_strict.yaml",
+        "baselines": {
+          "n_images": 51,
+          "n_persons": 163,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.8712,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8712,
+            "undetected_persons": 11,
+            "TP": 142,
+            "FP": 0,
+            "FN": 21,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.8466,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8466,
+            "undetected_persons": 15,
+            "TP": 138,
+            "FP": 0,
+            "FN": 25,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.8282,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8282,
+            "undetected_persons": 17,
+            "TP": 135,
+            "FP": 0,
+            "FN": 28,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.8221,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8221,
+            "undetected_persons": 18,
+            "TP": 134,
+            "FP": 0,
+            "FN": 29,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.816,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.816,
+            "undetected_persons": 19,
+            "TP": 133,
+            "FP": 0,
+            "FN": 30,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.7975,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7975,
+            "undetected_persons": 22,
+            "TP": 130,
+            "FP": 0,
+            "FN": 33,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.7914,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7914,
+            "undetected_persons": 23,
+            "TP": 129,
+            "FP": 0,
+            "FN": 34,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.7485,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7485,
+            "undetected_persons": 30,
+            "TP": 122,
+            "FP": 0,
+            "FN": 41,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.7055,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7055,
+            "undetected_persons": 39,
+            "TP": 115,
+            "FP": 0,
+            "FN": 48,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.6135,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6135,
+            "undetected_persons": 56,
+            "TP": 100,
+            "FP": 0,
+            "FN": 63,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 163,
+          "violation_recall": 0.8712,
+          "violation_precision": 1.0,
+          "f1": 0.9311,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.8712,
+          "undetected_persons": 11,
+          "phantom_persons": 262,
+          "TP": 142,
+          "FP": 0,
+          "FN": 21,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      },
+      "closeup": {
+        "bed": "closeup",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_holdout.yaml",
+        "baselines": {
+          "n_images": 400,
+          "n_persons": 620,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.5016,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5016,
+            "undetected_persons": 7,
+            "TP": 311,
+            "FP": 0,
+            "FN": 309,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.5032,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5032,
+            "undetected_persons": 8,
+            "TP": 312,
+            "FP": 0,
+            "FN": 308,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.5016,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5016,
+            "undetected_persons": 13,
+            "TP": 311,
+            "FP": 0,
+            "FN": 309,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.5,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5,
+            "undetected_persons": 14,
+            "TP": 310,
+            "FP": 0,
+            "FN": 310,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.4952,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4952,
+            "undetected_persons": 19,
+            "TP": 307,
+            "FP": 0,
+            "FN": 313,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.4839,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4839,
+            "undetected_persons": 26,
+            "TP": 300,
+            "FP": 0,
+            "FN": 320,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.4742,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4742,
+            "undetected_persons": 34,
+            "TP": 294,
+            "FP": 0,
+            "FN": 326,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.4548,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4548,
+            "undetected_persons": 48,
+            "TP": 282,
+            "FP": 0,
+            "FN": 338,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.4194,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.4194,
+            "undetected_persons": 90,
+            "TP": 260,
+            "FP": 0,
+            "FN": 360,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.3758,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.3758,
+            "undetected_persons": 145,
+            "TP": 233,
+            "FP": 0,
+            "FN": 387,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.05,
+          "rule": "helmet",
+          "matched": 620,
+          "violation_recall": 0.5032,
+          "violation_precision": 1.0,
+          "f1": 0.6695,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.5032,
+          "undetected_persons": 8,
+          "phantom_persons": 458,
+          "TP": 312,
+          "FP": 0,
+          "FN": 308,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      }
+    },
+    "gate": {
+      "operating_conf": 0.1,
+      "checks": {
+        "heldout_verdict_accuracy>=target": {
+          "value": 0.7433,
+          "target": 0.7,
+          "pass": true
+        },
+        "heldout_beats_trivial_baseline": {
+          "value": 0.7433,
+          "target": 0.6656,
+          "pass": true
+        },
+        "indomain_violation_recall>=target": {
+          "value": 0.4113,
+          "target": 0.45,
+          "pass": false
+        },
+        "indomain_false_alarm<=ceiling": {
+          "value": 0.1543,
+          "target": 0.3,
+          "pass": true
+        },
+        "indomain_beats_trivial_baseline": {
+          "value": 0.586,
+          "target": 0.5375,
+          "pass": true
+        }
+      },
+      "indomain_row": {
+        "conf": 0.1,
+        "violation_recall": 0.4113,
+        "violation_precision": 0.7983,
+        "false_alarm_rate": 0.1543,
+        "verdict_accuracy": 0.586,
+        "undetected_persons": 396,
+        "TP": 190,
+        "FP": 48,
+        "FN": 272,
+        "TN": 263
+      },
+      "heldout_best_row": {
+        "conf": 0.03,
+        "violation_recall": 0.7438,
+        "violation_precision": 0.858,
+        "false_alarm_rate": 0.2577,
+        "verdict_accuracy": 0.7433,
+        "undetected_persons": 20,
+        "TP": 151,
+        "FP": 25,
+        "FN": 52,
+        "TN": 72
+      },
+      "iso_false_alarm": {
+        "FA<=0.15": {
+          "conf": 0.15,
+          "violation_recall": 0.3918,
+          "false_alarm_rate": 0.1497,
+          "verdict_accuracy": 0.5701,
+          "undetected_persons": 428
+        },
+        "FA<=0.20": {
+          "conf": 0.03,
+          "violation_recall": 0.4286,
+          "false_alarm_rate": 0.1543,
+          "verdict_accuracy": 0.6084,
+          "undetected_persons": 318
+        },
+        "FA<=0.25": {
+          "conf": 0.03,
+          "violation_recall": 0.4286,
+          "false_alarm_rate": 0.1543,
+          "verdict_accuracy": 0.6084,
+          "undetected_persons": 318
+        },
+        "FA<=0.30": {
+          "conf": 0.03,
+          "violation_recall": 0.4286,
+          "false_alarm_rate": 0.1543,
+          "verdict_accuracy": 0.6084,
+          "undetected_persons": 318
+        }
+      },
+      "passed": false
+    }
+  },
+  "final_s_thin": {
+    "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_s_thin\\weights\\best.pt",
+    "rule": "helmet",
+    "beds": {
+      "pictor": {
+        "bed": "pictor",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\data.yaml",
+        "baselines": {
+          "n_images": 316,
+          "n_persons": 999,
+          "violation_base_rate": 0.4625,
+          "always_violation_accuracy": 0.4625,
+          "always_compliant_accuracy": 0.5375,
+          "trivial_best_accuracy": 0.5375
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.5087,
+            "violation_precision": 0.6714,
+            "false_alarm_rate": 0.3267,
+            "verdict_accuracy": 0.5799,
+            "undetected_persons": 315,
+            "TP": 235,
+            "FP": 115,
+            "FN": 227,
+            "TN": 237
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.4805,
+            "violation_precision": 0.6607,
+            "false_alarm_rate": 0.3455,
+            "verdict_accuracy": 0.553,
+            "undetected_persons": 362,
+            "TP": 222,
+            "FP": 114,
+            "FN": 240,
+            "TN": 216
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.4589,
+            "violation_precision": 0.6709,
+            "false_alarm_rate": 0.3355,
+            "verdict_accuracy": 0.5415,
+            "undetected_persons": 393,
+            "TP": 212,
+            "FP": 104,
+            "FN": 250,
+            "TN": 206
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.4351,
+            "violation_precision": 0.6791,
+            "false_alarm_rate": 0.3299,
+            "verdict_accuracy": 0.5253,
+            "undetected_persons": 431,
+            "TP": 201,
+            "FP": 95,
+            "FN": 261,
+            "TN": 193
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.4221,
+            "violation_precision": 0.6842,
+            "false_alarm_rate": 0.3346,
+            "verdict_accuracy": 0.5116,
+            "undetected_persons": 467,
+            "TP": 195,
+            "FP": 90,
+            "FN": 267,
+            "TN": 179
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.3961,
+            "violation_precision": 0.6985,
+            "false_alarm_rate": 0.3173,
+            "verdict_accuracy": 0.4965,
+            "undetected_persons": 502,
+            "TP": 183,
+            "FP": 79,
+            "FN": 279,
+            "TN": 170
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.3723,
+            "violation_precision": 0.6935,
+            "false_alarm_rate": 0.3304,
+            "verdict_accuracy": 0.4711,
+            "undetected_persons": 541,
+            "TP": 172,
+            "FP": 76,
+            "FN": 290,
+            "TN": 154
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.3398,
+            "violation_precision": 0.6856,
+            "false_alarm_rate": 0.3445,
+            "verdict_accuracy": 0.4382,
+            "undetected_persons": 582,
+            "TP": 157,
+            "FP": 72,
+            "FN": 305,
+            "TN": 137
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.3074,
+            "violation_precision": 0.7245,
+            "false_alarm_rate": 0.3158,
+            "verdict_accuracy": 0.4092,
+            "undetected_persons": 652,
+            "TP": 142,
+            "FP": 54,
+            "FN": 320,
+            "TN": 117
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.2554,
+            "violation_precision": 0.7239,
+            "false_alarm_rate": 0.3333,
+            "verdict_accuracy": 0.3484,
+            "undetected_persons": 725,
+            "TP": 118,
+            "FP": 45,
+            "FN": 344,
+            "TN": 90
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 814,
+          "violation_recall": 0.5087,
+          "violation_precision": 0.6714,
+          "f1": 0.5788,
+          "false_alarm_rate": 0.3267,
+          "verdict_accuracy": 0.5799,
+          "undetected_persons": 315,
+          "phantom_persons": 1572,
+          "TP": 235,
+          "FP": 115,
+          "FN": 227,
+          "TN": 237
+        }
+      },
+      "sh17v2": {
+        "bed": "sh17v2",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data.yaml",
+        "baselines": {
+          "n_images": 125,
+          "n_persons": 305,
+          "violation_base_rate": 0.6656,
+          "always_violation_accuracy": 0.6656,
+          "always_compliant_accuracy": 0.3344,
+          "trivial_best_accuracy": 0.6656
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.8473,
+            "violation_precision": 0.9101,
+            "false_alarm_rate": 0.17,
+            "verdict_accuracy": 0.8416,
+            "undetected_persons": 16,
+            "TP": 172,
+            "FP": 17,
+            "FN": 31,
+            "TN": 83
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.8424,
+            "violation_precision": 0.9096,
+            "false_alarm_rate": 0.1717,
+            "verdict_accuracy": 0.8377,
+            "undetected_persons": 18,
+            "TP": 171,
+            "FP": 17,
+            "FN": 32,
+            "TN": 82
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.8424,
+            "violation_precision": 0.9096,
+            "false_alarm_rate": 0.1735,
+            "verdict_accuracy": 0.8372,
+            "undetected_persons": 19,
+            "TP": 171,
+            "FP": 17,
+            "FN": 32,
+            "TN": 81
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.8325,
+            "violation_precision": 0.9086,
+            "false_alarm_rate": 0.1771,
+            "verdict_accuracy": 0.8294,
+            "undetected_persons": 24,
+            "TP": 169,
+            "FP": 17,
+            "FN": 34,
+            "TN": 79
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.8177,
+            "violation_precision": 0.9071,
+            "false_alarm_rate": 0.1789,
+            "verdict_accuracy": 0.8188,
+            "undetected_persons": 28,
+            "TP": 166,
+            "FP": 17,
+            "FN": 37,
+            "TN": 78
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.7931,
+            "violation_precision": 0.8994,
+            "false_alarm_rate": 0.1957,
+            "verdict_accuracy": 0.7966,
+            "undetected_persons": 36,
+            "TP": 161,
+            "FP": 18,
+            "FN": 42,
+            "TN": 74
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.7586,
+            "violation_precision": 0.8851,
+            "false_alarm_rate": 0.2198,
+            "verdict_accuracy": 0.7653,
+            "undetected_persons": 43,
+            "TP": 154,
+            "FP": 20,
+            "FN": 49,
+            "TN": 71
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.7438,
+            "violation_precision": 0.8882,
+            "false_alarm_rate": 0.2111,
+            "verdict_accuracy": 0.7577,
+            "undetected_persons": 47,
+            "TP": 151,
+            "FP": 19,
+            "FN": 52,
+            "TN": 71
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.7143,
+            "violation_precision": 0.8841,
+            "false_alarm_rate": 0.2346,
+            "verdict_accuracy": 0.7289,
+            "undetected_persons": 65,
+            "TP": 145,
+            "FP": 19,
+            "FN": 58,
+            "TN": 62
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.665,
+            "violation_precision": 0.894,
+            "false_alarm_rate": 0.2254,
+            "verdict_accuracy": 0.6934,
+            "undetected_persons": 87,
+            "TP": 135,
+            "FP": 16,
+            "FN": 68,
+            "TN": 55
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 303,
+          "violation_recall": 0.8473,
+          "violation_precision": 0.9101,
+          "f1": 0.8776,
+          "false_alarm_rate": 0.17,
+          "verdict_accuracy": 0.8416,
+          "undetected_persons": 16,
+          "phantom_persons": 444,
+          "TP": 172,
+          "FP": 17,
+          "FN": 31,
+          "TN": 83
+        },
+        "contamination": "59 of 125 images were in the Week-4 v1 SH17 training set, so this bed is held out for the final runs but NOT for w4_sh17_train / w4_mixed_train / w3_darkaug"
+      },
+      "sh17v2_strict": {
+        "bed": "sh17v2_strict",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_strict.yaml",
+        "baselines": {
+          "n_images": 51,
+          "n_persons": 163,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.908,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.908,
+            "undetected_persons": 11,
+            "TP": 148,
+            "FP": 0,
+            "FN": 15,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.9018,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.9018,
+            "undetected_persons": 12,
+            "TP": 147,
+            "FP": 0,
+            "FN": 16,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.9018,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.9018,
+            "undetected_persons": 12,
+            "TP": 147,
+            "FP": 0,
+            "FN": 16,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.8957,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8957,
+            "undetected_persons": 14,
+            "TP": 146,
+            "FP": 0,
+            "FN": 17,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.8773,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8773,
+            "undetected_persons": 17,
+            "TP": 143,
+            "FP": 0,
+            "FN": 20,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.8528,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8528,
+            "undetected_persons": 21,
+            "TP": 139,
+            "FP": 0,
+            "FN": 24,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.8098,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8098,
+            "undetected_persons": 27,
+            "TP": 132,
+            "FP": 0,
+            "FN": 31,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.7914,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7914,
+            "undetected_persons": 30,
+            "TP": 129,
+            "FP": 0,
+            "FN": 34,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.773,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.773,
+            "undetected_persons": 34,
+            "TP": 126,
+            "FP": 0,
+            "FN": 37,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.7239,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7239,
+            "undetected_persons": 44,
+            "TP": 118,
+            "FP": 0,
+            "FN": 45,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 163,
+          "violation_recall": 0.908,
+          "violation_precision": 1.0,
+          "f1": 0.9518,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.908,
+          "undetected_persons": 11,
+          "phantom_persons": 222,
+          "TP": 148,
+          "FP": 0,
+          "FN": 15,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      },
+      "closeup": {
+        "bed": "closeup",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_holdout.yaml",
+        "baselines": {
+          "n_images": 400,
+          "n_persons": 620,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.8548,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8548,
+            "undetected_persons": 11,
+            "TP": 530,
+            "FP": 0,
+            "FN": 90,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.8484,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8484,
+            "undetected_persons": 12,
+            "TP": 526,
+            "FP": 0,
+            "FN": 94,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.8468,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8468,
+            "undetected_persons": 14,
+            "TP": 525,
+            "FP": 0,
+            "FN": 95,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.8403,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8403,
+            "undetected_persons": 18,
+            "TP": 521,
+            "FP": 0,
+            "FN": 99,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.8387,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8387,
+            "undetected_persons": 26,
+            "TP": 520,
+            "FP": 0,
+            "FN": 100,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.8355,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8355,
+            "undetected_persons": 32,
+            "TP": 518,
+            "FP": 0,
+            "FN": 102,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.829,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.829,
+            "undetected_persons": 37,
+            "TP": 514,
+            "FP": 0,
+            "FN": 106,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.8242,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8242,
+            "undetected_persons": 44,
+            "TP": 511,
+            "FP": 0,
+            "FN": 109,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.8032,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8032,
+            "undetected_persons": 68,
+            "TP": 498,
+            "FP": 0,
+            "FN": 122,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.7468,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7468,
+            "undetected_persons": 117,
+            "TP": 463,
+            "FP": 0,
+            "FN": 157,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 620,
+          "violation_recall": 0.8548,
+          "violation_precision": 1.0,
+          "f1": 0.9217,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.8548,
+          "undetected_persons": 11,
+          "phantom_persons": 614,
+          "TP": 530,
+          "FP": 0,
+          "FN": 90,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      }
+    },
+    "gate": {
+      "operating_conf": 0.1,
+      "checks": {
+        "heldout_verdict_accuracy>=target": {
+          "value": 0.8416,
+          "target": 0.7,
+          "pass": true
+        },
+        "heldout_beats_trivial_baseline": {
+          "value": 0.8416,
+          "target": 0.6656,
+          "pass": true
+        },
+        "indomain_violation_recall>=target": {
+          "value": 0.4351,
+          "target": 0.45,
+          "pass": false
+        },
+        "indomain_false_alarm<=ceiling": {
+          "value": 0.3299,
+          "target": 0.3,
+          "pass": false
+        },
+        "indomain_beats_trivial_baseline": {
+          "value": 0.5253,
+          "target": 0.5375,
+          "pass": false
+        }
+      },
+      "indomain_row": {
+        "conf": 0.1,
+        "violation_recall": 0.4351,
+        "violation_precision": 0.6791,
+        "false_alarm_rate": 0.3299,
+        "verdict_accuracy": 0.5253,
+        "undetected_persons": 431,
+        "TP": 201,
+        "FP": 95,
+        "FN": 261,
+        "TN": 193
+      },
+      "heldout_best_row": {
+        "conf": 0.03,
+        "violation_recall": 0.8473,
+        "violation_precision": 0.9101,
+        "false_alarm_rate": 0.17,
+        "verdict_accuracy": 0.8416,
+        "undetected_persons": 16,
+        "TP": 172,
+        "FP": 17,
+        "FN": 31,
+        "TN": 83
+      },
+      "iso_false_alarm": {
+        "FA<=0.15": null,
+        "FA<=0.20": null,
+        "FA<=0.25": null,
+        "FA<=0.30": null
+      },
+      "passed": false
+    }
+  },
+  "final_s_scale": {
+    "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_s_scale\\weights\\best.pt",
+    "rule": "helmet",
+    "beds": {
+      "pictor": {
+        "bed": "pictor",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\data.yaml",
+        "baselines": {
+          "n_images": 316,
+          "n_persons": 999,
+          "violation_base_rate": 0.4625,
+          "always_violation_accuracy": 0.4625,
+          "always_compliant_accuracy": 0.5375,
+          "trivial_best_accuracy": 0.5375
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.5714,
+            "violation_precision": 0.7253,
+            "false_alarm_rate": 0.2762,
+            "verdict_accuracy": 0.6383,
+            "undetected_persons": 289,
+            "TP": 264,
+            "FP": 100,
+            "FN": 198,
+            "TN": 262
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.5519,
+            "violation_precision": 0.7203,
+            "false_alarm_rate": 0.2903,
+            "verdict_accuracy": 0.6189,
+            "undetected_persons": 322,
+            "TP": 255,
+            "FP": 99,
+            "FN": 207,
+            "TN": 242
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.5303,
+            "violation_precision": 0.7185,
+            "false_alarm_rate": 0.2918,
+            "verdict_accuracy": 0.6043,
+            "undetected_persons": 351,
+            "TP": 245,
+            "FP": 96,
+            "FN": 217,
+            "TN": 233
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.5152,
+            "violation_precision": 0.719,
+            "false_alarm_rate": 0.2897,
+            "verdict_accuracy": 0.5951,
+            "undetected_persons": 377,
+            "TP": 238,
+            "FP": 93,
+            "FN": 224,
+            "TN": 228
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.4892,
+            "violation_precision": 0.7244,
+            "false_alarm_rate": 0.2857,
+            "verdict_accuracy": 0.578,
+            "undetected_persons": 413,
+            "TP": 226,
+            "FP": 86,
+            "FN": 236,
+            "TN": 215
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.4589,
+            "violation_precision": 0.726,
+            "false_alarm_rate": 0.2749,
+            "verdict_accuracy": 0.5618,
+            "undetected_persons": 440,
+            "TP": 212,
+            "FP": 80,
+            "FN": 250,
+            "TN": 211
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.4177,
+            "violation_precision": 0.7148,
+            "false_alarm_rate": 0.279,
+            "verdict_accuracy": 0.5312,
+            "undetected_persons": 481,
+            "TP": 193,
+            "FP": 77,
+            "FN": 269,
+            "TN": 199
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.4091,
+            "violation_precision": 0.7354,
+            "false_alarm_rate": 0.2636,
+            "verdict_accuracy": 0.5264,
+            "undetected_persons": 508,
+            "TP": 189,
+            "FP": 68,
+            "FN": 273,
+            "TN": 190
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.368,
+            "violation_precision": 0.7623,
+            "false_alarm_rate": 0.25,
+            "verdict_accuracy": 0.4881,
+            "undetected_persons": 579,
+            "TP": 170,
+            "FP": 53,
+            "FN": 292,
+            "TN": 159
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.3247,
+            "violation_precision": 0.7772,
+            "false_alarm_rate": 0.2471,
+            "verdict_accuracy": 0.4418,
+            "undetected_persons": 649,
+            "TP": 150,
+            "FP": 43,
+            "FN": 312,
+            "TN": 131
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 824,
+          "violation_recall": 0.5714,
+          "violation_precision": 0.7253,
+          "f1": 0.6392,
+          "false_alarm_rate": 0.2762,
+          "verdict_accuracy": 0.6383,
+          "undetected_persons": 289,
+          "phantom_persons": 1317,
+          "TP": 264,
+          "FP": 100,
+          "FN": 198,
+          "TN": 262
+        }
+      },
+      "sh17v2": {
+        "bed": "sh17v2",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data.yaml",
+        "baselines": {
+          "n_images": 125,
+          "n_persons": 305,
+          "violation_base_rate": 0.6656,
+          "always_violation_accuracy": 0.6656,
+          "always_compliant_accuracy": 0.3344,
+          "trivial_best_accuracy": 0.6656
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.8177,
+            "violation_precision": 0.883,
+            "false_alarm_rate": 0.2292,
+            "verdict_accuracy": 0.8027,
+            "undetected_persons": 22,
+            "TP": 166,
+            "FP": 22,
+            "FN": 37,
+            "TN": 74
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.8079,
+            "violation_precision": 0.8817,
+            "false_alarm_rate": 0.2316,
+            "verdict_accuracy": 0.7953,
+            "undetected_persons": 25,
+            "TP": 164,
+            "FP": 22,
+            "FN": 39,
+            "TN": 73
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.8079,
+            "violation_precision": 0.877,
+            "false_alarm_rate": 0.2421,
+            "verdict_accuracy": 0.7919,
+            "undetected_persons": 25,
+            "TP": 164,
+            "FP": 23,
+            "FN": 39,
+            "TN": 72
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.803,
+            "violation_precision": 0.8763,
+            "false_alarm_rate": 0.2421,
+            "verdict_accuracy": 0.7886,
+            "undetected_persons": 26,
+            "TP": 163,
+            "FP": 23,
+            "FN": 40,
+            "TN": 72
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.7833,
+            "violation_precision": 0.8736,
+            "false_alarm_rate": 0.2421,
+            "verdict_accuracy": 0.7752,
+            "undetected_persons": 30,
+            "TP": 159,
+            "FP": 23,
+            "FN": 44,
+            "TN": 72
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.7685,
+            "violation_precision": 0.8764,
+            "false_alarm_rate": 0.2366,
+            "verdict_accuracy": 0.7669,
+            "undetected_persons": 36,
+            "TP": 156,
+            "FP": 22,
+            "FN": 47,
+            "TN": 71
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.7438,
+            "violation_precision": 0.8779,
+            "false_alarm_rate": 0.2283,
+            "verdict_accuracy": 0.7525,
+            "undetected_persons": 41,
+            "TP": 151,
+            "FP": 21,
+            "FN": 52,
+            "TN": 71
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.7438,
+            "violation_precision": 0.883,
+            "false_alarm_rate": 0.2222,
+            "verdict_accuracy": 0.7543,
+            "undetected_persons": 43,
+            "TP": 151,
+            "FP": 20,
+            "FN": 52,
+            "TN": 70
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.7192,
+            "violation_precision": 0.8848,
+            "false_alarm_rate": 0.2209,
+            "verdict_accuracy": 0.737,
+            "undetected_persons": 55,
+            "TP": 146,
+            "FP": 19,
+            "FN": 57,
+            "TN": 67
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.665,
+            "violation_precision": 0.9,
+            "false_alarm_rate": 0.1875,
+            "verdict_accuracy": 0.7067,
+            "undetected_persons": 75,
+            "TP": 135,
+            "FP": 15,
+            "FN": 68,
+            "TN": 65
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 299,
+          "violation_recall": 0.8177,
+          "violation_precision": 0.883,
+          "f1": 0.8491,
+          "false_alarm_rate": 0.2292,
+          "verdict_accuracy": 0.8027,
+          "undetected_persons": 22,
+          "phantom_persons": 370,
+          "TP": 166,
+          "FP": 22,
+          "FN": 37,
+          "TN": 74
+        },
+        "contamination": "59 of 125 images were in the Week-4 v1 SH17 training set, so this bed is held out for the final runs but NOT for w4_sh17_train / w4_mixed_train / w3_darkaug"
+      },
+      "sh17v2_strict": {
+        "bed": "sh17v2_strict",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_strict.yaml",
+        "baselines": {
+          "n_images": 51,
+          "n_persons": 163,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.8834,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8834,
+            "undetected_persons": 13,
+            "TP": 144,
+            "FP": 0,
+            "FN": 19,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.8773,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8773,
+            "undetected_persons": 14,
+            "TP": 143,
+            "FP": 0,
+            "FN": 20,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.8834,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8834,
+            "undetected_persons": 14,
+            "TP": 144,
+            "FP": 0,
+            "FN": 19,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.8773,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8773,
+            "undetected_persons": 15,
+            "TP": 143,
+            "FP": 0,
+            "FN": 20,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.8528,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8528,
+            "undetected_persons": 19,
+            "TP": 139,
+            "FP": 0,
+            "FN": 24,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.8344,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8344,
+            "undetected_persons": 22,
+            "TP": 136,
+            "FP": 0,
+            "FN": 27,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.816,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.816,
+            "undetected_persons": 25,
+            "TP": 133,
+            "FP": 0,
+            "FN": 30,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.816,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.816,
+            "undetected_persons": 25,
+            "TP": 133,
+            "FP": 0,
+            "FN": 30,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.7791,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7791,
+            "undetected_persons": 31,
+            "TP": 127,
+            "FP": 0,
+            "FN": 36,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.7239,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7239,
+            "undetected_persons": 40,
+            "TP": 118,
+            "FP": 0,
+            "FN": 45,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 163,
+          "violation_recall": 0.8834,
+          "violation_precision": 1.0,
+          "f1": 0.9381,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.8834,
+          "undetected_persons": 13,
+          "phantom_persons": 194,
+          "TP": 144,
+          "FP": 0,
+          "FN": 19,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      },
+      "closeup": {
+        "bed": "closeup",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_holdout.yaml",
+        "baselines": {
+          "n_images": 400,
+          "n_persons": 620,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.6355,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6355,
+            "undetected_persons": 15,
+            "TP": 394,
+            "FP": 0,
+            "FN": 226,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.6323,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6323,
+            "undetected_persons": 16,
+            "TP": 392,
+            "FP": 0,
+            "FN": 228,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.6274,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6274,
+            "undetected_persons": 17,
+            "TP": 389,
+            "FP": 0,
+            "FN": 231,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.6242,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6242,
+            "undetected_persons": 19,
+            "TP": 387,
+            "FP": 0,
+            "FN": 233,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.621,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.621,
+            "undetected_persons": 25,
+            "TP": 385,
+            "FP": 0,
+            "FN": 235,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.6129,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6129,
+            "undetected_persons": 31,
+            "TP": 380,
+            "FP": 0,
+            "FN": 240,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.5984,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5984,
+            "undetected_persons": 40,
+            "TP": 371,
+            "FP": 0,
+            "FN": 249,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.5806,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5806,
+            "undetected_persons": 47,
+            "TP": 360,
+            "FP": 0,
+            "FN": 260,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.5677,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5677,
+            "undetected_persons": 67,
+            "TP": 352,
+            "FP": 0,
+            "FN": 268,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.5355,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.5355,
+            "undetected_persons": 110,
+            "TP": 332,
+            "FP": 0,
+            "FN": 288,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 620,
+          "violation_recall": 0.6355,
+          "violation_precision": 1.0,
+          "f1": 0.7771,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.6355,
+          "undetected_persons": 15,
+          "phantom_persons": 435,
+          "TP": 394,
+          "FP": 0,
+          "FN": 226,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      }
+    },
+    "gate": {
+      "operating_conf": 0.1,
+      "checks": {
+        "heldout_verdict_accuracy>=target": {
+          "value": 0.8027,
+          "target": 0.7,
+          "pass": true
+        },
+        "heldout_beats_trivial_baseline": {
+          "value": 0.8027,
+          "target": 0.6656,
+          "pass": true
+        },
+        "indomain_violation_recall>=target": {
+          "value": 0.5152,
+          "target": 0.45,
+          "pass": true
+        },
+        "indomain_false_alarm<=ceiling": {
+          "value": 0.2897,
+          "target": 0.3,
+          "pass": true
+        },
+        "indomain_beats_trivial_baseline": {
+          "value": 0.5951,
+          "target": 0.5375,
+          "pass": true
+        }
+      },
+      "indomain_row": {
+        "conf": 0.1,
+        "violation_recall": 0.5152,
+        "violation_precision": 0.719,
+        "false_alarm_rate": 0.2897,
+        "verdict_accuracy": 0.5951,
+        "undetected_persons": 377,
+        "TP": 238,
+        "FP": 93,
+        "FN": 224,
+        "TN": 228
+      },
+      "heldout_best_row": {
+        "conf": 0.03,
+        "violation_recall": 0.8177,
+        "violation_precision": 0.883,
+        "false_alarm_rate": 0.2292,
+        "verdict_accuracy": 0.8027,
+        "undetected_persons": 22,
+        "TP": 166,
+        "FP": 22,
+        "FN": 37,
+        "TN": 74
+      },
+      "iso_false_alarm": {
+        "FA<=0.15": null,
+        "FA<=0.20": null,
+        "FA<=0.25": {
+          "conf": 0.4,
+          "violation_recall": 0.368,
+          "false_alarm_rate": 0.25,
+          "verdict_accuracy": 0.4881,
+          "undetected_persons": 579
+        },
+        "FA<=0.30": {
+          "conf": 0.03,
+          "violation_recall": 0.5714,
+          "false_alarm_rate": 0.2762,
+          "verdict_accuracy": 0.6383,
+          "undetected_persons": 289
+        }
+      },
+      "passed": true
+    }
+  },
+  "final_n_deploy": {
+    "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\final_n_deploy\\weights\\best.pt",
+    "rule": "helmet",
+    "beds": {
+      "pictor": {
+        "bed": "pictor",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\data.yaml",
+        "baselines": {
+          "n_images": 316,
+          "n_persons": 999,
+          "violation_base_rate": 0.4625,
+          "always_violation_accuracy": 0.4625,
+          "always_compliant_accuracy": 0.5375,
+          "trivial_best_accuracy": 0.5375
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.5411,
+            "violation_precision": 0.5924,
+            "false_alarm_rate": 0.5165,
+            "verdict_accuracy": 0.517,
+            "undetected_persons": 348,
+            "TP": 250,
+            "FP": 172,
+            "FN": 212,
+            "TN": 161
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.5216,
+            "violation_precision": 0.5936,
+            "false_alarm_rate": 0.5108,
+            "verdict_accuracy": 0.5083,
+            "undetected_persons": 373,
+            "TP": 241,
+            "FP": 165,
+            "FN": 221,
+            "TN": 158
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.5065,
+            "violation_precision": 0.6047,
+            "false_alarm_rate": 0.4951,
+            "verdict_accuracy": 0.5058,
+            "undetected_persons": 396,
+            "TP": 234,
+            "FP": 153,
+            "FN": 228,
+            "TN": 156
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.4892,
+            "violation_precision": 0.6027,
+            "false_alarm_rate": 0.5034,
+            "verdict_accuracy": 0.4921,
+            "undetected_persons": 421,
+            "TP": 226,
+            "FP": 149,
+            "FN": 236,
+            "TN": 147
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.4632,
+            "violation_precision": 0.6062,
+            "false_alarm_rate": 0.5055,
+            "verdict_accuracy": 0.4749,
+            "undetected_persons": 460,
+            "TP": 214,
+            "FP": 139,
+            "FN": 248,
+            "TN": 136
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.4524,
+            "violation_precision": 0.6076,
+            "false_alarm_rate": 0.5094,
+            "verdict_accuracy": 0.4663,
+            "undetected_persons": 478,
+            "TP": 209,
+            "FP": 135,
+            "FN": 253,
+            "TN": 130
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.4459,
+            "violation_precision": 0.6113,
+            "false_alarm_rate": 0.5137,
+            "verdict_accuracy": 0.4603,
+            "undetected_persons": 496,
+            "TP": 206,
+            "FP": 131,
+            "FN": 256,
+            "TN": 124
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.4372,
+            "violation_precision": 0.6196,
+            "false_alarm_rate": 0.5167,
+            "verdict_accuracy": 0.453,
+            "undetected_persons": 519,
+            "TP": 202,
+            "FP": 124,
+            "FN": 260,
+            "TN": 116
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.3896,
+            "violation_precision": 0.6272,
+            "false_alarm_rate": 0.5169,
+            "verdict_accuracy": 0.4185,
+            "undetected_persons": 573,
+            "TP": 180,
+            "FP": 107,
+            "FN": 282,
+            "TN": 100
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.355,
+            "violation_precision": 0.6381,
+            "false_alarm_rate": 0.5314,
+            "verdict_accuracy": 0.3862,
+            "undetected_persons": 631,
+            "TP": 164,
+            "FP": 93,
+            "FN": 298,
+            "TN": 82
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 795,
+          "violation_recall": 0.5411,
+          "violation_precision": 0.5924,
+          "f1": 0.5656,
+          "false_alarm_rate": 0.5165,
+          "verdict_accuracy": 0.517,
+          "undetected_persons": 348,
+          "phantom_persons": 1633,
+          "TP": 250,
+          "FP": 172,
+          "FN": 212,
+          "TN": 161
+        }
+      },
+      "sh17v2": {
+        "bed": "sh17v2",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data.yaml",
+        "baselines": {
+          "n_images": 125,
+          "n_persons": 305,
+          "violation_base_rate": 0.6656,
+          "always_violation_accuracy": 0.6656,
+          "always_compliant_accuracy": 0.3344,
+          "trivial_best_accuracy": 0.6656
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.8177,
+            "violation_precision": 0.8098,
+            "false_alarm_rate": 0.4062,
+            "verdict_accuracy": 0.7458,
+            "undetected_persons": 24,
+            "TP": 166,
+            "FP": 39,
+            "FN": 37,
+            "TN": 57
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.803,
+            "violation_precision": 0.8069,
+            "false_alarm_rate": 0.4105,
+            "verdict_accuracy": 0.7349,
+            "undetected_persons": 31,
+            "TP": 163,
+            "FP": 39,
+            "FN": 40,
+            "TN": 56
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.7931,
+            "violation_precision": 0.805,
+            "false_alarm_rate": 0.4105,
+            "verdict_accuracy": 0.7282,
+            "undetected_persons": 33,
+            "TP": 161,
+            "FP": 39,
+            "FN": 42,
+            "TN": 56
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.7882,
+            "violation_precision": 0.8081,
+            "false_alarm_rate": 0.4043,
+            "verdict_accuracy": 0.7273,
+            "undetected_persons": 35,
+            "TP": 160,
+            "FP": 38,
+            "FN": 43,
+            "TN": 56
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.7734,
+            "violation_precision": 0.8135,
+            "false_alarm_rate": 0.3956,
+            "verdict_accuracy": 0.7211,
+            "undetected_persons": 42,
+            "TP": 157,
+            "FP": 36,
+            "FN": 46,
+            "TN": 55
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.7685,
+            "violation_precision": 0.8041,
+            "false_alarm_rate": 0.4176,
+            "verdict_accuracy": 0.7109,
+            "undetected_persons": 45,
+            "TP": 156,
+            "FP": 38,
+            "FN": 47,
+            "TN": 53
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.7586,
+            "violation_precision": 0.8105,
+            "false_alarm_rate": 0.4091,
+            "verdict_accuracy": 0.7079,
+            "undetected_persons": 51,
+            "TP": 154,
+            "FP": 36,
+            "FN": 49,
+            "TN": 52
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.7438,
+            "violation_precision": 0.8075,
+            "false_alarm_rate": 0.4138,
+            "verdict_accuracy": 0.6966,
+            "undetected_persons": 57,
+            "TP": 151,
+            "FP": 36,
+            "FN": 52,
+            "TN": 51
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.7143,
+            "violation_precision": 0.8056,
+            "false_alarm_rate": 0.4167,
+            "verdict_accuracy": 0.676,
+            "undetected_persons": 69,
+            "TP": 145,
+            "FP": 35,
+            "FN": 58,
+            "TN": 49
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.665,
+            "violation_precision": 0.8133,
+            "false_alarm_rate": 0.4079,
+            "verdict_accuracy": 0.6452,
+            "undetected_persons": 87,
+            "TP": 135,
+            "FP": 31,
+            "FN": 68,
+            "TN": 45
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 299,
+          "violation_recall": 0.8177,
+          "violation_precision": 0.8098,
+          "f1": 0.8137,
+          "false_alarm_rate": 0.4062,
+          "verdict_accuracy": 0.7458,
+          "undetected_persons": 24,
+          "phantom_persons": 674,
+          "TP": 166,
+          "FP": 39,
+          "FN": 37,
+          "TN": 57
+        },
+        "contamination": "59 of 125 images were in the Week-4 v1 SH17 training set, so this bed is held out for the final runs but NOT for w4_sh17_train / w4_mixed_train / w3_darkaug"
+      },
+      "sh17v2_strict": {
+        "bed": "sh17v2_strict",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_strict.yaml",
+        "baselines": {
+          "n_images": 51,
+          "n_persons": 163,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.8589,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8589,
+            "undetected_persons": 16,
+            "TP": 140,
+            "FP": 0,
+            "FN": 23,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.8344,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8344,
+            "undetected_persons": 22,
+            "TP": 136,
+            "FP": 0,
+            "FN": 27,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.8221,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8221,
+            "undetected_persons": 24,
+            "TP": 134,
+            "FP": 0,
+            "FN": 29,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.8098,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.8098,
+            "undetected_persons": 25,
+            "TP": 132,
+            "FP": 0,
+            "FN": 31,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.7914,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7914,
+            "undetected_persons": 29,
+            "TP": 129,
+            "FP": 0,
+            "FN": 34,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.7791,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7791,
+            "undetected_persons": 31,
+            "TP": 127,
+            "FP": 0,
+            "FN": 36,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.7669,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7669,
+            "undetected_persons": 32,
+            "TP": 125,
+            "FP": 0,
+            "FN": 38,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.7485,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7485,
+            "undetected_persons": 37,
+            "TP": 122,
+            "FP": 0,
+            "FN": 41,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.7178,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.7178,
+            "undetected_persons": 43,
+            "TP": 117,
+            "FP": 0,
+            "FN": 46,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.6687,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6687,
+            "undetected_persons": 51,
+            "TP": 109,
+            "FP": 0,
+            "FN": 54,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 163,
+          "violation_recall": 0.8589,
+          "violation_precision": 1.0,
+          "f1": 0.9241,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.8589,
+          "undetected_persons": 16,
+          "phantom_persons": 402,
+          "TP": 140,
+          "FP": 0,
+          "FN": 23,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      },
+      "closeup": {
+        "bed": "closeup",
+        "data": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\data\\sh17c_v2\\data_holdout.yaml",
+        "baselines": {
+          "n_images": 400,
+          "n_persons": 620,
+          "violation_base_rate": 1.0,
+          "always_violation_accuracy": 1.0,
+          "always_compliant_accuracy": 0.0,
+          "trivial_best_accuracy": 1.0
+        },
+        "sweep": [
+          {
+            "conf": 0.03,
+            "violation_recall": 0.6403,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6403,
+            "undetected_persons": 11,
+            "TP": 397,
+            "FP": 0,
+            "FN": 223,
+            "TN": 0
+          },
+          {
+            "conf": 0.05,
+            "violation_recall": 0.6339,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6339,
+            "undetected_persons": 15,
+            "TP": 393,
+            "FP": 0,
+            "FN": 227,
+            "TN": 0
+          },
+          {
+            "conf": 0.07,
+            "violation_recall": 0.6339,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6339,
+            "undetected_persons": 17,
+            "TP": 393,
+            "FP": 0,
+            "FN": 227,
+            "TN": 0
+          },
+          {
+            "conf": 0.1,
+            "violation_recall": 0.629,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.629,
+            "undetected_persons": 17,
+            "TP": 390,
+            "FP": 0,
+            "FN": 230,
+            "TN": 0
+          },
+          {
+            "conf": 0.15,
+            "violation_recall": 0.6242,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6242,
+            "undetected_persons": 25,
+            "TP": 387,
+            "FP": 0,
+            "FN": 233,
+            "TN": 0
+          },
+          {
+            "conf": 0.2,
+            "violation_recall": 0.621,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.621,
+            "undetected_persons": 32,
+            "TP": 385,
+            "FP": 0,
+            "FN": 235,
+            "TN": 0
+          },
+          {
+            "conf": 0.25,
+            "violation_recall": 0.621,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.621,
+            "undetected_persons": 38,
+            "TP": 385,
+            "FP": 0,
+            "FN": 235,
+            "TN": 0
+          },
+          {
+            "conf": 0.3,
+            "violation_recall": 0.6194,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6194,
+            "undetected_persons": 42,
+            "TP": 384,
+            "FP": 0,
+            "FN": 236,
+            "TN": 0
+          },
+          {
+            "conf": 0.4,
+            "violation_recall": 0.6065,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.6065,
+            "undetected_persons": 53,
+            "TP": 376,
+            "FP": 0,
+            "FN": 244,
+            "TN": 0
+          },
+          {
+            "conf": 0.5,
+            "violation_recall": 0.579,
+            "violation_precision": 1.0,
+            "false_alarm_rate": 0.0,
+            "verdict_accuracy": 0.579,
+            "undetected_persons": 76,
+            "TP": 359,
+            "FP": 0,
+            "FN": 261,
+            "TN": 0
+          }
+        ],
+        "best_f1": {
+          "conf": 0.03,
+          "rule": "helmet",
+          "matched": 620,
+          "violation_recall": 0.6403,
+          "violation_precision": 1.0,
+          "f1": 0.7807,
+          "false_alarm_rate": 0.0,
+          "verdict_accuracy": 0.6403,
+          "undetected_persons": 11,
+          "phantom_persons": 875,
+          "TP": 397,
+          "FP": 0,
+          "FN": 223,
+          "TN": 0
+        },
+        "note": "every ground-truth worker is a violation, so FP = TN = 0 by construction: false_alarm_rate and verdict_accuracy are undefined and must not be quoted from this bed. Read violation_recall and undetected_persons only."
+      }
+    },
+    "gate": {
+      "operating_conf": 0.1,
+      "checks": {
+        "heldout_verdict_accuracy>=target": {
+          "value": 0.7458,
+          "target": 0.7,
+          "pass": true
+        },
+        "heldout_beats_trivial_baseline": {
+          "value": 0.7458,
+          "target": 0.6656,
+          "pass": true
+        },
+        "indomain_violation_recall>=target": {
+          "value": 0.4892,
+          "target": 0.45,
+          "pass": true
+        },
+        "indomain_false_alarm<=ceiling": {
+          "value": 0.5034,
+          "target": 0.3,
+          "pass": false
+        },
+        "indomain_beats_trivial_baseline": {
+          "value": 0.4921,
+          "target": 0.5375,
+          "pass": false
+        }
+      },
+      "indomain_row": {
+        "conf": 0.1,
+        "violation_recall": 0.4892,
+        "violation_precision": 0.6027,
+        "false_alarm_rate": 0.5034,
+        "verdict_accuracy": 0.4921,
+        "undetected_persons": 421,
+        "TP": 226,
+        "FP": 149,
+        "FN": 236,
+        "TN": 147
+      },
+      "heldout_best_row": {
+        "conf": 0.03,
+        "violation_recall": 0.8177,
+        "violation_precision": 0.8098,
+        "false_alarm_rate": 0.4062,
+        "verdict_accuracy": 0.7458,
+        "undetected_persons": 24,
+        "TP": 166,
+        "FP": 39,
+        "FN": 37,
+        "TN": 57
+      },
+      "iso_false_alarm": {
+        "FA<=0.15": null,
+        "FA<=0.20": null,
+        "FA<=0.25": null,
+        "FA<=0.30": null
+      },
+      "passed": false
+    }
+  }
+}

@@ -7,5 +7,7 @@
   "desc": "Auto-fetched distractor images as background-only, retrain winner - false-positive mode",
   "status": "blocked",
   "finished": "2026-09-09 19:38:53",
-  "reason": "Deferred after Week 2. Hard negatives address false POSITIVES; the measured failure mode here is false negatives (27-58% undetected persons) + an unlearned WHV class. Revisit only if a future model drives false-positive rate up."
+  "reason": "Deferred after Week 2. Hard negatives address false POSITIVES; the measured failure mode here is false negatives (27-58% undetected persons) + an unlearned WHV class. Revisit only if a future model drives false-positive rate up.",
+  "superseded_by": "sh17_map_v2.py (Week 7)",
+  "note": "Item #7 asked for background-only distractor images (hard hats on surfaces, hi-vis on railings) to attack false positives. That source never materialised, and SH17's no-PPE images could not substitute: a person there is 'no helmet ANNOTATED', so feeding them in would invent violations and raise false alarms. Week 7 reaches the same goal from the other side. SH17's `head` class marks a CONFIRMED bare head, so sh17_map_v2.py adds 856 workers who are genuinely helmetless in deployment-like geometry. Those are hard negatives for the 'helmet present' decision - the discriminative evidence item #7 wanted - without the label noise that blocked it. The distractor-object half of the item (helmet lying on a bench) is still untested."
 }

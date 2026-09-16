@@ -335,12 +335,18 @@ experiment that emits a result row and a figure. Built and run by **Claude Code
 
 | path | role |
 |---|---|
-| `SCHEDULE.md` | the full 6-week plan; every item mapped to an experiment id |
+| `SCHEDULE.md` | the full plan, Weeks 1–7; every item mapped to an experiment id |
 | `experiments/registry.yaml` | the experiment matrix — `defaults` + per-experiment `params`, `deps`, `week`, `kind` |
 | `experiments/run.py` | run one experiment (`--next` for loop mode, or an id): train → test-split eval → latency bench → `results/<id>.json` |
 | `experiments/report.py` | aggregate `results/*.json` → `results/REPORT.md`, `STATUS.md`, `figs/*.png` |
 | `experiments/lib.py` | registry loading, dependency/next-experiment logic, latency bench |
-| `experiments/results/` | one `<id>.json` per experiment, `results.jsonl`, `REPORT.md`, `WEEK1_FINDINGS.md`, `figs/` |
+| `experiments/week6.py` | handlers for `crossdata`, `arch` (P2 / attention / two-stage / quantisation / baselines), `distill`, `track` |
+| `experiments/arch.py` | generates the yolo11 variant yamls (P2 head, CBAM/SE/ECA/CoordAtt necks) and the custom attention blocks |
+| `experiments/sh17_map_v2.py` | SH17 → person-level compliance using the `head` class as confirmed no-helmet evidence |
+| `experiments/build_finest.py` | assembles the final training set |
+| `experiments/gate.py` | the deployment acceptance test (four beds + trivial baselines + pass/fail) |
+| `experiments/deploy.py` | validated install of a checkpoint into Amsar as `ppe_eye.pt` |
+| `experiments/results/` | one `<id>.json` per experiment, `results.jsonl`, `REPORT.md`, **`GAINS.md`** (the whole-project accounting), `WEEK{1..5}_FINDINGS.md`, `GATE.json`, `figs/` |
 
 Runs in the `PPE/` venv as shipped (no extra installs for Week 1). Trained
 checkpoints land in `runs/ppe_enh/<id>/weights/` (git-ignored).
@@ -354,10 +360,23 @@ PPE/Scripts/python.exe experiments/report.py             # rebuild tables + figu
 ```
 
 As a self-paced loop (Claude Code): `/loop PPE/Scripts/python.exe experiments/run.py --next`.
-`--next` exits 3 at the first experiment whose `kind` has no handler yet — a
-deliberate review gate between weeks. Only `kind: train` is implemented; Weeks
-2–6 (`audit`, `eval`, `corrupt`, `crossdata`, `track`, `distill`, `calib`,
-`arch`) are declared but not yet coded.
+`--next` exits 3 at the first experiment whose `kind` has no handler — a
+deliberate review gate between weeks. Every declared kind is now implemented:
+`train`, `eval`, `audit`, `corrupt` and `calib` in `run.py`; `crossdata`,
+`arch`, `distill` and `track` in `experiments/week6.py`.
+
+Two scripts sit outside the registry because they answer deployment questions
+rather than research ones:
+
+```powershell
+PPE/Scripts/python.exe experiments/gate.py --weights runs/ppe_enh/<id>/weights/best.pt
+PPE/Scripts/python.exe experiments/deploy.py --weights runs/ppe_enh/<id>/weights/best.pt
+```
+
+`gate.py` is the acceptance test — four person-level test beds, each reporting
+its own trivial baselines, with a pass/fail verdict. `deploy.py` installs a
+checkpoint into Amsar as `ppe_eye.pt` and refuses one that has not passed.
+See `DEPLOY.md`.
 
 ### Week 1 result — Tier 1 training hygiene (11/11 runs)
 
@@ -424,13 +443,29 @@ narrow training distribution, so tiling hurts. A null result, not an upper bound
 `w2_hard_negatives` (item #7) is **deferred** — it targets false positives; the
 measured failure mode is false negatives.
 
-**Status: paused after Week 2.** The project's finding is now firm: on this
-dataset a properly trained YOLO11s reaches mAP50 ≈ 0.49 but only ~0.34
-person-level violation recall and misses a quarter to a half of all workers,
-because the training data (sparse, close-up) does not resemble deployment
-(crowded, distant) and the compliant class is data-starved. No training-recipe,
-augmentation, resolution, or architecture change addresses this — it needs
-deployment-representative labelled data.
+### Weeks 3–7 — robustness, generalisation, and the final checkpoint
+
+Full accounting in **`experiments/results/GAINS.md`**; per-week detail in
+`WEEK{3,4,5}_FINDINGS.md`. The short version:
+
+| week | item | outcome |
+|---|---|---|
+| 3 | corruption benchmark | sharpness, not colour, is the binding constraint — defocus/motion blur cost 40–70% of violation recall at severity 3, haze/overexposure 5–6%. **Night is non-functional** for every checkpoint. Aggressive brightness aug (`w3_darkaug`) was falsified: it did not fix night and made everything else worse. |
+| 4 | cross-dataset | the one intervention that moved the deployment metric. Adding SH17 lifted violation recall 0.344 → 0.457 with object mAP flat at 0.495. |
+| 5 | calibration | the mixed model is near-calibrated and errs conservative; the Pictor-only baseline is overconfident in every bin above 0.2. Temperature scaling is a null result — it is monotone, so it cannot move recall or false alarms. |
+| 6 | architecture | P2 head, CBAM/SE/ECA/CoordAtt, RT-DETR, quantisation, and the two-stage cascade costed properly. The cascade is **already slower at one worker in frame** (7.55 vs 7.30 ms) and 2.3× slower at 40. |
+| 7 | the final checkpoint | `sh17_map_v2.py` uses SH17's `head` class as **confirmed** no-helmet evidence instead of discarding unannotated images, filtered to deployment geometry. Training set 727 → 1255 images; WHV 53 → 180 instances. |
+
+**Status: the bottleneck was always the data, and Week 7 acts on that.** Weeks
+1–3 swept the recipe and Week 6 swept the architecture; both came back flat.
+The Week-7 checkpoints are the first to clear the held-out acceptance bar in
+`experiments/gate.py` — see `GAINS.md` §5 and `DEPLOY.md`.
+
+Two reporting traps were found and fixed while writing this up: rows were being
+compared across **different test sets** (`w4_sh17_train`'s headline 0.5835 is
+SH17, not Pictor — its Pictor number is 0.1025), and mAP50 averages classes
+with 456 instances against classes with 6. `report.py` now prints a `test set`
+column and per-class instance counts.
 
 ## Contributions
 
@@ -444,6 +479,10 @@ deployment-representative labelled data.
   the author's direction. Design decisions (dataset ontology, base-recipe
   re-pointing after the LR sweep, deferring hard-negatives, pausing after each
   week) were made by the author at review gates.
+- **Weeks 3–7** (`experiments/corruptions.py`, `calibrate.py`, `sh17_map.py`,
+  `sh17_map_v2.py`, `week6.py`, `arch.py`, `build_finest.py`, `gate.py`,
+  `deploy.py`, `fig_gains.py`, `GAINS.md`, `DEPLOY.md`): **Claude Code
+  (Opus 5)**.
 
 ## Reference
 

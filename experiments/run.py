@@ -6,8 +6,9 @@ run.py — run one enhancement experiment and write its result row.
   python experiments/run.py w1_s_adamw_1e3 # run a specific experiment
   python experiments/run.py --status       # print STATUS.md contents and exit
 
-Only `kind: train` is implemented. When --next hits a non-train kind it prints
-which handler is missing and exits 3 — that is the review gate between weeks.
+Handlers for every declared kind are implemented: train / eval / audit /
+corrupt / calib here, and crossdata / arch / distill / track in week6.py.
+An unknown kind still exits 3 — the review gate between weeks.
 
 After a successful run it regenerates the report (report.py).
 """
@@ -231,9 +232,20 @@ def handle_calib(exp: dict) -> dict:
                          float(p.get("iou", 0.5)))
 
 
+def _week6(kind):
+    """Week-6 kinds live in week6.py; import lazily so a missing optional
+    dependency there cannot break the Week 1-5 handlers."""
+    def call(exp):
+        import week6
+        return week6.HANDLERS[kind](exp)
+    return call
+
+
 HANDLERS = {"train": handle_train, "eval": handle_eval,
             "audit": handle_audit, "corrupt": handle_corrupt,
-            "calib": handle_calib}
+            "calib": handle_calib,
+            "crossdata": _week6("crossdata"), "arch": _week6("arch"),
+            "distill": _week6("distill"), "track": _week6("track")}
 
 
 def run_one(exp: dict) -> int:

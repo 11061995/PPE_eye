@@ -1,0 +1,138 @@
+{
+  "id": "w6_qat",
+  "week": 6,
+  "tier": 3,
+  "item": "17",
+  "kind": "arch",
+  "desc": "Post-training quantisation: FP32 vs TensorRT FP16 vs TensorRT INT8 vs ONNX - accuracy retention and latency",
+  "params": {
+    "data": "data/mixed_pictor_sh17/data.yaml",
+    "model": "yolo11s.pt",
+    "imgsz": 640,
+    "epochs": 150,
+    "patience": 30,
+    "batch": 16,
+    "seed": 0,
+    "device": "0",
+    "optimizer": "AdamW",
+    "lr0": 0.0001,
+    "cos_lr": true,
+    "warmup_epochs": 3.0,
+    "close_mosaic": 10,
+    "project": "runs/ppe_enh",
+    "variant": "quant",
+    "weights": "runs/ppe_enh/w4_mixed_train/weights/best.pt"
+  },
+  "started": "2026-09-15 23:13:30",
+  "weights": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.pt",
+  "formats": {
+    "fp32": {
+      "test_mAP50": 0.4948,
+      "test_mAP50_95": 0.3019,
+      "latency_ms_mean": 17.75,
+      "latency_ms_p50": 14.42,
+      "latency_ms_p95": 28.72,
+      "fps_mean": 56.3,
+      "file_MB": 19.18,
+      "mAP50_retention": 1.0
+    },
+    "fp16_torch": {
+      "test_mAP50": 0.4954,
+      "test_mAP50_95": 0.3018,
+      "latency_ms_mean": 6.25,
+      "latency_ms_p50": 6.22,
+      "latency_ms_p95": 6.47,
+      "fps_mean": 160.0,
+      "file_MB": 9.59,
+      "mAP50_retention": 1.0012
+    },
+    "fp16_tensorrt": {
+      "error": "ModuleNotFoundError: No module named 'tensorrt'"
+    },
+    "int8_tensorrt": {
+      "error": "ModuleNotFoundError: No module named 'tensorrt'"
+    },
+    "onnx_cpu": {
+      "test_mAP50": 0.4632,
+      "test_mAP50_95": 0.2671,
+      "latency_ms_mean": 27.47,
+      "latency_ms_p50": 27.51,
+      "latency_ms_p95": 28.49,
+      "fps_mean": 36.4,
+      "device": "cpu",
+      "file_MB": 37.93,
+      "export_minutes": 0.6,
+      "path": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.onnx",
+      "mAP50_retention": 0.9361
+    },
+    "torchscript": {
+      "test_mAP50": 0.4634,
+      "test_mAP50_95": 0.2674,
+      "latency_ms_mean": 5.18,
+      "latency_ms_p50": 4.89,
+      "latency_ms_p95": 7.71,
+      "fps_mean": 193.0,
+      "device": "0",
+      "file_MB": 38.19,
+      "export_minutes": 0.2,
+      "path": "C:\\Users\\user\\Desktop\\khizar\\amsar-AI\\research\\YOLO-PPEeye\\runs\\ppe_enh\\w4_mixed_train\\weights\\best.torchscript",
+      "mAP50_retention": 0.9365
+    }
+  },
+  "note": "QAT is not run: it needs fake-quant observers in the training loop, and the Week-6 variants found no architectural headroom for it to recover. PTQ is what gates deployment anyway. TensorRT rows depend on the `tensorrt` package being present on the target; on a Jetson they are the numbers that matter. Re-run 2026-09-15 after fixing the FP16 leg: the earlier error was a predictor cached during the FP32 pass surviving val(half=True)'s in-place halving of the weights, so float32 input met half weights. The leg now runs on a fresh model object. FP16 accuracy retention is 1.001 (0.4954 vs 0.4948).",
+  "status": "done",
+  "finished": "2026-09-15 23:14:55",
+  "controls": {
+    "letterbox": {
+      "why": "Exported models cannot use ultralytics' rectangular batching, so val() forces rect=False for them. Re-running the PyTorch FP32 model at rect=False reproduces the export 'accuracy drop' exactly, which means the export paths lose nothing and the per-format mAP columns below are NOT comparable to the fp32 row.",
+      "pytorch_fp32_rect_true": 0.4948,
+      "pytorch_fp32_rect_false": 0.4634,
+      "onnx_cpu": 0.4632,
+      "torchscript": 0.4634,
+      "conclusion": "ONNX and TorchScript are accuracy-neutral; compare them to 0.4634."
+    },
+    "fp16_vs_fp32_latency": {
+      "why": "The per-format latency_ms_* fields are measured at different points in a single process and are not a controlled A/B - the fp32 row in this file was measured at 17.75 ms while an interleaved re-measurement puts it at ~6.0 ms. These reps alternate the two models in one process instead.",
+      "method": "batch 1, imgsz 640, 15 warmup + 60 timed, torch.cuda.synchronize, 3 reps",
+      "reps": [
+        {
+          "fp32_mean": 6.1,
+          "fp16_mean": 6.54,
+          "speedup": 0.93
+        },
+        {
+          "fp32_mean": 6.03,
+          "fp16_mean": 6.37,
+          "speedup": 0.95
+        },
+        {
+          "fp32_mean": 5.97,
+          "fp16_mean": 6.42,
+          "speedup": 0.93
+        }
+      ],
+      "conclusion": "FP16 is 0.93-0.95x, i.e. slightly SLOWER than FP32 at batch 1 on an RTX 4060 Ti. At this size the pipeline is launch-overhead-bound, not compute-bound, so halving the arithmetic buys nothing. FP16's real wins here are the 2x smaller file and headroom on memory-bound hardware - do not assume they transfer to a Jetson untested."
+    },
+    "torchscript_vs_fp32_latency": {
+      "method": "batch 1, imgsz 640, 15 warmup + 60 timed, torch.cuda.synchronize, 3 reps, one process",
+      "reps": [
+        {
+          "pytorch_mean": 6.24,
+          "torchscript_mean": 5.06,
+          "speedup": 1.23
+        },
+        {
+          "pytorch_mean": 6.67,
+          "torchscript_mean": 5.65,
+          "speedup": 1.18
+        },
+        {
+          "pytorch_mean": 6.0,
+          "torchscript_mean": 4.94,
+          "speedup": 1.22
+        }
+      ],
+      "conclusion": "TorchScript is a real 1.18-1.23x on batch-1 GPU inference, and accuracy-neutral."
+    }
+  }
+}
